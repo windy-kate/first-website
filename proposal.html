@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kommerzielles Angebot — Consulting & Automatisierung</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: #e8e4de;
+            color: var(--graphite);
+            line-height: 1.7;
+        }
+
+        /* ===== DOCUMENT ===== */
+        .document {
+            max-width: 900px;
+            margin: 40px auto;
+            background: var(--white);
+            box-shadow: 0 4px 40px rgba(0,0,0,0.12);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        /* ===== COVER PAGE ===== */
+        .cover {
+            background: linear-gradient(160deg, var(--black) 0%, var(--graphite) 45%, #3d3520 100%);
+            color: var(--white);
+            padding: 80px 72px;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+        .cover::before {
+            content: '';
+            position: absolute;
+            top: -30%;
+            right: -15%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201,168,76,0.12) 0%, transparent 65%);
+        }
+        .cover::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light), var(--gold));
+        }
+        .cover-top { position: relative; z-index: 1; }
+        .cover-logo {
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 60px;
+        }
+        .cover-title {
+            font-size: 44px;
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 16px;
+        }
+        .cover-title span {
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .cover-subtitle {
+            font-size: 18px;
+            color: rgba(255,255,255,0.6);
+            font-weight: 400;
+            max-width: 500px;
+        }
+        .cover-bottom {
+            position: relative;
+            z-index: 1;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 80px;
+        }
+        .cover-meta { font-size: 13px; color: rgba(255,255,255,0.4); }
+        .cover-meta strong { color: rgba(255,255,255,0.7); }
+        .cover-date {
+            font-size: 13px;
+            color: rgba(255,255,255,0.4);
+            text-align: right;
+        }
+        .cover-badge {
+            display: inline-block;
+            border: 1px solid rgba(201,168,76,0.4);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+
+        /* ===== PAGE CONTENT ===== */
+        .page {
+            padding: 56px 72px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .page:last-child { border-bottom: none; }
+
+        .page-number {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 32px;
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        h2 span { color: var(--gold); }
+        h3 {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-top: 32px;
+            margin-bottom: 12px;
+        }
+        h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 12px;
+        }
+
+        .page-intro {
+            font-size: 15px;
+            color: var(--gray-600);
+            margin-bottom: 32px;
+            max-width: 650px;
+        }
+
+        .gold-line {
+            width: 48px;
+            height: 3px;
+            background: var(--gold);
+            border-radius: 2px;
+            margin-bottom: 24px;
+        }
+
+        /* About Company */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+            margin-top: 24px;
+        }
+        .about-card {
+            padding: 24px;
+            border-radius: 14px;
+            border: 1px solid var(--gray-200);
+            transition: border-color 0.3s;
+        }
+        .about-card:hover { border-color: var(--gold-light); }
+        .about-card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+        .about-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--graphite);
+            text-transform: none;
+            letter-spacing: 0;
+            margin-bottom: 6px;
+        }
+        .about-card p {
+            font-size: 13px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* Stats row */
+        .stats-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 32px 0;
+        }
+        .stat-item {
+            text-align: center;
+            padding: 20px 12px;
+            background: var(--gray-50);
+            border-radius: 12px;
+        }
+        .stat-value {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--gold);
+        }
+        .stat-label {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* Services */
+        .service-block {
+            border: 1px solid var(--gray-200);
+            border-radius: 16px;
+            overflow: hidden;
+            margin-bottom: 20px;
+            transition: border-color 0.3s;
+        }
+        .service-block:hover { border-color: var(--gold-light); }
+        .service-block-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 24px;
+            background: var(--gray-50);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .service-block-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--graphite);
+        }
+        .service-block-tier {
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 12px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .tier-starter { background: #dbeafe; color: #1e40af; }
+        .tier-business { background: #fef3c7; color: #92400e; }
+        .tier-enterprise { background: #ede9fe; color: #5b21b6; }
+
+        .service-block-body { padding: 24px; }
+        .service-block-desc {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 16px;
+        }
+
+        .deliverables {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+        }
+        .deliverable {
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+        .deliverable-check {
+            color: var(--gold);
+            font-weight: 700;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .service-block-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 24px;
+            background: var(--gray-50);
+            border-top: 1px solid var(--gray-100);
+        }
+        .service-timeline {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+        .service-price-tag {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--graphite);
+        }
+        .service-price-tag span {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray-500);
+        }
+
+        /* Pricing table */
+        .pricing-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 24px 0;
+        }
+        .pricing-table th {
+            padding: 14px 16px;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-align: left;
+            border-bottom: 2px solid var(--gray-200);
+        }
+        .pricing-table th:last-child { text-align: right; }
+        .pricing-table td {
+            padding: 12px 16px;
+            font-size: 14px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+        .pricing-table td:last-child {
+            text-align: right;
+            font-weight: 700;
+        }
+        .pricing-table tr.total-row td {
+            border-bottom: none;
+            border-top: 2px solid var(--graphite);
+            font-weight: 800;
+            font-size: 16px;
+            padding-top: 16px;
+        }
+        .pricing-table tr.subtotal td {
+            color: var(--gray-500);
+            font-size: 13px;
+        }
+        .pricing-table tr.discount td {
+            color: #166534;
+            background: #f0fdf4;
+        }
+
+        /* Why us */
+        .why-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 24px;
+        }
+        .why-card {
+            padding: 28px;
+            border-radius: 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+        }
+        .why-number {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--gold-light);
+            line-height: 1;
+            margin-bottom: 12px;
+        }
+        .why-card h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--graphite);
+            text-transform: none;
+            letter-spacing: 0;
+            margin-bottom: 8px;
+        }
+        .why-card p {
+            font-size: 13px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* Process / Timeline */
+        .process-steps {
+            position: relative;
+            padding-left: 40px;
+            margin-top: 24px;
+        }
+        .process-steps::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--gold), var(--gold-light), var(--gray-200));
+        }
+        .process-step {
+            position: relative;
+            margin-bottom: 28px;
+            padding-left: 24px;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: -28px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 3px solid var(--white);
+            box-shadow: 0 0 0 2px var(--gold);
+        }
+        .process-step-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-bottom: 4px;
+        }
+        .process-step-time {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold-dark);
+            margin-bottom: 6px;
+        }
+        .process-step-desc {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        /* Guarantee */
+        .guarantee-box {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1px solid #fde68a;
+            border-radius: 16px;
+            padding: 32px;
+            margin-top: 32px;
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+        .guarantee-icon {
+            font-size: 36px;
+            flex-shrink: 0;
+        }
+        .guarantee-text h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: #78350f;
+            text-transform: none;
+            letter-spacing: 0;
+            margin-bottom: 6px;
+        }
+        .guarantee-text p {
+            font-size: 14px;
+            color: #92400e;
+            line-height: 1.7;
+        }
+
+        /* CTA / Contact */
+        .cta-section {
+            background: linear-gradient(160deg, var(--graphite), #3d3520);
+            color: var(--white);
+            padding: 48px 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 32px;
+        }
+        .cta-left h2 {
+            color: var(--white);
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .cta-left h2 span { color: var(--gold-light); }
+        .cta-left p {
+            font-size: 14px;
+            color: rgba(255,255,255,0.5);
+        }
+        .cta-right {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            text-align: right;
+        }
+        .cta-contact {
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+        }
+        .cta-contact strong {
+            color: var(--gold-light);
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 14px 32px;
+            background: var(--gold);
+            color: var(--white);
+            border-radius: 10px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        .cta-button:hover {
+            background: var(--gold-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201,168,76,0.3);
+        }
+
+        /* Footer */
+        .doc-footer {
+            padding: 24px 72px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 11px;
+            color: var(--gray-400);
+            border-top: 1px solid var(--gray-100);
+        }
+        .doc-footer-line {
+            width: 48px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 1px;
+        }
+
+        /* Validity badge */
+        .validity {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-top: 20px;
+        }
+        .validity-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+        }
+
+        /* Editable fields */
+        .editable {
+            border-bottom: 1px dashed var(--gold-light);
+            cursor: text;
+            padding: 0 2px;
+            transition: background 0.2s;
+        }
+        .editable:hover { background: rgba(201,168,76,0.08); }
+        .editable:focus {
+            outline: none;
+            background: rgba(201,168,76,0.12);
+            border-bottom-color: var(--gold);
+        }
+
+        .edit-hint {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            background: var(--graphite);
+            color: var(--white);
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-size: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+            z-index: 100;
+            opacity: 0.9;
+        }
+        .edit-hint span { color: var(--gold-light); font-weight: 600; }
+
+        /* Print styles */
+        @media print {
+            body { background: white; }
+            .document { margin: 0; box-shadow: none; border-radius: 0; }
+            .cover { min-height: 700px; break-after: page; }
+            .page { break-inside: avoid; }
+            .edit-hint { display: none; }
+            .cta-button { background: var(--graphite); }
+            .editable { border-bottom: none; }
+        }
+
+        @media (max-width: 768px) {
+            .cover { padding: 40px 32px; }
+            .page { padding: 36px 32px; }
+            .cover-title { font-size: 28px; }
+            .about-grid, .why-grid, .deliverables { grid-template-columns: 1fr; }
+            .stats-row { grid-template-columns: 1fr 1fr; }
+            .cta-section { flex-direction: column; padding: 36px 32px; text-align: center; }
+            .cta-right { text-align: center; }
+            .doc-footer { padding: 20px 32px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="edit-hint">Goldene Felder sind <span>editierbar</span> — klicken Sie zum Anpassen</div>
+
+<div class="document">
+
+    <!-- ===== COVER ===== -->
+    <div class="cover">
+        <div class="cover-top">
+            <div class="cover-logo" contenteditable="true">IHR FIRMENNAME</div>
+            <h1 class="cover-title">Kommerzielles<br>Angebot<br><span>f&uuml;r Ihr Projekt</span></h1>
+            <p class="cover-subtitle">Ganzheitliche L&ouml;sung f&uuml;r Branding, digitale Pr&auml;senz, Automatisierung und Kundengewinnung — alles aus einer Hand.</p>
+        </div>
+        <div class="cover-bottom">
+            <div class="cover-meta">
+                <div class="cover-badge">Vertraulich</div><br>
+                Erstellt f&uuml;r:<br>
+                <strong contenteditable="true" class="editable" style="color:var(--gold-light);border-color:rgba(232,212,139,0.3)">Firma / Kundenname</strong><br>
+                <span contenteditable="true" class="editable" style="border-color:rgba(255,255,255,0.2)">Ansprechpartner</span>
+            </div>
+            <div class="cover-date">
+                April 2026<br>
+                Angebots-Nr.: <span contenteditable="true" class="editable" style="border-color:rgba(255,255,255,0.2)">KA-2026-001</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 1: About ===== -->
+    <div class="page">
+        <div class="page-number">01 &mdash; &Uuml;ber uns</div>
+        <h2>&Uuml;ber <span>unser Unternehmen</span></h2>
+        <div class="gold-line"></div>
+        <p class="page-intro">
+            Wir sind eine europ&auml;ische Beratungsagentur f&uuml;r Automatisierung und digitales Marketing.
+            Unser Ansatz ist einzigartig: Wir liefern nicht einzelne Bausteine, sondern das komplette System —
+            von der Markenentwicklung &uuml;ber die Website bis zur automatisierten Kundengewinnung.
+            Alles DSGVO-konform und auf europ&auml;ischer Infrastruktur.
+        </p>
+
+        <div class="about-grid">
+            <div class="about-card">
+                <div class="about-card-icon" style="background:#ede9fe;color:#7c3aed;">&#9881;</div>
+                <h4>Full-Service-Ansatz</h4>
+                <p>Branding, Website, Automatisierung und Leadgenerierung aus einer Hand — kein Agentur-Hopping, kein Abstimmungschaos.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon" style="background:#dcfce7;color:#16a34a;">&#9733;</div>
+                <h4>KI-gest&uuml;tzte Automatisierung</h4>
+                <p>Moderne Workflows mit n8n und Make.com, KI-Chatbots und intelligente Prozessoptimierung f&uuml;r messbare Effizienzgewinne.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon" style="background:#dbeafe;color:#2563eb;">&#9670;</div>
+                <h4>Messbare Ergebnisse</h4>
+                <p>Jedes Projekt wird mit klaren KPIs definiert und gemessen. Transparentes Reporting und nachweisbarer ROI.</p>
+            </div>
+            <div class="about-card">
+                <div class="about-card-icon" style="background:#fef3c7;color:#a07e2e;">&#9830;</div>
+                <h4>100% DSGVO-konform</h4>
+                <p>Deutsche und EU-Server. Keine Abh&auml;ngigkeit von US-Cloud-Diensten. Datensouver&auml;nit&auml;t f&uuml;r Ihr Unternehmen.</p>
+            </div>
+        </div>
+
+        <div class="stats-row">
+            <div class="stat-item">
+                <div class="stat-value">50+</div>
+                <div class="stat-label">Abgeschlossene Projekte</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">98%</div>
+                <div class="stat-label">Kundenzufriedenheit</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">3&ndash;6x</div>
+                <div class="stat-label">Durchschnittlicher ROI</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-value">EU</div>
+                <div class="stat-label">Server-Standort</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 2: Services ===== -->
+    <div class="page">
+        <div class="page-number">02 &mdash; Leistungen</div>
+        <h2>Unsere <span>Leistungspakete</span></h2>
+        <div class="gold-line"></div>
+        <p class="page-intro">
+            Drei durchdachte Pakete, die zu jeder Unternehmensphase passen. Jedes Paket kann individuell erg&auml;nzt werden.
+        </p>
+
+        <!-- Starter -->
+        <div class="service-block">
+            <div class="service-block-header">
+                <div class="service-block-name">Digital Kickstart</div>
+                <span class="service-block-tier tier-starter">Starter</span>
+            </div>
+            <div class="service-block-body">
+                <div class="service-block-desc">
+                    F&uuml;r Gr&uuml;nder und Einzelunternehmer: professioneller Marktauftritt mit Branding, Website und Basis-Automatisierung.
+                </div>
+                <div class="deliverables">
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Markenpositionierung & Zielgruppe</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Logo & Grundlagen-Farbkonzept</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Corporate-Design-Basisleitfaden</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> One-Page-Landingpage (responsive)</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Kontaktformular & Google Maps</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Basis-SEO-Optimierung</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> E-Mail-Autoresponder</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> 1 Workflow-Automatisierung</div>
+                </div>
+            </div>
+            <div class="service-block-footer">
+                <div class="service-timeline">Lieferzeit: 2&ndash;3 Wochen</div>
+                <div class="service-price-tag">&euro;2.990 <span>netto</span></div>
+            </div>
+        </div>
+
+        <!-- Business -->
+        <div class="service-block" style="border-color:var(--gold-light);">
+            <div class="service-block-header" style="background:rgba(201,168,76,0.06);">
+                <div class="service-block-name">Growth Engine</div>
+                <span class="service-block-tier tier-business">Business</span>
+            </div>
+            <div class="service-block-body">
+                <div class="service-block-desc">
+                    F&uuml;r KMU: kompletter digitaler Vertriebskanal mit Branding, Multi-Page-Website, CRM, KI-Chatbot und LinkedIn-Lead-Funnel.
+                </div>
+                <div class="deliverables">
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Markt- & Wettbewerbsanalyse</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Vollst&auml;ndige Markenidentit&auml;t</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Corporate Design Manual</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Marketingstrategie & Positionierung</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Multi-Page-Website (bis 5 Seiten)</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Conversion-optimierte Landingpage</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Lead-Magnet & Funnel-Aufbau</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> SEO-Optimierung & Analytics</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> CRM-Setup & Integration</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> 5 Workflow-Automatisierungen</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> KI-Chatbot</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> LinkedIn-Lead-Funnel</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> E-Mail-Marketing-Automatisierung</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Onboarding & Schulung</div>
+                </div>
+            </div>
+            <div class="service-block-footer">
+                <div class="service-timeline">Lieferzeit: 4&ndash;6 Wochen</div>
+                <div class="service-price-tag">&euro;7.900 <span>netto</span></div>
+            </div>
+        </div>
+
+        <!-- Enterprise -->
+        <div class="service-block">
+            <div class="service-block-header">
+                <div class="service-block-name">Scale System</div>
+                <span class="service-block-tier tier-enterprise">Enterprise</span>
+            </div>
+            <div class="service-block-body">
+                <div class="service-block-desc">
+                    F&uuml;r etablierte Unternehmen: vollst&auml;ndige Digitalisierung mit unbegrenzter Website, KI-Telefonassistent, Multi-Channel-Marketing und 3 Monaten Support.
+                </div>
+                <div class="deliverables">
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Umfassende Marktanalyse</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Premium-Markenidentit&auml;t</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Go-to-Market-Strategie</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> USP-Workshop</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Vollst&auml;ndige Website (unbegrenzt)</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Landingpages mit A/B-Testing</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Blog / Content Hub</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Kundenportal / Dashboard</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Unbegrenzte Automatisierungen</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> KI-Chatbot + Telefonassistent</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Multi-Channel Lead-Funnel</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> KPI-Dashboard & Reporting</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> 3 Monate Support inklusive</div>
+                    <div class="deliverable"><span class="deliverable-check">&#10003;</span> Onboarding & Schulung</div>
+                </div>
+            </div>
+            <div class="service-block-footer">
+                <div class="service-timeline">Lieferzeit: 8&ndash;12 Wochen</div>
+                <div class="service-price-tag">&euro;14.900 <span>netto</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 3: Pricing ===== -->
+    <div class="page">
+        <div class="page-number">03 &mdash; Investition</div>
+        <h2>Ihre <span>Investition</span></h2>
+        <div class="gold-line"></div>
+        <p class="page-intro">
+            Transparente Preisgestaltung ohne versteckte Kosten. Alle Preise verstehen sich netto zzgl. 19% MwSt.
+        </p>
+
+        <h4>Empfohlenes Paket: Business &laquo;Growth Engine&raquo;</h4>
+
+        <table class="pricing-table">
+            <thead>
+                <tr>
+                    <th>Leistung</th>
+                    <th style="text-align:right">Betrag</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Markt- & Wettbewerbsanalyse</td>
+                    <td>&euro;1.290</td>
+                </tr>
+                <tr>
+                    <td>Vollst&auml;ndige Markenidentit&auml;t & Corporate Design</td>
+                    <td>&euro;1.680</td>
+                </tr>
+                <tr>
+                    <td>Marketingstrategie & Positionierung</td>
+                    <td>&euro;1.490</td>
+                </tr>
+                <tr>
+                    <td>Multi-Page-Website (5 Seiten) + Landingpage</td>
+                    <td>&euro;3.490</td>
+                </tr>
+                <tr>
+                    <td>SEO-Optimierung (Erweitert)</td>
+                    <td>&euro;890</td>
+                </tr>
+                <tr>
+                    <td>CRM-Setup & Integration</td>
+                    <td>&euro;1.290</td>
+                </tr>
+                <tr>
+                    <td>5 Workflow-Automatisierungen (n8n/Make)</td>
+                    <td>&euro;2.450</td>
+                </tr>
+                <tr>
+                    <td>KI-Chatbot (Kundenqualifizierung)</td>
+                    <td>&euro;1.490</td>
+                </tr>
+                <tr>
+                    <td>LinkedIn-Lead-Funnel + Lead-Magnet</td>
+                    <td>&euro;2.280</td>
+                </tr>
+                <tr>
+                    <td>E-Mail-Marketing-Automatisierung</td>
+                    <td>&euro;790</td>
+                </tr>
+                <tr>
+                    <td>Onboarding & Schulung</td>
+                    <td>&euro;490</td>
+                </tr>
+                <tr class="subtotal">
+                    <td>Summe Einzelleistungen</td>
+                    <td>&euro;17.630</td>
+                </tr>
+                <tr class="discount">
+                    <td>Paketrabatt (Business)</td>
+                    <td>&minus;&euro;9.730</td>
+                </tr>
+                <tr class="total-row">
+                    <td>Paketpreis (netto)</td>
+                    <td>&euro;7.900</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p style="font-size:13px;color:var(--gray-500);margin-bottom: 24px;">
+            Flexible Zahlungsoptionen: Einmalzahlung oder 4 Raten &agrave; &euro;2.100
+        </p>
+
+        <div class="validity">
+            <span class="validity-dot"></span>
+            Dieses Angebot ist g&uuml;ltig bis: <strong contenteditable="true" class="editable">20. Mai 2026</strong>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 4: Why us ===== -->
+    <div class="page">
+        <div class="page-number">04 &mdash; Warum wir</div>
+        <h2>Warum <span>mit uns arbeiten?</span></h2>
+        <div class="gold-line"></div>
+
+        <div class="why-grid">
+            <div class="why-card">
+                <div class="why-number">01</div>
+                <h4>Alles aus einer Hand</h4>
+                <p>Kein Agentur-Hopping. Von der Strategie &uuml;ber das Branding bis zur Automatisierung und Leadgenerierung — ein Ansprechpartner, ein Projekt, ein Ziel.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-number">02</div>
+                <h4>KI-First-Ansatz</h4>
+                <p>W&auml;hrend andere manuell arbeiten, setzen wir KI-gest&uuml;tzte Workflows ein: schnellere Ergebnisse, h&ouml;here Effizienz, messbar niedrigere Kosten f&uuml;r Sie.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-number">03</div>
+                <h4>ROI-Garantie</h4>
+                <p>Jedes Projekt wird mit messbaren KPIs definiert. Wir zeigen Ihnen schwarz auf wei&szlig;, welchen Return Ihre Investition bringt — keine vagen Versprechungen.</p>
+            </div>
+            <div class="why-card">
+                <div class="why-number">04</div>
+                <h4>Europ&auml;ische Werte</h4>
+                <p>100% DSGVO-konform. Deutsche/EU-Server. Keine US-Cloud-Abh&auml;ngigkeit. Ihre Daten geh&ouml;ren Ihnen — nicht einem Tech-Konzern.</p>
+            </div>
+        </div>
+
+        <div class="guarantee-box">
+            <div class="guarantee-icon">&#9733;</div>
+            <div class="guarantee-text">
+                <h4>Unsere Zufriedenheitsgarantie</h4>
+                <p>
+                    Sollten Sie nach der ersten Pr&auml;sentation nicht &uuml;berzeugt sein, &uuml;berarbeiten wir das Ergebnis
+                    kostenlos — bis es Ihren Erwartungen voll entspricht. Unbegrenzte Revisionen im Rahmen des vereinbarten Scopes
+                    sind f&uuml;r uns selbstverst&auml;ndlich. Ihr Erfolg ist unser Gesch&auml;ftsmodell.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== PAGE 5: Process ===== -->
+    <div class="page">
+        <div class="page-number">05 &mdash; Ablauf</div>
+        <h2>Unser <span>Projektablauf</span></h2>
+        <div class="gold-line"></div>
+        <p class="page-intro">
+            Ein transparenter, strukturierter Prozess — Sie wissen jederzeit, wo wir stehen und was als N&auml;chstes kommt.
+        </p>
+
+        <div class="process-steps">
+            <div class="process-step">
+                <div class="process-step-title">Kick-off & Briefing</div>
+                <div class="process-step-time">Tag 1&ndash;2</div>
+                <div class="process-step-desc">Pers&ouml;nliches Kennenlerngespr&auml;ch. Ziele, Zielgruppe, Wettbewerb und Rahmenbedingungen werden erfasst. Sie erhalten einen detaillierten Projektplan.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-step-title">Konzept & Strategie</div>
+                <div class="process-step-time">Woche 1</div>
+                <div class="process-step-desc">Marktanalyse, Positionierung, Markenkonzept und Marketingstrategie werden entwickelt. Pr&auml;sentation und Freigabe durch Sie.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-step-title">Design & Branding</div>
+                <div class="process-step-time">Woche 2</div>
+                <div class="process-step-desc">Logo, Farbwelt, Typografie und Corporate Design werden erstellt. Sie w&auml;hlen aus mehreren Entw&uuml;rfen.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-step-title">Entwicklung & Automatisierung</div>
+                <div class="process-step-time">Woche 3&ndash;4</div>
+                <div class="process-step-desc">Website, Landingpages, CRM-Integration, Workflows und KI-Chatbot werden implementiert. Regelm&auml;&szlig;ige Zwischenpr&auml;sentationen.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-step-title">Testing & Optimierung</div>
+                <div class="process-step-time">Woche 5</div>
+                <div class="process-step-desc">Alle Systeme werden getestet, optimiert und miteinander verbunden. Quality Assurance und Performance-Checks.</div>
+            </div>
+            <div class="process-step">
+                <div class="process-step-title">Launch & Onboarding</div>
+                <div class="process-step-time">Woche 6</div>
+                <div class="process-step-desc">Go-Live. Schulung Ihres Teams. &Uuml;bergabe aller Zugangsdaten und Dokumentation. Beginn der Support-Phase.</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== CTA ===== -->
+    <div class="cta-section">
+        <div class="cta-left">
+            <h2>Bereit f&uuml;r den <span>n&auml;chsten Schritt?</span></h2>
+            <p>Lassen Sie uns in einem kostenlosen Erstgespr&auml;ch besprechen, wie wir Ihr Projekt zum Erfolg f&uuml;hren.</p>
+        </div>
+        <div class="cta-right">
+            <div class="cta-contact">E-Mail: <strong contenteditable="true" class="editable" style="border-color:rgba(232,212,139,0.3)">ihre@email.de</strong></div>
+            <div class="cta-contact">Telefon: <strong contenteditable="true" class="editable" style="border-color:rgba(232,212,139,0.3)">+49 XXX XXX XXXX</strong></div>
+            <a class="cta-button" href="#">Kostenloses Erstgespr&auml;ch buchen</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="doc-footer">
+        <div>
+            <div class="doc-footer-line"></div>
+        </div>
+        <div><span contenteditable="true" class="editable">Ihr Firmenname</span> &middot; Alle Preise netto zzgl. 19% MwSt.</div>
+        <div>Seite 1 von 1</div>
+    </div>
+
+</div>
+
+<script>
+// Auto-hide edit hint after 6 seconds
+setTimeout(function() {
+    var hint = document.querySelector('.edit-hint');
+    if (hint) {
+        hint.style.transition = 'opacity 0.5s';
+        hint.style.opacity = '0';
+        setTimeout(function() { hint.style.display = 'none'; }, 500);
+    }
+}, 6000);
+</script>
+
+</body>
+</html>

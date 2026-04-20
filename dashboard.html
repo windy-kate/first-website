@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marktanalyse — Consulting & Automatisierung in Deutschland 2024–2026</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-100: #f7f7f7;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-600: #737373;
+            --gray-700: #525252;
+            --green: #22c55e;
+            --green-bg: #f0fdf4;
+            --red: #ef4444;
+            --red-bg: #fef2f2;
+            --blue: #3b82f6;
+            --blue-bg: #eff6ff;
+            --purple: #8b5cf6;
+            --purple-bg: #f5f3ff;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--pearl-light);
+            color: var(--graphite);
+            line-height: 1.6;
+        }
+
+        /* HEADER */
+        .header {
+            background: linear-gradient(135deg, var(--black) 0%, var(--graphite) 50%, #3d3520 100%);
+            color: var(--white);
+            padding: 48px 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(201,168,76,0.15) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+        .header-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.2);
+            border: 1px solid rgba(201,168,76,0.4);
+            color: var(--gold-light);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 12px;
+        }
+        .header h1 span {
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.7);
+            max-width: 700px;
+        }
+        .header-stats {
+            display: flex;
+            gap: 32px;
+            margin-top: 32px;
+            flex-wrap: wrap;
+        }
+        .header-stat {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px 28px;
+            min-width: 200px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        .header-stat:hover {
+            transform: translateY(-4px);
+            border-color: rgba(201,168,76,0.4);
+        }
+        .header-stat-value {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--gold);
+        }
+        .header-stat-label {
+            font-size: 13px;
+            color: rgba(255,255,255,0.6);
+            margin-top: 4px;
+        }
+        .header-stat-change {
+            font-size: 12px;
+            margin-top: 6px;
+            font-weight: 600;
+        }
+        .change-up { color: var(--green); }
+        .change-down { color: var(--red); }
+
+        /* MAIN LAYOUT */
+        .main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px;
+        }
+
+        /* SECTION */
+        .section {
+            margin-bottom: 40px;
+        }
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .section-title .icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+            flex-shrink: 0;
+        }
+        .section-subtitle {
+            font-size: 14px;
+            color: var(--gray-600);
+            margin-bottom: 24px;
+            padding-left: 48px;
+        }
+
+        /* CARDS GRID */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 24px;
+        }
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 24px;
+        }
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        /* CARD */
+        .card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 6px 24px rgba(0,0,0,0.03);
+            border: 1px solid var(--gray-200);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06), 0 12px 40px rgba(0,0,0,0.06);
+        }
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--gray-700);
+        }
+        .card-badge {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 8px;
+        }
+        .badge-green { background: var(--green-bg); color: #16a34a; }
+        .badge-red { background: var(--red-bg); color: #dc2626; }
+        .badge-blue { background: var(--blue-bg); color: #2563eb; }
+        .badge-purple { background: var(--purple-bg); color: #7c3aed; }
+
+        .card-value {
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--graphite);
+            line-height: 1;
+        }
+        .card-unit {
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--gray-600);
+        }
+        .card-description {
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-top: 8px;
+        }
+
+        /* CHART CONTAINER */
+        .chart-container {
+            position: relative;
+            height: 320px;
+            margin-top: 16px;
+        }
+        .chart-container-sm {
+            height: 260px;
+        }
+
+        /* KPI ROW */
+        .kpi-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .kpi-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: all 0.3s;
+            cursor: default;
+        }
+        .kpi-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+        }
+        .kpi-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            margin-bottom: 16px;
+        }
+        .kpi-value {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--graphite);
+        }
+        .kpi-label {
+            font-size: 13px;
+            color: var(--gray-600);
+            margin-top: 4px;
+        }
+        .kpi-trend {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+        .trend-up { background: var(--green-bg); color: #16a34a; }
+        .trend-down { background: var(--red-bg); color: #dc2626; }
+        .trend-neutral { background: var(--blue-bg); color: #2563eb; }
+
+        /* INSIGHT BOX */
+        .insight-box {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fde68a;
+            border-radius: 16px;
+            padding: 24px 28px;
+            margin-top: 24px;
+        }
+        .insight-box h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .insight-box p {
+            font-size: 14px;
+            color: #92400e;
+            line-height: 1.7;
+        }
+
+        /* TABLE */
+        .data-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 16px;
+        }
+        .data-table th {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 2px solid var(--gray-200);
+            cursor: pointer;
+            user-select: none;
+            transition: color 0.2s;
+        }
+        .data-table th:hover {
+            color: var(--gold-dark);
+        }
+        .data-table th.sorted {
+            color: var(--gold-dark);
+        }
+        .data-table td {
+            font-size: 14px;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--gray-100);
+            transition: background 0.2s;
+        }
+        .data-table tr:hover td {
+            background: var(--pearl-light);
+        }
+        .data-table .bar-cell {
+            width: 160px;
+        }
+        .bar-bg {
+            background: var(--gray-100);
+            border-radius: 4px;
+            height: 8px;
+            overflow: hidden;
+        }
+        .bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transition: width 1s ease;
+        }
+        .bar-fill.green {
+            background: linear-gradient(90deg, #22c55e, #4ade80);
+        }
+        .bar-fill.red {
+            background: linear-gradient(90deg, #ef4444, #f87171);
+        }
+
+        /* TAB SWITCHER */
+        .tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--gray-100);
+            padding: 4px;
+            border-radius: 12px;
+            margin-bottom: 24px;
+            width: fit-content;
+        }
+        .tab {
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: none;
+            background: transparent;
+            color: var(--gray-600);
+        }
+        .tab.active {
+            background: var(--white);
+            color: var(--graphite);
+            font-weight: 600;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .tab:hover:not(.active) {
+            color: var(--graphite);
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            padding: 32px 40px;
+            color: var(--gray-600);
+            font-size: 12px;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 20px;
+        }
+        .footer a {
+            color: var(--gold-dark);
+            text-decoration: none;
+        }
+
+        /* ANIMATED COUNTER */
+        .counter { transition: all 0.6s ease; }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .grid-2, .grid-3 { grid-template-columns: 1fr; }
+            .grid-4, .kpi-row { grid-template-columns: 1fr 1fr; }
+            .header-stats { gap: 16px; }
+        }
+        @media (max-width: 640px) {
+            .grid-4, .kpi-row { grid-template-columns: 1fr; }
+            .header { padding: 28px 20px; }
+            .main { padding: 20px; }
+            .header h1 { font-size: 24px; }
+        }
+
+        /* TOOLTIP */
+        .tooltip-custom {
+            position: relative;
+        }
+        .tooltip-custom::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--graphite);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .tooltip-custom:hover::after {
+            opacity: 1;
+        }
+
+        /* PROGRESS RING */
+        .progress-ring {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        .progress-ring svg {
+            transform: rotate(-90deg);
+        }
+        .progress-ring-text {
+            position: absolute;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--graphite);
+        }
+
+        /* ANIMATE ON SCROLL */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-content">
+        <div class="header-badge">Marktforschung 2024 – 2026</div>
+        <h1>Consulting & Automatisierung<br>Markt <span>Deutschland</span></h1>
+        <p>Umfassende Analyse des deutschen Marktes für Unternehmensberatung, Geschäftsprozessautomatisierung und digitales Marketing. Datenquellen: BDU, Bitkom, Statista, Grand View Research.</p>
+
+        <div class="header-stats">
+            <div class="header-stat">
+                <div class="header-stat-value">€49 Mrd.</div>
+                <div class="header-stat-label">Consulting-Markt 2025</div>
+                <div class="header-stat-change change-up">+0,5% YoY</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-value">$15,7 Mrd.</div>
+                <div class="header-stat-label">Digitales Marketing 2025</div>
+                <div class="header-stat-change change-up">+7,9% CAGR</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-value">$3,96 Mrd.</div>
+                <div class="header-stat-label">Prozessautomatisierung 2024</div>
+                <div class="header-stat-change change-up">+27,3% CAGR (RPA)</div>
+            </div>
+            <div class="header-stat">
+                <div class="header-stat-value">+22%</div>
+                <div class="header-stat-label">KI-Beratung Wachstum 2026</div>
+                <div class="header-stat-change change-up">Stärkster Treiber</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- KPI ROW -->
+    <div class="kpi-row fade-in">
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background: var(--green-bg); color: #16a34a;">&#9650;</div>
+            <div class="kpi-value">€51,1 Mrd.</div>
+            <div class="kpi-label">Consulting-Markt 2026 (Prognose)</div>
+            <div class="kpi-trend trend-up">&#9650; +4,5% vs. 2025</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background: var(--blue-bg); color: #3b82f6;">&#9632;</div>
+            <div class="kpi-value">241.500</div>
+            <div class="kpi-label">Berater in Deutschland</div>
+            <div class="kpi-trend trend-neutral">Stabil</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background: var(--purple-bg); color: #7c3aed;">&#11044;</div>
+            <div class="kpi-value">149.000</div>
+            <div class="kpi-label">Offene IT-Stellen in DE</div>
+            <div class="kpi-trend trend-down">Fachkräftemangel</div>
+        </div>
+        <div class="kpi-card">
+            <div class="kpi-icon" style="background: #fef3c7; color: var(--gold-dark);">&#9733;</div>
+            <div class="kpi-value">81%</div>
+            <div class="kpi-label">KMUs nutzen KI wöchentlich</div>
+            <div class="kpi-trend trend-up">Hohe Adoption</div>
+        </div>
+    </div>
+
+    <!-- SECTION 1: CONSULTING MARKET OVERVIEW -->
+    <div class="section fade-in">
+        <div class="section-title">
+            <div class="icon">1</div>
+            Deutscher Beratungsmarkt — Umsatzentwicklung
+        </div>
+        <div class="section-subtitle">Gesamtumsatz des deutschen Consulting-Marktes in Milliarden Euro, 2019–2026</div>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Marktvolumen 2019–2026</div>
+                    <div class="card-badge badge-green">Wachstum</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartMarketVolume"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Wachstumsrate YoY (%)</div>
+                    <div class="card-badge badge-blue">Trend</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartGrowthRate"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 2: CONSULTING SEGMENTS -->
+    <div class="section fade-in">
+        <div class="section-title">
+            <div class="icon">2</div>
+            Beratungssegmente — Vergleich 2025 vs. 2026
+        </div>
+        <div class="section-subtitle">Wachstumsraten der einzelnen Beratungssegmente im Jahresvergleich</div>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab(this, 'segmentChart')">Diagramm</button>
+            <button class="tab" onclick="switchTab(this, 'segmentTable')">Tabelle</button>
+        </div>
+
+        <div class="grid-2">
+            <div class="card">
+                <div id="segmentChart" class="tab-content active">
+                    <div class="card-header">
+                        <div class="card-title">Segment-Wachstum 2025 vs. 2026</div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="chartSegments"></canvas>
+                    </div>
+                </div>
+                <div id="segmentTable" class="tab-content">
+                    <table class="data-table" id="tableSegments">
+                        <thead>
+                            <tr>
+                                <th onclick="sortTable('tableSegments', 0)">Segment</th>
+                                <th onclick="sortTable('tableSegments', 1)">2025</th>
+                                <th onclick="sortTable('tableSegments', 2)">2026 (P)</th>
+                                <th>Trend</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>IT-Beratung</td><td>+2,8%</td><td>+4,7%</td><td><div class="bar-bg"><div class="bar-fill green" style="width:68%"></div></div></td></tr>
+                            <tr><td>Strategieberatung</td><td>+1,1%</td><td>+5,2%</td><td><div class="bar-bg"><div class="bar-fill green" style="width:75%"></div></div></td></tr>
+                            <tr><td>Organisations- & Prozessberatung</td><td>-0,8%</td><td>+3,5%</td><td><div class="bar-bg"><div class="bar-fill green" style="width:50%"></div></div></td></tr>
+                            <tr><td>HR-Beratung</td><td>-0,8%</td><td>+4,2%</td><td><div class="bar-bg"><div class="bar-fill green" style="width:60%"></div></div></td></tr>
+                            <tr><td>KI-Beratung</td><td>+19,0%</td><td>+22,0%</td><td><div class="bar-bg"><div class="bar-fill green" style="width:100%"></div></div></td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- INDUSTRY SECTORS -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Branchen-Nachfrage 2026 (Prognose)</div>
+                    <div class="card-badge badge-purple">Sektoren</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartIndustries"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 3: BPA & DIGITAL MARKETING -->
+    <div class="section fade-in">
+        <div class="section-title">
+            <div class="icon">3</div>
+            Automatisierung & Digitales Marketing
+        </div>
+        <div class="section-subtitle">Marktgröße und Wachstumsprognosen für die Kernmärkte Ihres Geschäftsmodells</div>
+
+        <div class="grid-3">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Business Process Automation (DE)</div>
+                    <div class="card-badge badge-green">Boomend</div>
+                </div>
+                <div class="card-value">$1,78 <span class="card-unit">Mrd.</span></div>
+                <div class="card-description">Prognostiziertes Marktvolumen 2026</div>
+                <div style="margin-top: 16px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-bottom:4px;">
+                        <span>DE-Anteil an Europa</span><span>27,7%</span>
+                    </div>
+                    <div class="bar-bg" style="height:10px;">
+                        <div class="bar-fill" style="width:27.7%;"></div>
+                    </div>
+                </div>
+                <div style="margin-top: 12px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-bottom:4px;">
+                        <span>RPA CAGR 2026–2033</span><span>27,3%</span>
+                    </div>
+                    <div class="bar-bg" style="height:10px;">
+                        <div class="bar-fill green" style="width:60%;"></div>
+                    </div>
+                </div>
+                <div class="chart-container chart-container-sm" style="margin-top:16px;">
+                    <canvas id="chartBPA"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Digitales Marketing (DE)</div>
+                    <div class="card-badge badge-blue">Stetig</div>
+                </div>
+                <div class="card-value">$15,7 <span class="card-unit">Mrd.</span></div>
+                <div class="card-description">Marktvolumen 2025</div>
+                <div style="margin-top: 16px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-bottom:4px;">
+                        <span>CAGR 2026–2035</span><span>7,9%</span>
+                    </div>
+                    <div class="bar-bg" style="height:10px;">
+                        <div class="bar-fill" style="width:40%;"></div>
+                    </div>
+                </div>
+                <div style="margin-top: 12px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-bottom:4px;">
+                        <span>Prognose 2034</span><span>$31,1 Mrd.</span>
+                    </div>
+                    <div class="bar-bg" style="height:10px;">
+                        <div class="bar-fill green" style="width:100%;"></div>
+                    </div>
+                </div>
+                <div class="chart-container chart-container-sm" style="margin-top:16px;">
+                    <canvas id="chartDigitalMarketing"></canvas>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">KI-Beratung (DE)</div>
+                    <div class="card-badge badge-purple">Explosiv</div>
+                </div>
+                <div class="card-value">+22% <span class="card-unit">p.a.</span></div>
+                <div class="card-description">Wachstum KI-Projekte 2026</div>
+                <div style="margin-top:16px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-bottom:4px;">
+                        <span>2025 Wachstum</span><span>+19%</span>
+                    </div>
+                    <div class="bar-bg" style="height:10px;">
+                        <div class="bar-fill green" style="width:76%;"></div>
+                    </div>
+                </div>
+                <div style="margin-top:12px;">
+                    <div style="display:flex;justify-content:space-between;font-size:12px;color:var(--gray-600);margin-bottom:4px;">
+                        <span>2026 Wachstum (P)</span><span>+22%</span>
+                    </div>
+                    <div class="bar-bg" style="height:10px;">
+                        <div class="bar-fill green" style="width:88%;"></div>
+                    </div>
+                </div>
+                <div class="chart-container chart-container-sm" style="margin-top:16px;">
+                    <canvas id="chartAI"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SECTION 4: MITTELSTAND DIGITAL -->
+    <div class="section fade-in">
+        <div class="section-title">
+            <div class="icon">4</div>
+            Mittelstand & Digitalisierung — Chancen
+        </div>
+        <div class="section-subtitle">Digitalisierungsgrad und Herausforderungen deutscher KMU — Ihr Zielmarkt</div>
+
+        <div class="grid-2">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">Digitalisierungs-Herausforderungen</div>
+                    <div class="card-badge badge-red">Chance</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartDigitalization"></canvas>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title">KMU-Technologieadoption 2025</div>
+                    <div class="card-badge badge-green">Status</div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="chartAdoption"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="insight-box">
+            <h4>&#128161; Strategisches Fazit</h4>
+            <p>
+                <strong>Der Markt bietet eine einzigartige Chance:</strong> KI-Beratung wächst mit +22% am stärksten, während 53% der KMU Schwierigkeiten mit Digitalisierungsprojekten haben.
+                149.000 offene IT-Stellen zeigen den akuten Fachkräftemangel. <strong>Ihre Positionierung als externer Partner für Automatisierung und digitales Marketing</strong> adressiert genau diese Lücke.
+                Besonders stark wachsende Branchen (Energie +6,5%, Public Sector +6,1%, Finanz +5,5%) bieten erstklassige Zielgruppen.
+            </p>
+        </div>
+    </div>
+
+    <!-- SECTION 5: GLOBAL BPA TREND -->
+    <div class="section fade-in">
+        <div class="section-title">
+            <div class="icon">5</div>
+            Globaler BPA-Markt — Perspektive
+        </div>
+        <div class="section-subtitle">Weltweite Entwicklung der Geschäftsprozessautomatisierung 2023–2033</div>
+
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title">Globales Marktvolumen BPA (USD Mrd.)</div>
+                <div class="card-badge badge-green">CAGR 13,6%</div>
+            </div>
+            <div class="chart-container">
+                <canvas id="chartGlobalBPA"></canvas>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    Quellen:
+    <a href="https://www.bdu.de/news/deutsche-unternehmensberatungen-erwarten-2026-eine-rueckkehr-zum-wachstumskurs/" target="_blank">BDU</a> ·
+    <a href="https://www.consulting.de/artikel/stillstand-2025-aufschwung-2026-ki-wird-zum-motor-der-beratungsbranche/" target="_blank">Consulting.de</a> ·
+    <a href="https://www.bitkom.org/Marktdaten/ITK-Konjunktur/ITK-Markt-Deutschland" target="_blank">Bitkom</a> ·
+    <a href="https://www.grandviewresearch.com/horizon/outlook/robotic-process-automation-market/germany" target="_blank">Grand View Research</a> ·
+    <a href="https://www.expertmarketresearch.com/reports/germany-digital-marketing-market" target="_blank">Expert Market Research</a> ·
+    <a href="https://www.6wresearch.com/industry-report/germany-business-process-automation-market" target="_blank">6W Research</a> ·
+    <a href="https://www.marketsandmarkets.com/Market-Reports/business-process-automation-market-197532385.html" target="_blank">MarketsandMarkets</a>
+    <br>Stand: April 2026 · Alle Prognosen basieren auf den jeweils neuesten verfügbaren Quellen.
+</div>
+
+<script>
+// ============ CHART CONFIG DEFAULTS ============
+Chart.defaults.font.family = "'Inter', sans-serif";
+Chart.defaults.font.size = 12;
+Chart.defaults.color = '#737373';
+Chart.defaults.plugins.legend.labels.usePointStyle = true;
+Chart.defaults.plugins.legend.labels.padding = 16;
+Chart.defaults.elements.bar.borderRadius = 6;
+Chart.defaults.elements.line.tension = 0.4;
+
+const gold = '#c9a84c';
+const goldLight = '#e8d48b';
+const goldDark = '#a07e2e';
+const graphite = '#2d2d2d';
+const green = '#22c55e';
+const blue = '#3b82f6';
+const purple = '#8b5cf6';
+const red = '#ef4444';
+
+// ============ 1. MARKET VOLUME ============
+new Chart(document.getElementById('chartMarketVolume'), {
+    type: 'bar',
+    data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026(P)'],
+        datasets: [{
+            label: 'Umsatz (Mrd. €)',
+            data: [36.2, 34.6, 37.8, 41.2, 44.5, 48.8, 49.0, 51.1],
+            backgroundColor: (ctx) => {
+                const i = ctx.dataIndex;
+                if (i === 7) return 'rgba(201,168,76,0.3)';
+                return gold;
+            },
+            borderColor: (ctx) => {
+                const i = ctx.dataIndex;
+                if (i === 7) return gold;
+                return 'transparent';
+            },
+            borderWidth: (ctx) => ctx.dataIndex === 7 ? 2 : 0,
+            borderDash: (ctx) => ctx.dataIndex === 7 ? [5,5] : [],
+            barPercentage: 0.7,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                titleColor: '#fff',
+                bodyColor: '#fff',
+                padding: 12,
+                cornerRadius: 10,
+                callbacks: {
+                    label: (ctx) => ctx.parsed.y + ' Mrd. €'
+                }
+            }
+        },
+        scales: {
+            y: {
+                beginAtZero: false,
+                min: 30,
+                grid: { color: '#f0f0f0' },
+                ticks: { callback: v => v + ' Mrd.' }
+            },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 2. GROWTH RATE ============
+new Chart(document.getElementById('chartGrowthRate'), {
+    type: 'line',
+    data: {
+        labels: ['2019', '2020', '2021', '2022', '2023', '2024', '2025', '2026(P)'],
+        datasets: [{
+            label: 'Wachstum (%)',
+            data: [7.4, -4.4, 9.2, 9.0, 8.0, 9.7, 0.5, 4.5],
+            borderColor: gold,
+            backgroundColor: 'rgba(201,168,76,0.1)',
+            fill: true,
+            pointBackgroundColor: (ctx) => ctx.raw < 0 ? red : gold,
+            pointRadius: 6,
+            pointHoverRadius: 9,
+            borderWidth: 3,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 12,
+                cornerRadius: 10,
+                callbacks: {
+                    label: (ctx) => (ctx.parsed.y > 0 ? '+' : '') + ctx.parsed.y + '%'
+                }
+            }
+        },
+        scales: {
+            y: {
+                grid: { color: '#f0f0f0' },
+                ticks: { callback: v => (v > 0 ? '+' : '') + v + '%' }
+            },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 3. SEGMENTS ============
+new Chart(document.getElementById('chartSegments'), {
+    type: 'bar',
+    data: {
+        labels: ['IT-Beratung', 'Strategie', 'Org. & Prozess', 'HR-Beratung', 'KI-Beratung'],
+        datasets: [
+            {
+                label: '2025',
+                data: [2.8, 1.1, -0.8, -0.8, 19.0],
+                backgroundColor: '#d4d4d4',
+                barPercentage: 0.7,
+            },
+            {
+                label: '2026 (P)',
+                data: [4.7, 5.2, 3.5, 4.2, 22.0],
+                backgroundColor: gold,
+                barPercentage: 0.7,
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: {
+            legend: { position: 'bottom' },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 12,
+                cornerRadius: 10,
+                callbacks: {
+                    label: (ctx) => ctx.dataset.label + ': ' + (ctx.parsed.x > 0 ? '+' : '') + ctx.parsed.x + '%'
+                }
+            }
+        },
+        scales: {
+            x: {
+                grid: { color: '#f0f0f0' },
+                ticks: { callback: v => (v > 0 ? '+' : '') + v + '%' }
+            },
+            y: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 4. INDUSTRIES ============
+new Chart(document.getElementById('chartIndustries'), {
+    type: 'bar',
+    data: {
+        labels: ['Energie', 'Public Sector', 'Finanz', 'Gesundheit', 'IT/Telko', 'Automobil', 'Chemie'],
+        datasets: [{
+            label: 'Wachstum 2026 (%)',
+            data: [6.5, 6.1, 5.5, 4.8, 4.5, 1.4, 0.5],
+            backgroundColor: [gold, gold, gold, goldLight, goldLight, '#d4d4d4', '#d4d4d4'],
+            barPercentage: 0.65,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        indexAxis: 'y',
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 12,
+                cornerRadius: 10,
+                callbacks: {
+                    label: (ctx) => '+' + ctx.parsed.x + '%'
+                }
+            }
+        },
+        scales: {
+            x: {
+                grid: { color: '#f0f0f0' },
+                ticks: { callback: v => '+' + v + '%' }
+            },
+            y: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 5. BPA MARKET ============
+new Chart(document.getElementById('chartBPA'), {
+    type: 'line',
+    data: {
+        labels: ['2023', '2024', '2025', '2026', '2027', '2028'],
+        datasets: [{
+            label: 'BPA DE (Mrd. $)',
+            data: [1.35, 1.48, 1.62, 1.78, 1.96, 2.15],
+            borderColor: gold,
+            backgroundColor: 'rgba(201,168,76,0.08)',
+            fill: true,
+            pointRadius: 4,
+            pointBackgroundColor: gold,
+            borderWidth: 2.5,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 10,
+                cornerRadius: 8,
+                callbacks: { label: ctx => '$' + ctx.parsed.y + ' Mrd.' }
+            }
+        },
+        scales: {
+            y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => '$' + v } },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 6. DIGITAL MARKETING ============
+new Chart(document.getElementById('chartDigitalMarketing'), {
+    type: 'line',
+    data: {
+        labels: ['2023', '2024', '2025', '2026', '2028', '2030', '2034'],
+        datasets: [{
+            label: 'Digital Marketing DE (Mrd. $)',
+            data: [13.4, 14.5, 15.7, 16.9, 19.7, 23.0, 31.1],
+            borderColor: blue,
+            backgroundColor: 'rgba(59,130,246,0.08)',
+            fill: true,
+            pointRadius: 4,
+            pointBackgroundColor: blue,
+            borderWidth: 2.5,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 10,
+                cornerRadius: 8,
+                callbacks: { label: ctx => '$' + ctx.parsed.y + ' Mrd.' }
+            }
+        },
+        scales: {
+            y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => '$' + v } },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 7. AI CONSULTING ============
+new Chart(document.getElementById('chartAI'), {
+    type: 'bar',
+    data: {
+        labels: ['2023', '2024', '2025', '2026(P)'],
+        datasets: [{
+            label: 'KI-Wachstum (%)',
+            data: [12, 15, 19, 22],
+            backgroundColor: [purple + '66', purple + '88', purple + 'bb', purple],
+            barPercentage: 0.6,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 10,
+                cornerRadius: 8,
+                callbacks: { label: ctx => '+' + ctx.parsed.y + '%' }
+            }
+        },
+        scales: {
+            y: { grid: { color: '#f5f5f5' }, ticks: { callback: v => '+' + v + '%' } },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 8. DIGITALIZATION CHALLENGES ============
+new Chart(document.getElementById('chartDigitalization'), {
+    type: 'bar',
+    data: {
+        labels: ['2022', '2023', '2024', '2025'],
+        datasets: [{
+            label: 'Unternehmen mit Digitalisierungsproblemen (%)',
+            data: [34, 39, 46, 53],
+            backgroundColor: [red + '55', red + '77', red + '99', red],
+            barPercentage: 0.6,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 10,
+                cornerRadius: 8,
+                callbacks: { label: ctx => ctx.parsed.y + '% der Unternehmen' }
+            }
+        },
+        scales: {
+            y: {
+                grid: { color: '#f5f5f5' },
+                ticks: { callback: v => v + '%' },
+                max: 70
+            },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ 9. TECH ADOPTION ============
+new Chart(document.getElementById('chartAdoption'), {
+    type: 'doughnut',
+    data: {
+        labels: ['KI-Nutzung (wöchentlich)', 'Cloud-Dienste', 'Cybersecurity', 'Hybrid-IT', 'On-Premise'],
+        datasets: [{
+            data: [81, 72, 61, 51, 15],
+            backgroundColor: [gold, blue, green, purple, '#d4d4d4'],
+            borderWidth: 0,
+            spacing: 3,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        cutout: '55%',
+        plugins: {
+            legend: {
+                position: 'right',
+                labels: { padding: 12, font: { size: 12 } }
+            },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 10,
+                cornerRadius: 8,
+                callbacks: { label: ctx => ctx.label + ': ' + ctx.parsed + '%' }
+            }
+        }
+    }
+});
+
+// ============ 10. GLOBAL BPA ============
+new Chart(document.getElementById('chartGlobalBPA'), {
+    type: 'line',
+    data: {
+        labels: ['2023', '2024', '2025', '2026', '2027', '2028', '2029', '2030', '2031', '2032', '2033'],
+        datasets: [{
+            label: 'Global BPA (Mrd. $)',
+            data: [11.2, 13.5, 16.1, 18.3, 20.8, 23.6, 26.8, 30.5, 34.6, 39.3, 44.7],
+            borderColor: gold,
+            backgroundColor: (ctx) => {
+                const chart = ctx.chart;
+                const {ctx: c, chartArea} = chart;
+                if (!chartArea) return null;
+                const gradient = c.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                gradient.addColorStop(0, 'rgba(201,168,76,0)');
+                gradient.addColorStop(1, 'rgba(201,168,76,0.15)');
+                return gradient;
+            },
+            fill: true,
+            pointRadius: 5,
+            pointBackgroundColor: gold,
+            pointBorderColor: '#fff',
+            pointBorderWidth: 2,
+            borderWidth: 3,
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: { display: false },
+            tooltip: {
+                backgroundColor: graphite,
+                padding: 12,
+                cornerRadius: 10,
+                callbacks: { label: ctx => '$' + ctx.parsed.y + ' Mrd.' }
+            }
+        },
+        scales: {
+            y: {
+                grid: { color: '#f5f5f5' },
+                ticks: { callback: v => '$' + v + 'B' }
+            },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+// ============ TAB SWITCHING ============
+function switchTab(btn, tabId) {
+    const parent = btn.closest('.section');
+    parent.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    btn.classList.add('active');
+    parent.querySelectorAll('.tab-content').forEach(tc => tc.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+}
+
+// ============ TABLE SORT ============
+function sortTable(tableId, col) {
+    const table = document.getElementById(tableId);
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const th = table.querySelectorAll('th')[col];
+    const asc = !th.classList.contains('sorted') || th.dataset.dir === 'desc';
+
+    table.querySelectorAll('th').forEach(h => { h.classList.remove('sorted'); delete h.dataset.dir; });
+    th.classList.add('sorted');
+    th.dataset.dir = asc ? 'asc' : 'desc';
+
+    rows.sort((a, b) => {
+        let va = a.cells[col].textContent.trim();
+        let vb = b.cells[col].textContent.trim();
+        const na = parseFloat(va.replace(/[^0-9.,-]/g, '').replace(',', '.'));
+        const nb = parseFloat(vb.replace(/[^0-9.,-]/g, '').replace(',', '.'));
+        if (!isNaN(na) && !isNaN(nb)) {
+            return asc ? na - nb : nb - na;
+        }
+        return asc ? va.localeCompare(vb, 'de') : vb.localeCompare(va, 'de');
+    });
+    rows.forEach(r => tbody.appendChild(r));
+}
+
+// ============ SCROLL ANIMATION ============
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

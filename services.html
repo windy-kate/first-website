@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leistungspakete — Consulting & Automatisierung</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --green: #22c55e;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--pearl-light);
+            color: var(--graphite);
+            line-height: 1.6;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--black) 0%, var(--graphite) 40%, #3d3520 100%);
+            color: var(--white);
+            padding: 56px 40px 48px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -60%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 60%);
+        }
+        .header-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        .header-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.2);
+            border: 1px solid rgba(201,168,76,0.4);
+            color: var(--gold-light);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 24px;
+        }
+        .header h1 {
+            font-size: 40px;
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 16px;
+        }
+        .header h1 span {
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== USP SECTION ===== */
+        .usp-section {
+            max-width: 1200px;
+            margin: -40px auto 0;
+            padding: 0 40px;
+            position: relative;
+            z-index: 2;
+        }
+        .usp-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 40px 48px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid var(--gray-200);
+            display: grid;
+            grid-template-columns: 1fr 1px 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+        .usp-left h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 12px;
+        }
+        .usp-left h2 span { color: var(--gold); }
+        .usp-tagline {
+            font-size: 15px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        .usp-highlight {
+            background: linear-gradient(135deg, #fffbeb, #fef3c7);
+            border: 1px solid #fde68a;
+            border-radius: 12px;
+            padding: 16px 20px;
+            font-size: 14px;
+            color: #78350f;
+            font-weight: 500;
+            line-height: 1.6;
+        }
+        .usp-divider {
+            width: 1px;
+            height: 100%;
+            background: linear-gradient(180deg, transparent, var(--gray-200), transparent);
+        }
+        .usp-right { display: flex; flex-direction: column; gap: 16px; }
+        .advantage {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+        .advantage-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+        .advantage-text h4 {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-bottom: 2px;
+        }
+        .advantage-text p {
+            font-size: 13px;
+            color: var(--gray-500);
+        }
+
+        /* ===== PACKAGES ===== */
+        .packages-section {
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding: 0 40px;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .section-header h2 {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--graphite);
+        }
+        .section-header p {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-top: 8px;
+        }
+
+        /* Billing toggle */
+        .billing-toggle {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 40px;
+        }
+        .billing-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-500);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .billing-label.active { color: var(--graphite); font-weight: 700; }
+        .toggle-switch {
+            width: 48px;
+            height: 26px;
+            background: var(--gray-300);
+            border-radius: 13px;
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s;
+        }
+        .toggle-switch.active { background: var(--gold); }
+        .toggle-knob {
+            width: 22px;
+            height: 22px;
+            background: var(--white);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .toggle-switch.active .toggle-knob { transform: translateX(22px); }
+        .save-badge {
+            background: #dcfce7;
+            color: #166534;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 6px;
+        }
+
+        /* Package cards */
+        .packages-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: stretch;
+        }
+        .package-card {
+            background: var(--white);
+            border-radius: 20px;
+            border: 2px solid var(--gray-200);
+            padding: 36px 32px;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .package-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+        }
+        .package-card.featured {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 4px rgba(201,168,76,0.12);
+        }
+        .package-card.featured::before {
+            content: 'BELIEBTESTE WAHL';
+            position: absolute;
+            top: 18px;
+            right: -32px;
+            background: var(--gold);
+            color: var(--white);
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+        }
+
+        .package-tier {
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 8px;
+        }
+        .tier-starter { color: var(--blue); }
+        .tier-business { color: var(--gold); }
+        .tier-enterprise { color: var(--purple); }
+
+        .package-name {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 8px;
+        }
+        .package-desc {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 24px;
+            line-height: 1.6;
+            min-height: 44px;
+        }
+
+        .package-price {
+            margin-bottom: 24px;
+        }
+        .price-value {
+            font-size: 42px;
+            font-weight: 900;
+            color: var(--graphite);
+            line-height: 1;
+        }
+        .price-currency {
+            font-size: 20px;
+            font-weight: 700;
+            vertical-align: super;
+        }
+        .price-period {
+            font-size: 14px;
+            color: var(--gray-400);
+            font-weight: 400;
+        }
+        .price-note {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        .package-divider {
+            width: 100%;
+            height: 1px;
+            background: var(--gray-200);
+            margin-bottom: 24px;
+        }
+
+        .feature-group {
+            margin-bottom: 20px;
+        }
+        .feature-group-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+        .feature-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--gray-600);
+        }
+        .feature-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+        .check-yes {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+        .check-no {
+            background: var(--gray-100);
+            color: var(--gray-400);
+        }
+        .feature-item.disabled {
+            color: var(--gray-400);
+        }
+
+        .package-timeline {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--gray-100);
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+        .timeline-icon {
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: var(--gray-100);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+        }
+
+        .package-cta {
+            display: block;
+            text-align: center;
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 700;
+            text-decoration: none;
+            margin-top: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .cta-outline {
+            background: transparent;
+            border: 2px solid var(--gray-300);
+            color: var(--graphite);
+        }
+        .cta-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .cta-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            border: 2px solid var(--gold);
+            color: var(--white);
+        }
+        .cta-gold:hover {
+            transform: scale(1.02);
+            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+        }
+        .cta-dark {
+            background: var(--graphite);
+            border: 2px solid var(--graphite);
+            color: var(--white);
+        }
+        .cta-dark:hover {
+            background: var(--black);
+        }
+
+        /* ===== ADD-ONS ===== */
+        .addons-section {
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding: 0 40px;
+        }
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+        .addon-card {
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 14px;
+            padding: 22px;
+            transition: all 0.3s;
+        }
+        .addon-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+        }
+        .addon-icon {
+            width: 38px;
+            height: 38px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            margin-bottom: 14px;
+        }
+        .addon-name {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-bottom: 4px;
+        }
+        .addon-desc {
+            font-size: 12px;
+            color: var(--gray-500);
+            line-height: 1.5;
+            margin-bottom: 12px;
+        }
+        .addon-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--graphite);
+        }
+        .addon-price span {
+            font-size: 12px;
+            font-weight: 400;
+            color: var(--gray-500);
+        }
+
+        /* ===== COMPARISON TABLE ===== */
+        .comparison-section {
+            max-width: 1200px;
+            margin: 56px auto 0;
+            padding: 0 40px;
+        }
+        .comparison-wrapper {
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .comparison-table thead th {
+            padding: 20px 16px;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            border-bottom: 2px solid var(--gray-200);
+            color: var(--graphite);
+        }
+        .comparison-table thead th:first-child {
+            text-align: left;
+            color: var(--gray-500);
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .comparison-table thead th.featured-col {
+            background: rgba(201,168,76,0.06);
+        }
+        .comparison-table tbody td {
+            padding: 14px 16px;
+            font-size: 13px;
+            text-align: center;
+            border-bottom: 1px solid var(--gray-100);
+            color: var(--gray-600);
+        }
+        .comparison-table tbody td:first-child {
+            text-align: left;
+            font-weight: 500;
+            color: var(--graphite);
+        }
+        .comparison-table tbody td.featured-col {
+            background: rgba(201,168,76,0.04);
+        }
+        .comparison-table .group-row td {
+            background: var(--gray-50);
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gray-400);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 10px 16px;
+        }
+        .tick { color: var(--green); font-weight: 700; }
+        .cross { color: var(--gray-300); }
+        .value { font-weight: 600; color: var(--graphite); }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 12px;
+            color: var(--gray-500);
+            border-top: 1px solid var(--gray-200);
+            margin-top: 60px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .packages-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .usp-card { grid-template-columns: 1fr; gap: 24px; }
+            .usp-divider { width: 100%; height: 1px; }
+            .addons-grid { grid-template-columns: 1fr 1fr; }
+        }
+        @media (max-width: 640px) {
+            .header { padding: 36px 20px 32px; }
+            .header h1 { font-size: 28px; }
+            .packages-section, .addons-section, .comparison-section, .usp-section { padding: 0 20px; }
+            .addons-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+    </style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+    <div class="header-content">
+        <div class="header-badge">Etappe 3 — Leistungskatalog</div>
+        <h1>Drei Pakete.<br>Ein Ziel: <span>Ihr Wachstum.</span></h1>
+        <p>Von der Strategie bis zur Umsetzung — w&auml;hlen Sie das Paket, das zu Ihrem Gesch&auml;ft passt. Jedes Paket liefert messbare Ergebnisse.</p>
+    </div>
+</div>
+
+<!-- ===== USP & ADVANTAGES ===== -->
+<div class="usp-section fade-up">
+    <div class="usp-card">
+        <div class="usp-left">
+            <h2>Warum wir? <span>Alles aus einer Hand.</span></h2>
+            <p class="usp-tagline">
+                W&auml;hrend andere Agenturen entweder nur Automatisierung ODER nur Marketing anbieten,
+                liefern wir das komplette Paket: <strong>Konzept, Branding, Website, Automatisierung und Leadgenerierung</strong> — nahtlos integriert und mit messbarem ROI.
+            </p>
+            <div class="usp-highlight">
+                <strong>Unser Versprechen:</strong> Sie erhalten nicht einzelne Bausteine, sondern ein funktionierendes System, das Kunden anzieht, qualifiziert und konvertiert — vollautomatisch und DSGVO-konform.
+            </div>
+        </div>
+        <div class="usp-divider"></div>
+        <div class="usp-right">
+            <div class="advantage">
+                <div class="advantage-icon" style="background:#ede9fe;color:#7c3aed;">&#9881;</div>
+                <div class="advantage-text">
+                    <h4>Full-Service statt Flickwerk</h4>
+                    <p>Branding + Website + Automatisierung + Marketing in einem Projekt. Kein Agentur-Hopping.</p>
+                </div>
+            </div>
+            <div class="advantage">
+                <div class="advantage-icon" style="background:#dcfce7;color:#16a34a;">&#9733;</div>
+                <div class="advantage-text">
+                    <h4>KI-gest&uuml;tzte Automatisierung</h4>
+                    <p>Moderne KI-Workflows mit n8n, Make.com — DSGVO-konform, auf Ihrer Infrastruktur.</p>
+                </div>
+            </div>
+            <div class="advantage">
+                <div class="advantage-icon" style="background:#dbeafe;color:#2563eb;">&#9670;</div>
+                <div class="advantage-text">
+                    <h4>Messbare Ergebnisse</h4>
+                    <p>Jedes Projekt wird mit klaren KPIs gemessen. Keine vagen Versprechungen, sondern ROI.</p>
+                </div>
+            </div>
+            <div class="advantage">
+                <div class="advantage-icon" style="background:#fef3c7;color:#a07e2e;">&#9830;</div>
+                <div class="advantage-text">
+                    <h4>Europ&auml;ischer Datenschutz</h4>
+                    <p>Deutsche/EU-Server. Keine US-Cloud-Abh&auml;ngigkeit. Vollst&auml;ndig DSGVO-konform.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== PACKAGES ===== -->
+<div class="packages-section">
+    <div class="section-header">
+        <h2>Unsere Leistungspakete</h2>
+        <p>Passend f&uuml;r jede Unternehmensphase — vom Einstieg bis zur Skalierung</p>
+    </div>
+
+    <div class="billing-toggle">
+        <span class="billing-label active" id="labelProject" onclick="toggleBilling('project')">Projektpreis</span>
+        <div class="toggle-switch" id="billingSwitch" onclick="toggleBilling()">
+            <div class="toggle-knob"></div>
+        </div>
+        <span class="billing-label" id="labelMonthly" onclick="toggleBilling('monthly')">Monatlich</span>
+        <span class="save-badge">Spare 15%</span>
+    </div>
+
+    <div class="packages-grid">
+
+        <!-- STARTER -->
+        <div class="package-card fade-up delay-1">
+            <div class="package-tier tier-starter">STARTER</div>
+            <div class="package-name">Digital Kickstart</div>
+            <div class="package-desc">
+                F&uuml;r Gr&uuml;nder und Einzelunternehmer, die ihren professionellen Marktauftritt brauchen.
+            </div>
+            <div class="package-price">
+                <div class="price-value" data-project="2.990" data-monthly="849"><span class="price-currency">&euro;</span>2.990</div>
+                <div class="price-period price-period-text">einmaliges Projektbudget</div>
+                <div class="price-note">oder 4 Raten &agrave; &euro;790</div>
+            </div>
+            <div class="package-divider"></div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Konzept & Branding</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Markenpositionierung & Zielgruppenanalyse</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Logo & Grundlagen Farbkonzept</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Corporate-Design-Basisleitfaden</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <div class="feature-group-title">Website</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> One-Page-Landingpage (responsive)</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Kontaktformular & Google Maps</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Basis-SEO-Optimierung</li>
+                    <li class="feature-item disabled"><span class="feature-check check-no">&mdash;</span> Multi-Page-Website</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <div class="feature-group-title">Automatisierung</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> E-Mail-Autoresponder einrichten</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> 1 Workflow-Automatisierung (z.B. Lead-Benachrichtigung)</li>
+                    <li class="feature-item disabled"><span class="feature-check check-no">&mdash;</span> KI-Chatbot</li>
+                    <li class="feature-item disabled"><span class="feature-check check-no">&mdash;</span> CRM-Integration</li>
+                </ul>
+            </div>
+
+            <div class="package-timeline">
+                <div class="timeline-icon">&#128197;</div>
+                <span>Lieferzeit: <strong>2&ndash;3 Wochen</strong></span>
+            </div>
+            <a class="package-cta cta-outline">Paket anfragen</a>
+        </div>
+
+        <!-- BUSINESS (Featured) -->
+        <div class="package-card featured fade-up delay-2">
+            <div class="package-tier tier-business">BUSINESS</div>
+            <div class="package-name">Growth Engine</div>
+            <div class="package-desc">
+                F&uuml;r KMU, die einen kompletten digitalen Vertriebskanal mit Automatisierung aufbauen wollen.
+            </div>
+            <div class="package-price">
+                <div class="price-value" data-project="7.900" data-monthly="2.240"><span class="price-currency">&euro;</span>7.900</div>
+                <div class="price-period price-period-text">einmaliges Projektbudget</div>
+                <div class="price-note">oder 4 Raten &agrave; &euro;2.100</div>
+            </div>
+            <div class="package-divider"></div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Konzept & Branding</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Markt- & Wettbewerbsanalyse</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Vollst&auml;ndige Markenidentit&auml;t (Logo, Farben, Typografie)</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Corporate Design Manual</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Marketingstrategie & Positionierung</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <div class="feature-group-title">Website & Leadgenerierung</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Multi-Page-Website (bis 5 Seiten)</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Conversion-optimierte Landingpage</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Lead-Magnet & Funnel-Aufbau</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> SEO-Optimierung & Analytics</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <div class="feature-group-title">Automatisierung & KI</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> CRM-Setup & Integration</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Bis zu 5 Workflow-Automatisierungen</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> KI-Chatbot f&uuml;r Kundenqualifizierung</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> LinkedIn-Lead-Funnel</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> E-Mail-Marketing-Automatisierung</li>
+                </ul>
+            </div>
+
+            <div class="package-timeline">
+                <div class="timeline-icon">&#128197;</div>
+                <span>Lieferzeit: <strong>4&ndash;6 Wochen</strong></span>
+            </div>
+            <a class="package-cta cta-gold">Beratungsgespr&auml;ch buchen</a>
+        </div>
+
+        <!-- ENTERPRISE -->
+        <div class="package-card fade-up delay-3">
+            <div class="package-tier tier-enterprise">ENTERPRISE</div>
+            <div class="package-name">Scale System</div>
+            <div class="package-desc">
+                F&uuml;r etablierte Unternehmen, die ihre Prozesse komplett digitalisieren und skalieren m&ouml;chten.
+            </div>
+            <div class="package-price">
+                <div class="price-value" data-project="14.900" data-monthly="4.230"><span class="price-currency">&euro;</span>14.900</div>
+                <div class="price-period price-period-text">einmaliges Projektbudget</div>
+                <div class="price-note">oder 6 Raten &agrave; &euro;2.650</div>
+            </div>
+            <div class="package-divider"></div>
+
+            <div class="feature-group">
+                <div class="feature-group-title">Strategie & Branding</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Umfassende Markt- & Wettbewerbsanalyse</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Premium-Markenidentit&auml;t (alle Formate)</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Komplettes Corporate-Design-System</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Go-to-Market-Strategie</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Wettbewerbspositionierung & USP-Workshop</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <div class="feature-group-title">Digitale Plattform</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Vollst&auml;ndige Website (unbegrenzte Seiten)</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Landingpages mit A/B-Testing</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Blog / Content Hub</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Kundenportal / Dashboard</li>
+                </ul>
+            </div>
+            <div class="feature-group">
+                <div class="feature-group-title">Automatisierung & Skalierung</div>
+                <ul class="feature-list">
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Unbegrenzte Workflow-Automatisierungen</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> KI-Chatbot + Telefonassistent</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> Multi-Channel Lead-Funnel (LinkedIn, Ads, SEO)</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> CRM, E-Mail, Social Automation</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> KPI-Dashboard & Reporting</li>
+                    <li class="feature-item"><span class="feature-check check-yes">&#10003;</span> 3 Monate Support & Optimierung inklusive</li>
+                </ul>
+            </div>
+
+            <div class="package-timeline">
+                <div class="timeline-icon">&#128197;</div>
+                <span>Lieferzeit: <strong>8&ndash;12 Wochen</strong></span>
+            </div>
+            <a class="package-cta cta-dark">Individuelle Beratung</a>
+        </div>
+
+    </div>
+</div>
+
+<!-- ===== ADD-ONS ===== -->
+<div class="addons-section fade-up">
+    <div class="section-header">
+        <h2>Erg&auml;nzende Leistungen</h2>
+        <p>Einzeln buchbar oder als Erweiterung zu jedem Paket</p>
+    </div>
+    <div class="addons-grid">
+        <div class="addon-card">
+            <div class="addon-icon" style="background:#ede9fe;color:#7c3aed;">&#9998;</div>
+            <div class="addon-name">Social-Media-Strategie</div>
+            <div class="addon-desc">Content-Planung, Redaktionsplan und Vorlagen f&uuml;r LinkedIn, Instagram & Co.</div>
+            <div class="addon-price">&euro;990 <span>einmalig</span></div>
+        </div>
+        <div class="addon-card">
+            <div class="addon-icon" style="background:#dbeafe;color:#2563eb;">&#9993;</div>
+            <div class="addon-name">E-Mail-Marketing-Setup</div>
+            <div class="addon-desc">Newsletter-System, Welcome-Sequenz, Segmentierung und Templates.</div>
+            <div class="addon-price">&euro;790 <span>einmalig</span></div>
+        </div>
+        <div class="addon-card">
+            <div class="addon-icon" style="background:#dcfce7;color:#16a34a;">&#9881;</div>
+            <div class="addon-name">Zus&auml;tzliche Automatisierung</div>
+            <div class="addon-desc">Individuelle Workflow-Automatisierung f&uuml;r spezifische Gesch&auml;ftsprozesse.</div>
+            <div class="addon-price">ab &euro;490 <span>pro Workflow</span></div>
+        </div>
+        <div class="addon-card">
+            <div class="addon-icon" style="background:#fef3c7;color:#a07e2e;">&#9733;</div>
+            <div class="addon-name">Laufender Support</div>
+            <div class="addon-desc">Monatliche Betreuung, Optimierung, Updates und technischer Support.</div>
+            <div class="addon-price">ab &euro;490 <span>/Monat</span></div>
+        </div>
+    </div>
+</div>
+
+<!-- ===== FULL COMPARISON TABLE ===== -->
+<div class="comparison-section fade-up">
+    <div class="section-header">
+        <h2>Detailvergleich aller Pakete</h2>
+        <p>Alle Leistungen im direkten Vergleich</p>
+    </div>
+    <div class="comparison-wrapper">
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width:30%">Leistung</th>
+                    <th style="width:23%">Starter<br><small style="color:var(--blue);font-weight:600">&euro;2.990</small></th>
+                    <th style="width:23%" class="featured-col">Business<br><small style="color:var(--gold);font-weight:600">&euro;7.900</small></th>
+                    <th style="width:23%">Enterprise<br><small style="color:var(--purple);font-weight:600">&euro;14.900</small></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="group-row"><td colspan="4">Strategie & Branding</td></tr>
+                <tr><td>Markenpositionierung</td><td class="tick">&#10003;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Wettbewerbsanalyse</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Logo & Corporate Design</td><td class="value">Basis</td><td class="featured-col value">Komplett</td><td class="value">Premium</td></tr>
+                <tr><td>Marketingstrategie</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Go-to-Market-Plan</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="tick">&#10003;</td></tr>
+
+                <tr class="group-row"><td colspan="4">Website & Digital</td></tr>
+                <tr><td>Landingpage</td><td class="tick">&#10003;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Multi-Page-Website</td><td class="cross">&mdash;</td><td class="featured-col value">Bis 5 Seiten</td><td class="value">Unbegrenzt</td></tr>
+                <tr><td>A/B-Testing</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Blog / Content Hub</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>SEO-Optimierung</td><td class="value">Basis</td><td class="featured-col value">Erweitert</td><td class="value">Komplett</td></tr>
+
+                <tr class="group-row"><td colspan="4">Automatisierung & KI</td></tr>
+                <tr><td>Workflow-Automatisierungen</td><td class="value">1</td><td class="featured-col value">Bis 5</td><td class="value">Unbegrenzt</td></tr>
+                <tr><td>CRM-Integration</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>KI-Chatbot</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Telefonassistent (KI)</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>E-Mail-Automatisierung</td><td class="value">Basis</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+
+                <tr class="group-row"><td colspan="4">Leadgenerierung</td></tr>
+                <tr><td>LinkedIn-Lead-Funnel</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Lead-Magnet & Funnel</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>Multi-Channel (Ads, SEO, Social)</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="tick">&#10003;</td></tr>
+                <tr><td>KPI-Dashboard & Reporting</td><td class="cross">&mdash;</td><td class="cross">&mdash;</td><td class="tick">&#10003;</td></tr>
+
+                <tr class="group-row"><td colspan="4">Support</td></tr>
+                <tr><td>Lieferzeit</td><td class="value">2&ndash;3 Wo.</td><td class="featured-col value">4&ndash;6 Wo.</td><td class="value">8&ndash;12 Wo.</td></tr>
+                <tr><td>Revisionen</td><td class="value">2</td><td class="featured-col value">5</td><td class="value">Unbegrenzt</td></tr>
+                <tr><td>Support nach Lieferung</td><td class="value">2 Wochen</td><td class="featured-col value">1 Monat</td><td class="value">3 Monate</td></tr>
+                <tr><td>Schulung / Onboarding</td><td class="cross">&mdash;</td><td class="featured-col tick">&#10003;</td><td class="tick">&#10003;</td></tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    Alle Preise zzgl. MwSt. &middot; Individuelle Anpassungen auf Anfrage m&ouml;glich.<br>
+    Basierend auf Wettbewerbsanalyse des deutschen Marktes, April 2026.
+</div>
+
+<script>
+// Billing toggle
+let isMonthly = false;
+
+function toggleBilling(mode) {
+    if (mode === 'project') isMonthly = false;
+    else if (mode === 'monthly') isMonthly = true;
+    else isMonthly = !isMonthly;
+
+    document.getElementById('billingSwitch').classList.toggle('active', isMonthly);
+    document.getElementById('labelProject').classList.toggle('active', !isMonthly);
+    document.getElementById('labelMonthly').classList.toggle('active', isMonthly);
+
+    document.querySelectorAll('.price-value').forEach(el => {
+        const project = el.dataset.project;
+        const monthly = el.dataset.monthly;
+        el.innerHTML = '<span class="price-currency">\u20AC</span>' + (isMonthly ? monthly : project);
+    });
+
+    document.querySelectorAll('.price-period-text').forEach(el => {
+        el.textContent = isMonthly ? 'pro Monat (4 Monate)' : 'einmaliges Projektbudget';
+    });
+}
+
+// Scroll animations
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) entry.target.classList.add('visible');
+    });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

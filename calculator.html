@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projektkalkulator — Consulting & Automatisierung</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #737373;
+            --gray-600: #525252;
+            --gray-700: #404040;
+            --green: #22c55e;
+            --green-bg: #f0fdf4;
+            --blue: #3b82f6;
+            --purple: #8b5cf6;
+            --red: #ef4444;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--pearl-light);
+            color: var(--graphite);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--black) 0%, var(--graphite) 40%, #3d3520 100%);
+            color: var(--white);
+            padding: 48px 40px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 700px;
+            height: 700px;
+            background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 60%);
+        }
+        .header-content { position: relative; z-index: 1; }
+        .header-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.2);
+            border: 1px solid rgba(201,168,76,0.4);
+            color: var(--gold-light);
+            padding: 6px 18px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 20px;
+        }
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+        }
+        .header h1 span {
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p { font-size: 15px; color: rgba(255,255,255,0.6); max-width: 550px; margin: 0 auto; }
+
+        /* ===== LAYOUT ===== */
+        .layout {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* ===== CATEGORIES ===== */
+        .categories { display: flex; flex-direction: column; gap: 28px; }
+
+        .category {
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid var(--gray-200);
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+            transition: box-shadow 0.3s;
+        }
+        .category:hover {
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+        }
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 20px 24px;
+            cursor: pointer;
+            user-select: none;
+            transition: background 0.2s;
+        }
+        .category-header:hover { background: var(--gray-50); }
+        .category-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        .category-info { flex: 1; }
+        .category-name {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--graphite);
+        }
+        .category-desc {
+            font-size: 12px;
+            color: var(--gray-500);
+        }
+        .category-count {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-400);
+            background: var(--gray-100);
+            padding: 4px 10px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .category-count.active {
+            background: rgba(201,168,76,0.15);
+            color: var(--gold-dark);
+        }
+        .category-chevron {
+            font-size: 14px;
+            color: var(--gray-400);
+            transition: transform 0.3s;
+        }
+        .category.open .category-chevron {
+            transform: rotate(180deg);
+        }
+
+        .category-body {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease;
+        }
+        .category.open .category-body {
+            max-height: 2000px;
+        }
+        .category-items {
+            padding: 0 24px 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        /* ===== SERVICE ITEM ===== */
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 14px;
+            align-items: center;
+            padding: 14px 16px;
+            border-radius: 12px;
+            border: 1.5px solid var(--gray-200);
+            cursor: pointer;
+            transition: all 0.25s;
+            user-select: none;
+        }
+        .service-item:hover {
+            border-color: var(--gold-light);
+            background: rgba(201,168,76,0.02);
+        }
+        .service-item.selected {
+            border-color: var(--gold);
+            background: rgba(201,168,76,0.05);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+        }
+
+        .checkbox {
+            width: 22px;
+            height: 22px;
+            border-radius: 6px;
+            border: 2px solid var(--gray-300);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            color: transparent;
+            transition: all 0.25s;
+            flex-shrink: 0;
+        }
+        .service-item.selected .checkbox {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        .service-info { min-width: 0; }
+        .service-name {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--graphite);
+        }
+        .service-desc {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 1px;
+        }
+        .service-tags {
+            display: flex;
+            gap: 4px;
+            margin-top: 6px;
+            flex-wrap: wrap;
+        }
+        .service-tag {
+            font-size: 10px;
+            font-weight: 600;
+            padding: 2px 7px;
+            border-radius: 4px;
+            background: var(--gray-100);
+            color: var(--gray-500);
+        }
+        .service-tag.time { background: #dbeafe; color: #1e40af; }
+
+        .service-price {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--graphite);
+            white-space: nowrap;
+            text-align: right;
+        }
+        .service-price-unit {
+            font-size: 11px;
+            font-weight: 400;
+            color: var(--gray-500);
+            display: block;
+        }
+
+        /* ===== QUANTITY ===== */
+        .qty-control {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 6px;
+        }
+        .qty-btn {
+            width: 24px;
+            height: 24px;
+            border-radius: 6px;
+            border: 1px solid var(--gray-300);
+            background: var(--white);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            color: var(--graphite);
+            transition: all 0.2s;
+        }
+        .qty-btn:hover { border-color: var(--gold); color: var(--gold-dark); }
+        .qty-value {
+            font-size: 13px;
+            font-weight: 700;
+            min-width: 20px;
+            text-align: center;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            position: sticky;
+            top: 24px;
+        }
+        .summary-card {
+            background: var(--white);
+            border-radius: 20px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            overflow: hidden;
+        }
+        .summary-header {
+            background: linear-gradient(135deg, var(--graphite), #3d3520);
+            color: var(--white);
+            padding: 24px;
+        }
+        .summary-header h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .summary-header p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        .summary-body { padding: 24px; }
+
+        .summary-items {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            max-height: 320px;
+            overflow-y: auto;
+            padding-right: 4px;
+        }
+        .summary-items::-webkit-scrollbar { width: 4px; }
+        .summary-items::-webkit-scrollbar-track { background: transparent; }
+        .summary-items::-webkit-scrollbar-thumb { background: var(--gray-300); border-radius: 2px; }
+
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 0;
+            border-bottom: 1px solid var(--gray-100);
+            animation: slideIn 0.3s ease;
+        }
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        .summary-item-name {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--graphite);
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        .summary-item-qty {
+            font-size: 11px;
+            color: var(--gray-500);
+            white-space: nowrap;
+        }
+        .summary-item-price {
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--graphite);
+            white-space: nowrap;
+        }
+        .summary-item-remove {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: none;
+            background: var(--gray-100);
+            color: var(--gray-500);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: all 0.2s;
+        }
+        .summary-item-remove:hover {
+            background: #fee2e2;
+            color: var(--red);
+        }
+
+        .summary-empty {
+            text-align: center;
+            padding: 32px 0;
+            color: var(--gray-400);
+            font-size: 13px;
+        }
+        .summary-empty-icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            opacity: 0.4;
+        }
+
+        .summary-divider {
+            height: 1px;
+            background: var(--gray-200);
+            margin: 20px 0;
+        }
+
+        /* Discount */
+        .discount-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 14px;
+            background: var(--green-bg);
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .discount-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #166534;
+        }
+        .discount-value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #166534;
+        }
+
+        /* Totals */
+        .subtotal-row, .tax-row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-bottom: 8px;
+        }
+        .total-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            padding-top: 16px;
+            border-top: 2px solid var(--graphite);
+            margin-top: 12px;
+        }
+        .total-label {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--graphite);
+        }
+        .total-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--graphite);
+            line-height: 1;
+        }
+        .total-value .currency {
+            font-size: 18px;
+            vertical-align: super;
+        }
+        .total-note {
+            font-size: 11px;
+            color: var(--gray-500);
+            text-align: right;
+            margin-top: 4px;
+        }
+
+        /* Package suggestion */
+        .package-suggest {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 12px;
+            border: 1.5px dashed var(--gold);
+            background: rgba(201,168,76,0.04);
+        }
+        .package-suggest-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+        .package-suggest-text {
+            font-size: 13px;
+            color: var(--gray-600);
+            line-height: 1.5;
+        }
+        .package-suggest-saving {
+            font-size: 14px;
+            font-weight: 800;
+            color: var(--green);
+            margin-top: 8px;
+        }
+
+        /* CTA */
+        .summary-cta {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            border: none;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            text-align: center;
+            margin-top: 20px;
+            transition: all 0.3s;
+            text-decoration: none;
+            color: var(--white);
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+        }
+        .summary-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201,168,76,0.3);
+        }
+        .summary-cta:disabled {
+            background: var(--gray-300);
+            cursor: default;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .reset-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--gray-300);
+            border-radius: 10px;
+            background: transparent;
+            font-size: 13px;
+            font-family: inherit;
+            color: var(--gray-500);
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.2s;
+        }
+        .reset-btn:hover { border-color: var(--red); color: var(--red); }
+
+        /* ===== PRESETS ===== */
+        .presets {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 28px;
+        }
+        .preset-btn {
+            padding: 8px 16px;
+            border: 1.5px solid var(--gray-300);
+            border-radius: 10px;
+            background: var(--white);
+            font-size: 13px;
+            font-weight: 600;
+            font-family: inherit;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .preset-btn:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+        }
+        .preset-btn.active {
+            background: var(--gold);
+            border-color: var(--gold);
+            color: var(--white);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 32px;
+            font-size: 12px;
+            color: var(--gray-500);
+            border-top: 1px solid var(--gray-200);
+            margin-top: 20px;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .sidebar { position: static; }
+        }
+        @media (max-width: 640px) {
+            .header { padding: 28px 20px; }
+            .header h1 { font-size: 26px; }
+        }
+
+        /* Print */
+        @media print {
+            .header { padding: 20px; }
+            .category-body { max-height: none !important; }
+            .sidebar { position: static; break-inside: avoid; }
+            .service-item.selected { border: 2px solid #000; }
+            .summary-cta, .reset-btn, .preset-btn { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-content">
+        <div class="header-badge">Etappe 4 — Kalkulator</div>
+        <h1>Projekt<span>kalkulator</span></h1>
+        <p>W&auml;hlen Sie die gew&uuml;nschten Leistungen aus und sehen Sie sofort die Gesamtkosten. Kombinieren Sie frei oder nutzen Sie unsere Paket-Vorschl&auml;ge.</p>
+    </div>
+</div>
+
+<div class="layout">
+    <!-- LEFT: Services -->
+    <div>
+        <!-- PRESETS -->
+        <div class="presets">
+            <button class="preset-btn" onclick="applyPreset('none')">Leer starten</button>
+            <button class="preset-btn" onclick="applyPreset('starter')">Starter-Paket</button>
+            <button class="preset-btn" onclick="applyPreset('business')">Business-Paket</button>
+            <button class="preset-btn" onclick="applyPreset('enterprise')">Enterprise-Paket</button>
+        </div>
+
+        <div class="categories" id="categoriesContainer"></div>
+    </div>
+
+    <!-- RIGHT: Summary -->
+    <div class="sidebar">
+        <div class="summary-card">
+            <div class="summary-header">
+                <h3>Ihre Kalkulation</h3>
+                <p id="itemCountLabel">Noch keine Leistungen gew&auml;hlt</p>
+            </div>
+            <div class="summary-body">
+                <div class="summary-items" id="summaryItems">
+                    <div class="summary-empty">
+                        <div class="summary-empty-icon">&#9744;</div>
+                        W&auml;hlen Sie Leistungen aus der Liste
+                    </div>
+                </div>
+
+                <div class="summary-divider"></div>
+
+                <div id="discountRow" class="discount-row" style="display:none;">
+                    <span class="discount-label" id="discountLabel">Paketrabatt</span>
+                    <span class="discount-value" id="discountValue"></span>
+                </div>
+
+                <div class="subtotal-row">
+                    <span>Zwischensumme (netto)</span>
+                    <span id="subtotal">&euro;0</span>
+                </div>
+                <div class="tax-row">
+                    <span>MwSt. (19%)</span>
+                    <span id="taxAmount">&euro;0</span>
+                </div>
+
+                <div class="total-row">
+                    <span class="total-label">Gesamt (brutto)</span>
+                    <div>
+                        <div class="total-value" id="totalValue"><span class="currency">&euro;</span>0</div>
+                        <div class="total-note" id="totalNote"></div>
+                    </div>
+                </div>
+
+                <div id="packageSuggest" class="package-suggest" style="display:none;">
+                    <div class="package-suggest-title">Paket-Tipp</div>
+                    <div class="package-suggest-text" id="suggestText"></div>
+                    <div class="package-suggest-saving" id="suggestSaving"></div>
+                </div>
+
+                <button class="summary-cta" id="ctaBtn" disabled onclick="generatePDF()">Angebot anfordern</button>
+                <button class="reset-btn" onclick="resetAll()">Alle zur&uuml;cksetzen</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="footer">
+    Alle Preise in Euro netto. Individuelle Anpassungen auf Anfrage. &middot; Stand: April 2026
+</div>
+
+<script>
+// ============ SERVICE DATA ============
+const services = [
+    {
+        category: "branding",
+        categoryName: "Konzept & Branding",
+        categoryDesc: "Markenidentit\u00e4t, Strategie und visuelles Erscheinungsbild",
+        categoryIcon: "\u2605",
+        categoryColor: "#8b5cf6",
+        categoryBg: "#ede9fe",
+        items: [
+            { id: "brand-1", name: "Markenpositionierung & Zielgruppenanalyse", desc: "Workshop + Dokumentation", price: 890, tags: ["Strategie"], time: "3\u20135 Tage", presets: ["starter","business","enterprise"] },
+            { id: "brand-2", name: "Logo-Design & Farbkonzept", desc: "3 Entw\u00fcrfe inkl. 2 Revisionen", price: 690, tags: ["Design"], time: "5\u20137 Tage", presets: ["starter","business","enterprise"] },
+            { id: "brand-3", name: "Corporate-Design-Manual", desc: "Typografie, Farben, Layouts, Anwendungsregeln", price: 990, tags: ["Design"], time: "5 Tage", presets: ["business","enterprise"] },
+            { id: "brand-4", name: "Markt- & Wettbewerbsanalyse", desc: "Branchenrecherche mit Dashboard", price: 1290, tags: ["Strategie"], time: "5\u20137 Tage", presets: ["business","enterprise"] },
+            { id: "brand-5", name: "Marketingstrategie & Positionierung", desc: "Kanal-Mix, Messaging, Content-Plan", price: 1490, tags: ["Strategie"], time: "5\u20137 Tage", presets: ["business","enterprise"] },
+            { id: "brand-6", name: "Go-to-Market-Strategie", desc: "Launch-Plan, Meilensteine, KPIs", price: 1890, tags: ["Strategie"], time: "7\u201310 Tage", presets: ["enterprise"] },
+            { id: "brand-7", name: "USP-Workshop", desc: "Interaktiver Workshop zur Sch\u00e4rfung Ihres Alleinstellungsmerkmals", price: 690, tags: ["Workshop"], time: "1 Tag", presets: ["enterprise"] },
+        ]
+    },
+    {
+        category: "website",
+        categoryName: "Website & Landing Pages",
+        categoryDesc: "Professionelle Webpr\u00e4senz und Conversion-Optimierung",
+        categoryIcon: "\u25C6",
+        categoryColor: "#3b82f6",
+        categoryBg: "#dbeafe",
+        items: [
+            { id: "web-1", name: "One-Page-Landingpage", desc: "Responsive, conversion-optimiert, inkl. Formular", price: 1490, tags: ["Website"], time: "5\u20137 Tage", presets: ["starter"] },
+            { id: "web-2", name: "Multi-Page-Website (bis 5 Seiten)", desc: "Startseite, \u00dcber uns, Leistungen, Kontakt, Blog", price: 3490, tags: ["Website"], time: "10\u201314 Tage", presets: ["business"] },
+            { id: "web-3", name: "Vollst\u00e4ndige Website (unbegrenzt)", desc: "Alle Seiten, CMS-System, Admin-Panel", price: 5990, tags: ["Website"], time: "3\u20134 Wochen", presets: ["enterprise"] },
+            { id: "web-4", name: "Zus\u00e4tzliche Landingpage", desc: "Conversion-optimierte Kampagnen-Seite", price: 790, qty: true, tags: ["Conversion"], time: "3 Tage", presets: [] },
+            { id: "web-5", name: "A/B-Testing Setup", desc: "Split-Tests f\u00fcr Landingpages mit Analytics", price: 590, tags: ["Conversion"], time: "2 Tage", presets: ["enterprise"] },
+            { id: "web-6", name: "Blog / Content Hub", desc: "Blog-System mit Kategorien, Tags, SEO", price: 990, tags: ["Content"], time: "3\u20135 Tage", presets: ["enterprise"] },
+            { id: "web-7", name: "Kundenportal / Dashboard", desc: "Login-Bereich f\u00fcr Kunden mit individuellen Daten", price: 2490, tags: ["Entwicklung"], time: "2 Wochen", presets: ["enterprise"] },
+            { id: "web-8", name: "SEO-Optimierung (Erweitert)", desc: "Technical SEO, Keyword-Strategie, On-Page", price: 890, tags: ["SEO"], time: "5 Tage", presets: ["business","enterprise"] },
+        ]
+    },
+    {
+        category: "automation",
+        categoryName: "Automatisierung & KI",
+        categoryDesc: "Workflows, Chatbots und intelligente Prozessoptimierung",
+        categoryIcon: "\u2699",
+        categoryColor: "#22c55e",
+        categoryBg: "#dcfce7",
+        items: [
+            { id: "auto-1", name: "E-Mail-Autoresponder", desc: "Automatische Antwort-Sequenzen einrichten", price: 390, tags: ["E-Mail"], time: "1\u20132 Tage", presets: ["starter","business","enterprise"] },
+            { id: "auto-2", name: "Workflow-Automatisierung", desc: "Einzelner Gesch\u00e4ftsprozess (n8n/Make.com)", price: 490, qty: true, tags: ["Workflow"], time: "2\u20133 Tage", presets: ["starter"] },
+            { id: "auto-3", name: "CRM-Setup & Integration", desc: "HubSpot / Pipedrive einrichten + Anbindung", price: 1290, tags: ["CRM"], time: "3\u20135 Tage", presets: ["business","enterprise"] },
+            { id: "auto-4", name: "KI-Chatbot", desc: "Kundenqualifizierung und FAQ-Automatisierung", price: 1490, tags: ["KI"], time: "5\u20137 Tage", presets: ["business","enterprise"] },
+            { id: "auto-5", name: "KI-Telefonassistent", desc: "Automatisierte Anrufannahme mit KI-Sprachmodell", price: 2490, tags: ["KI"], time: "1\u20132 Wochen", presets: ["enterprise"] },
+            { id: "auto-6", name: "E-Mail-Marketing-Automatisierung", desc: "Segmentierung, Kampagnen, Nurturing-Sequenzen", price: 790, tags: ["E-Mail"], time: "3\u20135 Tage", presets: ["business","enterprise"] },
+            { id: "auto-7", name: "KPI-Dashboard & Reporting", desc: "Echtzeit-Dashboard mit automatisierten Reports", price: 1490, tags: ["Analytics"], time: "5\u20137 Tage", presets: ["enterprise"] },
+        ]
+    },
+    {
+        category: "leadgen",
+        categoryName: "Leadgenerierung & Marketing",
+        categoryDesc: "Kunden finden und konvertieren \u2014 \u00fcber alle Kan\u00e4le",
+        categoryIcon: "\u25B2",
+        categoryColor: "#c9a84c",
+        categoryBg: "#fef3c7",
+        items: [
+            { id: "lead-1", name: "LinkedIn-Lead-Funnel", desc: "Profil-Optimierung, Outreach-Sequenzen, Automatisierung", price: 1490, tags: ["LinkedIn"], time: "5\u20137 Tage", presets: ["business","enterprise"] },
+            { id: "lead-2", name: "Lead-Magnet-Erstellung", desc: "E-Book, Whitepaper oder Checklist inkl. Design", price: 790, tags: ["Content"], time: "5 Tage", presets: ["business","enterprise"] },
+            { id: "lead-3", name: "Social-Media-Strategie", desc: "Content-Plan, Vorlagen, Redaktionskalender", price: 990, tags: ["Social"], time: "3\u20135 Tage", presets: ["enterprise"] },
+            { id: "lead-4", name: "Google Ads Kampagne", desc: "Setup, Keywords, Anzeigen, Tracking", price: 990, tags: ["Ads"], time: "5 Tage", presets: [] },
+            { id: "lead-5", name: "LinkedIn Ads Kampagne", desc: "Targeting, Creatives, Budget-Optimierung", price: 890, tags: ["Ads"], time: "5 Tage", presets: [] },
+            { id: "lead-6", name: "Retargeting-Setup", desc: "Pixel, Audiences, automatisierte Kampagnen", price: 590, tags: ["Ads"], time: "2\u20133 Tage", presets: [] },
+        ]
+    },
+    {
+        category: "support",
+        categoryName: "Support & Schulung",
+        categoryDesc: "Laufende Betreuung und Wissenstransfer",
+        categoryIcon: "\u2731",
+        categoryColor: "#737373",
+        categoryBg: "#f5f5f5",
+        items: [
+            { id: "sup-1", name: "Onboarding & Schulung", desc: "Einf\u00fchrung in alle Systeme und Tools (Remote)", price: 490, tags: ["Schulung"], time: "0,5 Tage", presets: ["business","enterprise"] },
+            { id: "sup-2", name: "Monatlicher Support", desc: "Technischer Support, Optimierung, Updates", price: 490, recurring: true, tags: ["Laufend"], time: "Monatlich", presets: [] },
+            { id: "sup-3", name: "Quartals-Review", desc: "KPI-Analyse, Optimierungsvorschl\u00e4ge, Strategie-Update", price: 890, recurring: true, tags: ["Laufend"], time: "Quartal", presets: [] },
+        ]
+    }
+];
+
+// Package price points
+const packagePrices = {
+    starter: 2990,
+    business: 7900,
+    enterprise: 14900
+};
+
+// State
+let selected = {};  // { id: { qty: N } }
+
+// ============ RENDER CATEGORIES ============
+function renderCategories() {
+    const container = document.getElementById('categoriesContainer');
+    container.innerHTML = services.map(cat => {
+        const itemsHtml = cat.items.map(item => {
+            const sel = selected[item.id];
+            const qty = sel ? sel.qty : (item.qty ? 1 : 1);
+            const tagsHtml = item.tags.map(t => '<span class="service-tag">' + t + '</span>').join('') +
+                '<span class="service-tag time">' + item.time + '</span>';
+            const priceLabel = item.recurring ? item.price + '<span class="service-price-unit">/Monat</span>' : item.price;
+            const qtyHtml = item.qty ? '<div class="qty-control" onclick="event.stopPropagation()">' +
+                '<button class="qty-btn" onclick="changeQty(\'' + item.id + '\',-1)">-</button>' +
+                '<span class="qty-value" id="qty-' + item.id + '">' + qty + '</span>' +
+                '<button class="qty-btn" onclick="changeQty(\'' + item.id + '\',1)">+</button></div>' : '';
+
+            return '<div class="service-item ' + (sel ? 'selected' : '') + '" id="item-' + item.id + '" onclick="toggleItem(\'' + item.id + '\')">' +
+                '<div class="checkbox">' + (sel ? '&#10003;' : '') + '</div>' +
+                '<div class="service-info"><div class="service-name">' + item.name + '</div>' +
+                '<div class="service-desc">' + item.desc + '</div>' +
+                '<div class="service-tags">' + tagsHtml + '</div>' + qtyHtml + '</div>' +
+                '<div class="service-price">\u20AC' + priceLabel + '</div></div>';
+        }).join('');
+
+        const selectedCount = cat.items.filter(i => selected[i.id]).length;
+
+        return '<div class="category open" id="cat-' + cat.category + '">' +
+            '<div class="category-header" onclick="toggleCategory(\'' + cat.category + '\')">' +
+            '<div class="category-icon" style="background:' + cat.categoryBg + ';color:' + cat.categoryColor + '">' + cat.categoryIcon + '</div>' +
+            '<div class="category-info"><div class="category-name">' + cat.categoryName + '</div>' +
+            '<div class="category-desc">' + cat.categoryDesc + '</div></div>' +
+            '<span class="category-count ' + (selectedCount > 0 ? 'active' : '') + '">' + selectedCount + '/' + cat.items.length + '</span>' +
+            '<span class="category-chevron">\u25BC</span></div>' +
+            '<div class="category-body"><div class="category-items">' + itemsHtml + '</div></div></div>';
+    }).join('');
+}
+
+// ============ TOGGLE / SELECT ============
+function toggleCategory(catId) {
+    document.getElementById('cat-' + catId).classList.toggle('open');
+}
+
+function toggleItem(id) {
+    const item = findItem(id);
+    if (selected[id]) {
+        delete selected[id];
+    } else {
+        selected[id] = { qty: 1 };
+    }
+    updateAll();
+}
+
+function changeQty(id, delta) {
+    if (!selected[id]) {
+        selected[id] = { qty: 1 };
+    }
+    selected[id].qty = Math.max(1, (selected[id].qty || 1) + delta);
+    updateAll();
+}
+
+function removeItem(id) {
+    delete selected[id];
+    updateAll();
+}
+
+function findItem(id) {
+    for (const cat of services) {
+        for (const item of cat.items) {
+            if (item.id === id) return item;
+        }
+    }
+    return null;
+}
+
+// ============ PRESETS ============
+function applyPreset(preset) {
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    event.target.classList.add('active');
+
+    selected = {};
+    if (preset !== 'none') {
+        for (const cat of services) {
+            for (const item of cat.items) {
+                if (item.presets.includes(preset)) {
+                    let qty = 1;
+                    if (item.qty && preset === 'business') qty = 5;
+                    else if (item.qty && preset === 'enterprise') qty = 10;
+                    else if (item.qty) qty = 1;
+                    selected[item.id] = { qty: qty };
+                }
+            }
+        }
+    }
+    updateAll();
+}
+
+function resetAll() {
+    selected = {};
+    document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    updateAll();
+}
+
+// ============ UPDATE ============
+function updateAll() {
+    renderCategories();
+    renderSummary();
+}
+
+function renderSummary() {
+    const items = Object.keys(selected);
+    const container = document.getElementById('summaryItems');
+    const ctaBtn = document.getElementById('ctaBtn');
+
+    if (items.length === 0) {
+        container.innerHTML = '<div class="summary-empty"><div class="summary-empty-icon">&#9744;</div>W\u00e4hlen Sie Leistungen aus der Liste</div>';
+        document.getElementById('subtotal').textContent = '\u20AC0';
+        document.getElementById('taxAmount').textContent = '\u20AC0';
+        document.getElementById('totalValue').innerHTML = '<span class="currency">\u20AC</span>0';
+        document.getElementById('totalNote').textContent = '';
+        document.getElementById('itemCountLabel').textContent = 'Noch keine Leistungen gew\u00e4hlt';
+        document.getElementById('discountRow').style.display = 'none';
+        document.getElementById('packageSuggest').style.display = 'none';
+        ctaBtn.disabled = true;
+        return;
+    }
+
+    ctaBtn.disabled = false;
+
+    let subtotal = 0;
+    let oneTimeTotal = 0;
+    let recurringTotal = 0;
+    let html = '';
+
+    items.forEach(id => {
+        const item = findItem(id);
+        if (!item) return;
+        const qty = selected[id].qty || 1;
+        const lineTotal = item.price * qty;
+        subtotal += lineTotal;
+
+        if (item.recurring) recurringTotal += lineTotal;
+        else oneTimeTotal += lineTotal;
+
+        const qtyLabel = qty > 1 ? ' x' + qty : '';
+        const recurLabel = item.recurring ? ' /Mo.' : '';
+
+        html += '<div class="summary-item">' +
+            '<span class="summary-item-name">' + item.name + '</span>' +
+            (qtyLabel ? '<span class="summary-item-qty">' + qtyLabel + '</span>' : '') +
+            '<span class="summary-item-price">\u20AC' + lineTotal.toLocaleString('de-DE') + recurLabel + '</span>' +
+            '<button class="summary-item-remove" onclick="removeItem(\'' + id + '\')">\u2715</button></div>';
+    });
+
+    container.innerHTML = html;
+
+    // Discount logic
+    let discount = 0;
+    let discountLabel = '';
+    if (items.length >= 10) { discount = 0.15; discountLabel = 'Paketrabatt 15% (10+ Leistungen)'; }
+    else if (items.length >= 7) { discount = 0.10; discountLabel = 'Paketrabatt 10% (7+ Leistungen)'; }
+    else if (items.length >= 4) { discount = 0.05; discountLabel = 'Paketrabatt 5% (4+ Leistungen)'; }
+
+    const discountAmount = Math.round(subtotal * discount);
+    const netTotal = subtotal - discountAmount;
+    const tax = Math.round(netTotal * 0.19);
+    const gross = netTotal + tax;
+
+    if (discount > 0) {
+        document.getElementById('discountRow').style.display = 'flex';
+        document.getElementById('discountLabel').textContent = discountLabel;
+        document.getElementById('discountValue').textContent = '-\u20AC' + discountAmount.toLocaleString('de-DE');
+    } else {
+        document.getElementById('discountRow').style.display = 'none';
+    }
+
+    document.getElementById('subtotal').textContent = '\u20AC' + netTotal.toLocaleString('de-DE');
+    document.getElementById('taxAmount').textContent = '\u20AC' + tax.toLocaleString('de-DE');
+    document.getElementById('totalValue').innerHTML = '<span class="currency">\u20AC</span>' + gross.toLocaleString('de-DE');
+    document.getElementById('itemCountLabel').textContent = items.length + ' Leistung' + (items.length > 1 ? 'en' : '') + ' gew\u00e4hlt';
+
+    if (recurringTotal > 0) {
+        document.getElementById('totalNote').textContent = 'davon \u20AC' + recurringTotal.toLocaleString('de-DE') + '/Monat laufend';
+    } else {
+        document.getElementById('totalNote').textContent = '';
+    }
+
+    // Package suggestion
+    const suggest = document.getElementById('packageSuggest');
+    if (netTotal > 2500 && netTotal < 2990 * 0.95) {
+        suggest.style.display = 'block';
+        document.getElementById('suggestText').textContent = 'Sie sind nah am Starter-Paket (\u20AC2.990). Dieses enth\u00e4lt alle Basis-Leistungen und ist g\u00fcnstiger als die Einzelbuchung.';
+        document.getElementById('suggestSaving').textContent = '';
+    } else if (netTotal > 5000 && netTotal < 7900 * 0.95) {
+        suggest.style.display = 'block';
+        document.getElementById('suggestText').textContent = 'Tipp: Das Business-Paket (\u20AC7.900) enth\u00e4lt alle diese Leistungen plus LinkedIn-Funnel und KI-Chatbot.';
+        const saving = netTotal - 7900;
+        if (saving > 0) document.getElementById('suggestSaving').textContent = 'Sie sparen \u20AC' + saving.toLocaleString('de-DE') + ' gegen\u00fcber Einzelbuchung!';
+        else document.getElementById('suggestSaving').textContent = '';
+    } else if (netTotal > 10000 && netTotal < 14900 * 0.95) {
+        suggest.style.display = 'block';
+        document.getElementById('suggestText').textContent = 'Empfehlung: Das Enterprise-Paket (\u20AC14.900) enth\u00e4lt alles und 3 Monate Support.';
+        const saving = netTotal - 14900;
+        if (saving > 0) document.getElementById('suggestSaving').textContent = 'Sie sparen \u20AC' + saving.toLocaleString('de-DE') + ' gegen\u00fcber Einzelbuchung!';
+        else document.getElementById('suggestSaving').textContent = '';
+    } else {
+        suggest.style.display = 'none';
+    }
+}
+
+function generatePDF() {
+    window.print();
+}
+
+// ============ INIT ============
+updateAll();
+</script>
+
+</body>
+</html>
