@@ -1,0 +1,1077 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>5W-Segmentanalyse — AI-Consulting OWL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --graphite-light: #3a3a3a;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --gold-glow: rgba(201, 168, 76, 0.15);
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-200: #e5e5e5;
+            --gray-400: #a3a3a3;
+            --gray-600: #737373;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--pearl-light);
+            color: var(--graphite);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--black) 0%, var(--graphite) 50%, #3d3520 100%);
+            color: var(--white);
+            padding: 48px 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(201,168,76,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.15);
+            border: 1px solid rgba(201,168,76,0.3);
+            color: var(--gold-light);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            animation: fadeInDown 0.6s ease-out 0.1s both;
+        }
+
+        .header h1 span {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            max-width: 700px;
+            animation: fadeInDown 0.6s ease-out 0.2s both;
+        }
+
+        /* ===== NAVIGATION TABS ===== */
+        .tabs-container {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            padding: 24px 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            position: relative;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .tab-btn:nth-child(1) { animation-delay: 0.3s; }
+        .tab-btn:nth-child(2) { animation-delay: 0.4s; }
+        .tab-btn:nth-child(3) { animation-delay: 0.5s; }
+        .tab-btn:nth-child(4) { animation-delay: 0.6s; }
+
+        .tab-btn:hover {
+            border-color: var(--gold);
+            color: var(--graphite);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201,168,76,0.15);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, var(--graphite) 0%, var(--black) 100%);
+            color: var(--gold-light);
+            border-color: var(--gold);
+            box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+        }
+
+        .tab-icon {
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        /* ===== MAIN CONTENT ===== */
+        .main {
+            padding: 32px 40px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* ===== TABLE VIEW ===== */
+        .view-table {
+            display: none;
+        }
+
+        .view-table.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .table-wrapper {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+            border: 1px solid var(--gray-200);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        thead th {
+            background: linear-gradient(135deg, var(--graphite) 0%, var(--black) 100%);
+            color: var(--white);
+            padding: 20px 24px;
+            text-align: left;
+            font-weight: 700;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        thead th:first-child {
+            width: 140px;
+            border-right: 2px solid rgba(201,168,76,0.3);
+        }
+
+        thead th .segment-icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        thead th .segment-subtitle {
+            font-weight: 400;
+            font-size: 11px;
+            color: rgba(255,255,255,0.5);
+        }
+
+        thead th.col-gold {
+            border-bottom: 3px solid var(--gold);
+        }
+
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+
+        tbody tr:hover {
+            background: var(--gold-glow);
+        }
+
+        tbody tr:not(:last-child) td {
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        tbody td {
+            padding: 20px 24px;
+            vertical-align: top;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        tbody td:first-child {
+            background: linear-gradient(135deg, #faf7f2 0%, #f5f0e8 100%);
+            font-weight: 700;
+            color: var(--graphite);
+            border-right: 2px solid var(--gold);
+            position: relative;
+        }
+
+        .w-label {
+            font-size: 20px;
+            display: block;
+            color: var(--gold-dark);
+            margin-bottom: 2px;
+        }
+
+        .w-question {
+            font-size: 11px;
+            color: var(--gray-600);
+            font-weight: 500;
+        }
+
+        .cell-title {
+            font-weight: 600;
+            color: var(--graphite);
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .cell-title .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .cell-detail {
+            color: var(--gray-600);
+            font-size: 13px;
+        }
+
+        .cell-tag {
+            display: inline-block;
+            background: var(--gold-glow);
+            border: 1px solid rgba(201,168,76,0.25);
+            color: var(--gold-dark);
+            padding: 2px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-top: 6px;
+            margin-right: 4px;
+        }
+
+        .pain-highlight {
+            background: rgba(239,68,68,0.06);
+            border-left: 3px solid #ef4444;
+            padding: 6px 12px;
+            border-radius: 0 6px 6px 0;
+            margin: 4px 0;
+            font-size: 13px;
+            color: #b91c1c;
+        }
+
+        .trigger-highlight {
+            background: rgba(59,130,246,0.06);
+            border-left: 3px solid #3b82f6;
+            padding: 6px 12px;
+            border-radius: 0 6px 6px 0;
+            margin: 4px 0;
+            font-size: 13px;
+            color: #1d4ed8;
+        }
+
+        /* ===== SEGMENT DETAIL CARDS ===== */
+        .segment-detail {
+            display: none;
+        }
+
+        .segment-detail.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        .detail-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .detail-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            border: 1px solid var(--gray-200);
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .detail-card:nth-child(1) { animation-delay: 0.1s; }
+        .detail-card:nth-child(2) { animation-delay: 0.2s; }
+        .detail-card:nth-child(3) { animation-delay: 0.3s; }
+        .detail-card:nth-child(4) { animation-delay: 0.4s; }
+        .detail-card:nth-child(5) { animation-delay: 0.5s; }
+
+        .detail-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+            border-color: var(--gold);
+        }
+
+        .detail-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .detail-card-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .icon-what { background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(201,168,76,0.05)); }
+        .icon-who { background: linear-gradient(135deg, rgba(59,130,246,0.12), rgba(59,130,246,0.04)); }
+        .icon-why { background: linear-gradient(135deg, rgba(239,68,68,0.10), rgba(239,68,68,0.03)); }
+        .icon-when { background: linear-gradient(135deg, rgba(139,92,246,0.12), rgba(139,92,246,0.04)); }
+        .icon-where { background: linear-gradient(135deg, rgba(34,197,94,0.12), rgba(34,197,94,0.04)); }
+
+        .detail-card-title {
+            font-weight: 700;
+            font-size: 15px;
+            color: var(--graphite);
+        }
+
+        .detail-card-subtitle {
+            font-size: 12px;
+            color: var(--gray-600);
+        }
+
+        .detail-card ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .detail-card li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.04);
+            font-size: 14px;
+            color: var(--graphite);
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .detail-card li:last-child {
+            border-bottom: none;
+        }
+
+        .detail-card li::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            margin-top: 8px;
+            flex-shrink: 0;
+        }
+
+        /* ===== SUMMARY CARDS ===== */
+        .summary-row {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 28px;
+            animation: fadeInUp 0.5s ease-out 0.2s both;
+        }
+
+        .summary-card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+            transition: all 0.3s ease;
+        }
+
+        .summary-card:hover {
+            transform: translateY(-3px);
+            border-color: var(--gold);
+            box-shadow: 0 8px 24px rgba(201,168,76,0.12);
+        }
+
+        .summary-card .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .summary-card .label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .summary-card .value {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--graphite);
+        }
+
+        .summary-card .sub {
+            font-size: 12px;
+            color: var(--gray-400);
+            margin-top: 4px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 32px 40px;
+            color: var(--gray-400);
+            font-size: 12px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .footer strong {
+            color: var(--gold-dark);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 28px; }
+            .main { padding: 24px 20px 40px; }
+            .tabs-container { padding: 20px 20px 0; }
+            .summary-row { grid-template-columns: 1fr; }
+            thead th, tbody td { padding: 14px 16px; font-size: 13px; }
+        }
+
+        @media (max-width: 768px) {
+            .table-wrapper { overflow-x: auto; }
+            table { min-width: 800px; }
+            .tab-btn { padding: 10px 16px; font-size: 12px; }
+        }
+
+        /* Print styles */
+        @media print {
+            .tabs-container { display: none; }
+            .header { padding: 24px; }
+            .view-table, .segment-detail { display: block !important; }
+            .detail-card, .summary-card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-badge">Etappe 1 von 3 &bull; Zielgruppenanalyse</div>
+    <h1>5W-Segment<span>analyse</span></h1>
+    <p>Vergleichende Analyse der drei Zielsegmente f&uuml;r AI-Consulting im Mittelstand &mdash; Region OWL, Deutschland</p>
+</div>
+
+<!-- TABS -->
+<div class="tabs-container">
+    <button class="tab-btn active" onclick="showView('overview')">
+        <span class="tab-icon">&#9638;</span> Gesamt&uuml;bersicht
+    </button>
+    <button class="tab-btn" onclick="showView('steuerberater')">
+        <span class="tab-icon">&#9878;</span> Steuerberater
+    </button>
+    <button class="tab-btn" onclick="showView('handwerk')">
+        <span class="tab-icon">&#9881;</span> Handwerk
+    </button>
+    <button class="tab-btn" onclick="showView('vereine')">
+        <span class="tab-icon">&#9829;</span> Vereine / NKO
+    </button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+    <!-- ========== OVERVIEW TABLE ========== -->
+    <div id="view-overview" class="view-table active">
+
+        <div class="summary-row">
+            <div class="summary-card">
+                <div class="icon">&#9878;</div>
+                <div class="label">Steuerberater</div>
+                <div class="value">~3.200 Kanzleien</div>
+                <div class="sub">NRW &bull; Fachkr&auml;ftemangel #1</div>
+            </div>
+            <div class="summary-card">
+                <div class="icon">&#9881;</div>
+                <div class="label">Handwerk</div>
+                <div class="value">~197.000 Betriebe</div>
+                <div class="sub">NRW &bull; B&uuml;roarbeit = Engpass</div>
+            </div>
+            <div class="summary-card">
+                <div class="icon">&#9829;</div>
+                <div class="label">Vereine / NKO</div>
+                <div class="value">~70.000 Vereine</div>
+                <div class="sub">NRW &bull; Ehrenamt am Limit</div>
+            </div>
+        </div>
+
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>5W</th>
+                        <th class="col-gold">
+                            <span class="segment-icon">&#9878;</span>
+                            Steuerberater
+                            <span class="segment-subtitle">Steuerkanzleien &amp; WP</span>
+                        </th>
+                        <th class="col-gold">
+                            <span class="segment-icon">&#9881;</span>
+                            Handwerk
+                            <span class="segment-subtitle">Handwerksbetriebe 10-80 MA</span>
+                        </th>
+                        <th class="col-gold">
+                            <span class="segment-icon">&#9829;</span>
+                            Vereine / NKO
+                            <span class="segment-subtitle">Gemeinn&uuml;tzige Organisationen</span>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- WHAT -->
+                    <tr>
+                        <td>
+                            <span class="w-label">W1</span>
+                            <strong>What?</strong>
+                            <span class="w-question">Was bieten wir an?</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> KI-gest&uuml;tzte Dokumentenverarbeitung</div>
+                            <div class="cell-detail">
+                                Automatisierte Belegerfassung, Mandanten-Kommunikation via RAG-Chatbot, intelligente Fristenverwaltung und Bescheid-Pr&uuml;fung.
+                            </div>
+                            <span class="cell-tag">RAG-System</span>
+                            <span class="cell-tag">n8n-Workflows</span>
+                            <span class="cell-tag">DATEV-Schnittstelle</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> B&uuml;ro- &amp; Verwaltungsautomatisierung</div>
+                            <div class="cell-detail">
+                                Automatisierte Angebotserstellung, Auftragserfassung, Rechnungsstellung und Einsatzplanung &mdash; damit B&uuml;rokr&auml;fte entlastet werden.
+                            </div>
+                            <span class="cell-tag">Angebots-Bot</span>
+                            <span class="cell-tag">ERP-Anbindung</span>
+                            <span class="cell-tag">WhatsApp-KI</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Ehrenamts-Entlastung durch KI</div>
+                            <div class="cell-detail">
+                                Automatisierte Mitgliederverwaltung, F&ouml;rderantrags-Assistent (RAG), Event-Planung und Spendenquittungen.
+                            </div>
+                            <span class="cell-tag">Mitglieder-Bot</span>
+                            <span class="cell-tag">F&ouml;rder-RAG</span>
+                            <span class="cell-tag">Event-Workflows</span>
+                        </td>
+                    </tr>
+
+                    <!-- WHO -->
+                    <tr>
+                        <td>
+                            <span class="w-label">W2</span>
+                            <strong>Who?</strong>
+                            <span class="w-question">Wer ist die Zielgruppe?</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Kanzleiinhaber:innen &amp; Partner:innen</div>
+                            <div class="cell-detail">
+                                Inhabergef&uuml;hrte Kanzleien mit 5&ndash;25 Mitarbeiter:innen. H&auml;ufig: Kanzlei-Chefin, die das Team zusammenh&auml;lt, w&auml;hrend 2&ndash;3 Stellen unbesetzt bleiben.
+                            </div>
+                            <span class="cell-tag">LPR: Kanzleiinhaber:in</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Gesch&auml;ftsf&uuml;hrer:innen &amp; B&uuml;roleiter:innen</div>
+                            <div class="cell-detail">
+                                SHK-, Elektro- und Baubetriebe, 10&ndash;80 MA. Die B&uuml;roleitung (oft die Ehefrau oder eine langj&auml;hrige Mitarbeiterin) k&auml;mpft mit Papierbergen.
+                            </div>
+                            <span class="cell-tag">LPR: Gesch&auml;ftsf&uuml;hrer:in</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Vorst&auml;nde &amp; Gesch&auml;ftsf&uuml;hrer:innen</div>
+                            <div class="cell-detail">
+                                Vereine mit 200&ndash;5.000 Mitgliedern und 1&ndash;5 hauptamtlichen Stellen. Ehrenamtliche Vorst&auml;nde (h&auml;ufig Frauen), die abends Verwaltung erledigen.
+                            </div>
+                            <span class="cell-tag">LPR: Vorstandsvorsitzende:r</span>
+                        </td>
+                    </tr>
+
+                    <!-- WHY -->
+                    <tr>
+                        <td>
+                            <span class="w-label">W3</span>
+                            <strong>Why?</strong>
+                            <span class="w-question">Warum jetzt?</span>
+                        </td>
+                        <td>
+                            <div class="pain-highlight">
+                                <strong>Fachkr&auml;ftemangel:</strong> 25 % der Steuerfachangestellten-Stellen in NRW unbesetzt (2025).
+                            </div>
+                            <div class="pain-highlight">
+                                <strong>Burnout:</strong> Mitarbeiterinnen arbeiten in Spitzenzeiten 55+ Std./Woche &mdash; Fluktuation steigt.
+                            </div>
+                            <div class="cell-detail" style="margin-top:8px;">
+                                Digitalisierungspflichten (E-Rechnung ab 2025, Grundsteuer-Reform) erh&ouml;hen den Druck zus&auml;tzlich.
+                            </div>
+                        </td>
+                        <td>
+                            <div class="pain-highlight">
+                                <strong>B&uuml;ro-Engpass:</strong> Eine Person macht Buchhaltung, Angebote, Einkauf, Telefon &mdash; alles gleichzeitig.
+                            </div>
+                            <div class="pain-highlight">
+                                <strong>Azubi-Mangel:</strong> 19.000 unbesetzte Ausbildungspl&auml;tze im Handwerk NRW (2025).
+                            </div>
+                            <div class="cell-detail" style="margin-top:8px;">
+                                Wachstumsblockade: Auftr&auml;ge m&uuml;ssen abgelehnt werden, weil die Verwaltung nicht mitskaliert.
+                            </div>
+                        </td>
+                        <td>
+                            <div class="pain-highlight">
+                                <strong>Ehrenamtskrise:</strong> Zahl der Engagierten sinkt seit 5 Jahren &mdash; Vorst&auml;nde finden keine Nachfolge.
+                            </div>
+                            <div class="pain-highlight">
+                                <strong>Verwaltungslast:</strong> 60 % der Vorstandsarbeit ist pure Administration statt Mission.
+                            </div>
+                            <div class="cell-detail" style="margin-top:8px;">
+                                Neue F&ouml;rdermittel-Anforderungen (Verwendungsnachweise, DSGVO-Dokumentation) &uuml;berfordern Ehrenamtliche.
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- WHEN -->
+                    <tr>
+                        <td>
+                            <span class="w-label">W4</span>
+                            <strong>When?</strong>
+                            <span class="w-question">Wann entsteht Bedarf?</span>
+                        </td>
+                        <td>
+                            <div class="trigger-highlight">
+                                <strong>Jan&ndash;Mai:</strong> Jahresabschluss-Saison &mdash; maximale &Uuml;berlastung.
+                            </div>
+                            <div class="trigger-highlight">
+                                <strong>Herbst:</strong> Gesetzliche Neuerungen werden angek&uuml;ndigt &mdash; Planungsdruck.
+                            </div>
+                            <div class="cell-detail" style="margin-top:8px;">
+                                Idealer Erstkontakt: <strong>Juni&ndash;September</strong> (nach der Hochsaison, vor dem Jahresendgesch&auml;ft).
+                            </div>
+                        </td>
+                        <td>
+                            <div class="trigger-highlight">
+                                <strong>Fr&uuml;hjahr:</strong> Auftragsspitze im Bau/SHK &mdash; B&uuml;ro erstickt.
+                            </div>
+                            <div class="trigger-highlight">
+                                <strong>Event:</strong> Mitarbeiterin k&uuml;ndigt oder geht in Elternzeit &mdash; pl&ouml;tzlicher Pain.
+                            </div>
+                            <div class="cell-detail" style="margin-top:8px;">
+                                Idealer Erstkontakt: <strong>Herbst/Winter</strong> (ruhigere Bauphase, Budget-Planung f&uuml;rs neue Jahr).
+                            </div>
+                        </td>
+                        <td>
+                            <div class="trigger-highlight">
+                                <strong>Q4:</strong> Jahreshauptversammlung &amp; Rechenschaftsbericht-Stress.
+                            </div>
+                            <div class="trigger-highlight">
+                                <strong>Fr&uuml;hjahr:</strong> F&ouml;rderantr&auml;ge &amp; Zuschuss-Deadlines.
+                            </div>
+                            <div class="cell-detail" style="margin-top:8px;">
+                                Idealer Erstkontakt: <strong>Jan&ndash;M&auml;rz</strong> (nach der JHV, bevor die Event-Saison startet).
+                            </div>
+                        </td>
+                    </tr>
+
+                    <!-- WHERE -->
+                    <tr>
+                        <td>
+                            <span class="w-label">W5</span>
+                            <strong>Where?</strong>
+                            <span class="w-question">Geografie &amp; Kan&auml;le?</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Prim&auml;r OWL, dann ganz NRW</div>
+                            <div class="cell-detail">
+                                <strong>Kan&auml;le:</strong> Steuerberaterverband Westfalen-Lippe, IHK Ostwestfalen, DATEV-Partnerveranstaltungen, LinkedIn (Fachgruppen StB).
+                            </div>
+                            <span class="cell-tag">StBV Westfalen-Lippe</span>
+                            <span class="cell-tag">LinkedIn</span>
+                            <span class="cell-tag">DATEV-Events</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Region OWL &mdash; Handwerkskammer</div>
+                            <div class="cell-detail">
+                                <strong>Kan&auml;le:</strong> Handwerkskammer OWL, Kreishandwerkerschaft Paderborn &amp; Bielefeld, Innungen, regionale Messen (z.B. ZAB Bielefeld).
+                            </div>
+                            <span class="cell-tag">HWK OWL</span>
+                            <span class="cell-tag">Innungen</span>
+                            <span class="cell-tag">Messen</span>
+                        </td>
+                        <td>
+                            <div class="cell-title"><span class="dot"></span> Kreisebene OWL, dann NRW</div>
+                            <div class="cell-detail">
+                                <strong>Kan&auml;le:</strong> Stadtsportverb&auml;nde, Kreis-Caritasverb&auml;nde, Ehrenamtsb&ouml;rsen, lokale Stiftungen, Freiwilligenagenturen OWL.
+                            </div>
+                            <span class="cell-tag">Stadtsportverb&auml;nde</span>
+                            <span class="cell-tag">Ehrenamtsb&ouml;rsen</span>
+                            <span class="cell-tag">Stiftungen</span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- ========== STEUERBERATER DETAIL ========== -->
+    <div id="view-steuerberater" class="segment-detail">
+        <div class="detail-grid">
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-what">&#128196;</div>
+                    <div>
+                        <div class="detail-card-title">What? &mdash; Unser Angebot</div>
+                        <div class="detail-card-subtitle">KI-L&ouml;sungen f&uuml;r Steuerkanzleien</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>RAG-basierter Mandanten-Chatbot f&uuml;r Standardanfragen (Belege, Fristen, Bescheide)</li>
+                    <li>Automatisierte Belegerfassung &amp; Vorkontierung via KI-OCR</li>
+                    <li>Intelligente Fristenverwaltung mit automatischen Erinnerungen</li>
+                    <li>n8n-Workflows f&uuml;r Bescheid-Pr&uuml;fung und Abweichungsanalyse</li>
+                    <li>DATEV-kompatible Schnittstellen &mdash; nahtlose Integration</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-who">&#128101;</div>
+                    <div>
+                        <div class="detail-card-title">Who? &mdash; Entscheider:innen</div>
+                        <div class="detail-card-subtitle">Zielgruppen-Profil</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Kanzleiinhaber:in</strong> &mdash; 40&ndash;60 Jahre, wirtschaftlich versiert, risikobewusst</li>
+                    <li><strong>Kanzleimanagerin</strong> &mdash; oft weiblich, organisiert den gesamten B&uuml;robetrieb</li>
+                    <li>5&ndash;25 Mitarbeiter:innen, 200&ndash;800 Mandanten</li>
+                    <li>Tech-Affinit&auml;t: mittel (DATEV ja, KI = Neuland)</li>
+                    <li>Entscheidung: Inhaber:in allein oder mit Partner:in</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-why">&#128293;</div>
+                    <div>
+                        <div class="detail-card-title">Why? &mdash; Schmerzpunkte</div>
+                        <div class="detail-card-subtitle">Akuter Handlungsdruck</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>25 % unbesetzte Stellen &mdash; Fachkr&auml;ftemangel auf Rekordniveau</li>
+                    <li>Mitarbeiterinnen leisten 55+ Std./Woche in der Hochsaison &mdash; Burnout-Gefahr</li>
+                    <li>E-Rechnung (ab 2025) und Grundsteuerreform erh&ouml;hen Verwaltungsaufwand</li>
+                    <li>Mandanten erwarten digitale Self-Service-Optionen</li>
+                    <li>Wettbewerb durch gr&ouml;&szlig;ere Kanzleien mit eigenen IT-Abteilungen</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-when">&#128197;</div>
+                    <div>
+                        <div class="detail-card-title">When? &mdash; Timing</div>
+                        <div class="detail-card-subtitle">Optimale Ansprache-Fenster</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Jan&ndash;Mai:</strong> Jahresabschluss-Saison = maximaler Leidensdruck</li>
+                    <li><strong>Juni&ndash;Sep:</strong> Ideales Akquise-Fenster &mdash; Luft zum Nachdenken</li>
+                    <li><strong>Herbst:</strong> Gesetzliche &Auml;nderungen werden bekannt &mdash; Investitionsbereitschaft steigt</li>
+                    <li>Trigger-Events: K&uuml;ndigung einer Schl&uuml;sselkraft, Mandantenwachstum, Software-Wechsel</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-where">&#127760;</div>
+                    <div>
+                        <div class="detail-card-title">Where? &mdash; Kan&auml;le &amp; Geografie</div>
+                        <div class="detail-card-subtitle">Vertriebswege in OWL &amp; NRW</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Prim&auml;rgebiet:</strong> Paderborn, Bielefeld, G&uuml;tersloh, Detmold, Minden</li>
+                    <li>Steuerberaterverband Westfalen-Lippe (Veranstaltungen, Newsletter)</li>
+                    <li>IHK Ostwestfalen &mdash; Digitalisierungs-Events</li>
+                    <li>LinkedIn-Fachgruppen: Steuerberater &amp; Digitalisierung</li>
+                    <li>DATEV-Partnerveranstaltungen und Kanzlei-Stammtische</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== HANDWERK DETAIL ========== -->
+    <div id="view-handwerk" class="segment-detail">
+        <div class="detail-grid">
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-what">&#128296;</div>
+                    <div>
+                        <div class="detail-card-title">What? &mdash; Unser Angebot</div>
+                        <div class="detail-card-subtitle">KI-L&ouml;sungen f&uuml;r Handwerksbetriebe</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Automatisierte Angebotserstellung aus Aufma&szlig;-Fotos &amp; Notizen</li>
+                    <li>KI-gest&uuml;tzte Auftragserfassung und Einsatzplanung</li>
+                    <li>WhatsApp-/Telefon-Bot f&uuml;r Kundenanfragen (24/7-Erreichbarkeit)</li>
+                    <li>Automatische Rechnungsstellung &amp; Mahnwesen via n8n</li>
+                    <li>Digitale Bauakte: Fotos, Protokolle, Abnahmen per KI sortiert</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-who">&#128101;</div>
+                    <div>
+                        <div class="detail-card-title">Who? &mdash; Entscheider:innen</div>
+                        <div class="detail-card-subtitle">Zielgruppen-Profil</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Gesch&auml;ftsf&uuml;hrer:in / Meister:in</strong> &mdash; 35&ndash;60 Jahre, praxisorientiert</li>
+                    <li><strong>B&uuml;roleiter:in</strong> &mdash; oft die Ehefrau oder langj&auml;hrige Mitarbeiterin, tr&auml;gt die gesamte Verwaltung</li>
+                    <li>10&ndash;80 Mitarbeiter:innen, Jahresumsatz 1&ndash;10 Mio. EUR</li>
+                    <li>Tech-Affinit&auml;t: niedrig bis mittel (WhatsApp ja, ERP = kompliziert)</li>
+                    <li>Entscheidung: Chef:in allein, oft am K&uuml;chentisch</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-why">&#128293;</div>
+                    <div>
+                        <div class="detail-card-title">Why? &mdash; Schmerzpunkte</div>
+                        <div class="detail-card-subtitle">Akuter Handlungsdruck</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Eine B&uuml;rokraft f&uuml;r alles: Buchhaltung, Angebote, Einkauf, Telefon &mdash; permanente &Uuml;berlastung</li>
+                    <li>19.000 unbesetzte Ausbildungspl&auml;tze im NRW-Handwerk</li>
+                    <li>Auftr&auml;ge werden abgelehnt, weil die Verwaltung nicht mitskaliert</li>
+                    <li>Zettelwirtschaft und fehlende Digitalisierung f&uuml;hren zu Umsatzverlusten</li>
+                    <li>Konkurrenz durch gr&ouml;&szlig;ere Betriebe mit professionellem B&uuml;ro-Team</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-when">&#128197;</div>
+                    <div>
+                        <div class="detail-card-title">When? &mdash; Timing</div>
+                        <div class="detail-card-subtitle">Optimale Ansprache-Fenster</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Fr&uuml;hjahr:</strong> Bau-/SHK-Hochsaison &mdash; B&uuml;ro explodiert</li>
+                    <li><strong>Herbst/Winter:</strong> Ideales Akquise-Fenster &mdash; ruhigere Phase, Jahresplanung</li>
+                    <li>Trigger: K&uuml;ndigung der B&uuml;rokraft, Elternzeit, Auftragsrekord</li>
+                    <li>Budget-Entscheidungen fallen oft im Nov/Dez f&uuml;rs neue Jahr</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-where">&#127760;</div>
+                    <div>
+                        <div class="detail-card-title">Where? &mdash; Kan&auml;le &amp; Geografie</div>
+                        <div class="detail-card-subtitle">Vertriebswege in OWL</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Prim&auml;rgebiet:</strong> Paderborn, Bielefeld, H&ouml;xter, Herford, Lippe</li>
+                    <li>Handwerkskammer OWL &mdash; Beratungsangebote &amp; Digitalisierungsprojekte</li>
+                    <li>Kreishandwerkerschaften Paderborn &amp; Bielefeld</li>
+                    <li>Innungsversammlungen (SHK, Elektro, Tischler)</li>
+                    <li>Regionale Messen: ZAB Bielefeld, Gewerbeschauen</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========== VEREINE DETAIL ========== -->
+    <div id="view-vereine" class="segment-detail">
+        <div class="detail-grid">
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-what">&#129309;</div>
+                    <div>
+                        <div class="detail-card-title">What? &mdash; Unser Angebot</div>
+                        <div class="detail-card-subtitle">KI-L&ouml;sungen f&uuml;r Vereine &amp; NKO</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Automatisierte Mitgliederverwaltung (Beitr&auml;ge, An-/Abmeldungen, Kommunikation)</li>
+                    <li>RAG-basierter F&ouml;rderantrags-Assistent &mdash; passende F&ouml;rdert&ouml;pfe finden &amp; Antr&auml;ge vorformulieren</li>
+                    <li>Event-Management-Workflows: Einladungen, Anmeldungen, Nachbereitung</li>
+                    <li>Automatische Spendenquittungen &amp; Verwendungsnachweise</li>
+                    <li>KI-Chatbot f&uuml;r Mitglieder-FAQ (Kurse, Termine, Beitr&auml;ge)</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-who">&#128101;</div>
+                    <div>
+                        <div class="detail-card-title">Who? &mdash; Entscheider:innen</div>
+                        <div class="detail-card-subtitle">Zielgruppen-Profil</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Vorstandsvorsitzende:r</strong> &mdash; 45&ndash;65 Jahre, ehrenamtlich, missiongetrieben</li>
+                    <li><strong>Gesch&auml;ftsf&uuml;hrer:in</strong> (falls hauptamtlich) &mdash; oft die einzige bezahlte Kraft</li>
+                    <li>200&ndash;5.000 Mitglieder, 1&ndash;5 Hauptamtliche, Budget 50k&ndash;500k EUR/Jahr</li>
+                    <li>Tech-Affinit&auml;t: niedrig (Excel &amp; Papier dominieren)</li>
+                    <li>Entscheidung: Vorstandsbeschluss (3&ndash;7 Personen), oft konsensbasiert</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-why">&#128293;</div>
+                    <div>
+                        <div class="detail-card-title">Why? &mdash; Schmerzpunkte</div>
+                        <div class="detail-card-subtitle">Akuter Handlungsdruck</div>
+                    </div>
+                </div>
+                <ul>
+                    <li>Ehrenamtskrise: Engagierte werden weniger, Vorst&auml;nde finden keine Nachfolge</li>
+                    <li>60 % der Vorstandsarbeit = pure Administration statt sinnstiftender Arbeit</li>
+                    <li>Neue DSGVO- &amp; F&ouml;rdermittel-Dokumentationspflichten &uuml;berfordern Ehrenamtliche</li>
+                    <li>Mitgliederschwund durch mangelnde Kommunikation &amp; veraltete Prozesse</li>
+                    <li>Burnout-Risiko: Wenige Schultern tragen alles &mdash; besonders Frauen im Ehrenamt</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-when">&#128197;</div>
+                    <div>
+                        <div class="detail-card-title">When? &mdash; Timing</div>
+                        <div class="detail-card-subtitle">Optimale Ansprache-Fenster</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Q4:</strong> Jahreshauptversammlung &amp; Rechenschaftsbericht &mdash; Stress-Peak</li>
+                    <li><strong>Jan&ndash;M&auml;rz:</strong> Ideales Akquise-Fenster &mdash; nach JHV, vor Event-Saison</li>
+                    <li><strong>Fr&uuml;hjahr:</strong> F&ouml;rderantrags-Deadlines &mdash; konkreter Bedarf wird sp&uuml;rbar</li>
+                    <li>Trigger: Vorstandswechsel, gescheiterter F&ouml;rderantrag, Mitglieder-R&uuml;ckgang</li>
+                </ul>
+            </div>
+            <div class="detail-card">
+                <div class="detail-card-header">
+                    <div class="detail-card-icon icon-where">&#127760;</div>
+                    <div>
+                        <div class="detail-card-title">Where? &mdash; Kan&auml;le &amp; Geografie</div>
+                        <div class="detail-card-subtitle">Vertriebswege in OWL &amp; NRW</div>
+                    </div>
+                </div>
+                <ul>
+                    <li><strong>Prim&auml;rgebiet:</strong> Kreise Paderborn, Bielefeld, G&uuml;tersloh, Lippe, Herford</li>
+                    <li>Stadtsportverb&auml;nde &amp; Kreissportb&uuml;nde OWL</li>
+                    <li>Freiwilligenagenturen &amp; Ehrenamtsb&ouml;rsen (z.B. Bielefeld, Paderborn)</li>
+                    <li>Lokale Stiftungen &amp; Kreis-Caritasverb&auml;nde</li>
+                    <li>B&uuml;rgerstiftungen, Dachverb&auml;nde, kommunale Netzwerktreffen</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="footer">
+    <strong>AI-Consulting OWL</strong> &mdash; 5W-Segmentanalyse &bull; Erstellt: April 2026 &bull; Vertraulich
+</div>
+
+<script>
+    function showView(view) {
+        // Hide all views
+        document.querySelectorAll('.view-table, .segment-detail').forEach(function(el) {
+            el.classList.remove('active');
+        });
+
+        // Deactivate all tabs
+        document.querySelectorAll('.tab-btn').forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+
+        // Show selected view
+        var target = document.getElementById('view-' + view);
+        if (target) {
+            target.classList.add('active');
+        }
+
+        // Activate clicked tab
+        var tabs = document.querySelectorAll('.tab-btn');
+        var tabIndex = {'overview': 0, 'steuerberater': 1, 'handwerk': 2, 'vereine': 3};
+        if (tabs[tabIndex[view]]) {
+            tabs[tabIndex[view]].classList.add('active');
+        }
+
+        // Re-trigger animations on cards
+        if (view !== 'overview') {
+            var cards = target.querySelectorAll('.detail-card');
+            cards.forEach(function(card, i) {
+                card.style.animation = 'none';
+                card.offsetHeight; // trigger reflow
+                card.style.animation = 'fadeInUp 0.5s ease-out ' + (i * 0.1) + 's both';
+            });
+        }
+    }
+</script>
+
+</body>
+</html>

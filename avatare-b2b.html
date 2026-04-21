@@ -1,0 +1,1416 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>B2B-Kunden-Avatare — AI-Consulting OWL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --graphite-light: #3a3a3a;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --gold-glow: rgba(201, 168, 76, 0.12);
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-100: #f7f7f7;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-600: #737373;
+            --gray-700: #525252;
+            --red: #dc2626;
+            --red-soft: #fef2f2;
+            --red-border: #fecaca;
+            --blue: #2563eb;
+            --blue-soft: #eff6ff;
+            --blue-border: #bfdbfe;
+            --green: #16a34a;
+            --green-soft: #f0fdf4;
+            --green-border: #bbf7d0;
+            --purple: #7c3aed;
+            --purple-soft: #f5f3ff;
+            --purple-border: #ddd6fe;
+            --amber: #d97706;
+            --amber-soft: #fffbeb;
+            --amber-border: #fde68a;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--pearl-light);
+            color: var(--graphite);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        /* ===== HEADER ===== */
+        .header {
+            background: linear-gradient(135deg, var(--black) 0%, var(--graphite) 50%, #3d3520 100%);
+            color: var(--white);
+            padding: 48px 40px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -60px;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(201,168,76,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: pulse 4s ease-in-out infinite;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: -120px;
+            left: 20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201,168,76,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 0.6; }
+            50% { transform: scale(1.1); opacity: 1; }
+        }
+
+        .header-badge {
+            display: inline-block;
+            background: rgba(201,168,76,0.15);
+            border: 1px solid rgba(201,168,76,0.3);
+            color: var(--gold-light);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            animation: fadeInDown 0.6s ease-out;
+            position: relative;
+        }
+
+        .header h1 {
+            font-size: 36px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            animation: fadeInDown 0.6s ease-out 0.1s both;
+            position: relative;
+        }
+
+        .header h1 span {
+            background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 16px;
+            color: rgba(255,255,255,0.6);
+            max-width: 700px;
+            animation: fadeInDown 0.6s ease-out 0.2s both;
+            position: relative;
+        }
+
+        /* ===== SEGMENT SELECTOR ===== */
+        .selector-bar {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            padding: 28px 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .seg-btn {
+            position: relative;
+            background: var(--white);
+            border: 2px solid var(--gray-200);
+            padding: 16px 32px;
+            border-radius: 14px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--gray-600);
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: fadeInUp 0.5s ease-out both;
+            overflow: hidden;
+        }
+
+        .seg-btn:nth-child(1) { animation-delay: 0.3s; }
+        .seg-btn:nth-child(2) { animation-delay: 0.4s; }
+        .seg-btn:nth-child(3) { animation-delay: 0.5s; }
+
+        .seg-btn::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .seg-btn:hover {
+            border-color: var(--gold);
+            color: var(--graphite);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(201,168,76,0.15);
+        }
+
+        .seg-btn:hover::after {
+            transform: scaleX(1);
+        }
+
+        .seg-btn.active {
+            background: linear-gradient(135deg, var(--graphite) 0%, var(--black) 100%);
+            color: var(--gold-light);
+            border-color: var(--gold);
+            box-shadow: 0 6px 24px rgba(201,168,76,0.25);
+        }
+
+        .seg-btn.active::after {
+            transform: scaleX(1);
+        }
+
+        .seg-btn .seg-icon {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 4px;
+        }
+
+        .seg-btn .seg-sub {
+            display: block;
+            font-size: 11px;
+            font-weight: 500;
+            opacity: 0.6;
+            margin-top: 2px;
+        }
+
+        /* ===== MAIN ===== */
+        .main {
+            padding: 32px 40px 60px;
+            max-width: 1300px;
+            margin: 0 auto;
+        }
+
+        /* ===== AVATAR PANEL ===== */
+        .avatar-panel {
+            display: none;
+        }
+
+        .avatar-panel.active {
+            display: block;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        /* ===== PROFILE BANNER ===== */
+        .profile-banner {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 28px;
+            align-items: center;
+            animation: fadeInUp 0.5s ease-out 0.1s both;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            background: linear-gradient(135deg, var(--graphite), var(--black));
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+            position: relative;
+        }
+
+        .profile-avatar::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 22px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light), var(--gold));
+            z-index: -1;
+        }
+
+        .profile-info h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 2px;
+        }
+
+        .profile-info .role {
+            font-size: 14px;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .profile-info .meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .meta-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--gray-100);
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--gray-700);
+        }
+
+        .meta-tag .meta-icon {
+            font-size: 14px;
+        }
+
+        .profile-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            align-items: flex-end;
+        }
+
+        .stat-box {
+            background: var(--gold-glow);
+            border: 1px solid rgba(201,168,76,0.2);
+            border-radius: 10px;
+            padding: 8px 16px;
+            text-align: center;
+            min-width: 140px;
+        }
+
+        .stat-box .stat-val {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--gold-dark);
+        }
+
+        .stat-box .stat-label {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--gray-600);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* ===== CONTENT GRID ===== */
+        .content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .content-grid .full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* ===== CARDS ===== */
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            border: 1px solid var(--gray-200);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease-out both;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(0,0,0,0.07);
+            border-color: var(--gold);
+        }
+
+        .card-header {
+            padding: 20px 24px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .card-header-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        .card-header-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--graphite);
+        }
+
+        .card-header-sub {
+            font-size: 11px;
+            color: var(--gray-600);
+        }
+
+        .card-body {
+            padding: 20px 24px 24px;
+        }
+
+        /* ===== UTP CARD (gold accent) ===== */
+        .card-utp {
+            border: 2px solid rgba(201,168,76,0.3);
+            background: linear-gradient(135deg, var(--white) 0%, rgba(201,168,76,0.04) 100%);
+        }
+
+        .card-utp .card-header {
+            border-bottom-color: rgba(201,168,76,0.15);
+        }
+
+        .utp-icon { background: linear-gradient(135deg, rgba(201,168,76,0.2), rgba(201,168,76,0.08)); }
+
+        .utp-statement {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--graphite);
+            line-height: 1.6;
+            margin-bottom: 16px;
+            padding: 16px;
+            background: var(--gold-glow);
+            border-radius: 12px;
+            border-left: 4px solid var(--gold);
+        }
+
+        .utp-pillars {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .utp-pillar {
+            text-align: center;
+            padding: 14px 10px;
+            background: var(--gray-100);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .utp-pillar:hover {
+            background: var(--gold-glow);
+            transform: translateY(-2px);
+        }
+
+        .utp-pillar .pillar-icon {
+            font-size: 22px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .utp-pillar .pillar-title {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--graphite);
+            display: block;
+        }
+
+        .utp-pillar .pillar-text {
+            font-size: 11px;
+            color: var(--gray-600);
+            display: block;
+            margin-top: 2px;
+        }
+
+        /* ===== PAIN CARD (red accent) ===== */
+        .pain-icon { background: linear-gradient(135deg, rgba(220,38,38,0.12), rgba(220,38,38,0.04)); }
+
+        .pain-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px 14px;
+            border-radius: 10px;
+            margin-bottom: 8px;
+            background: var(--red-soft);
+            border: 1px solid var(--red-border);
+            transition: all 0.2s ease;
+        }
+
+        .pain-item:last-child { margin-bottom: 0; }
+
+        .pain-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(220,38,38,0.08);
+        }
+
+        .pain-num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--red);
+            color: var(--white);
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .pain-text {
+            font-size: 13px;
+            color: var(--graphite);
+            line-height: 1.5;
+        }
+
+        .pain-text strong {
+            color: var(--red);
+        }
+
+        /* ===== LPR CARD ===== */
+        .lpr-icon { background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(124,58,237,0.04)); }
+
+        .lpr-profile {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .lpr-avatar {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            background: linear-gradient(135deg, var(--purple-soft), var(--purple-border));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .lpr-details h4 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--graphite);
+            margin-bottom: 2px;
+        }
+
+        .lpr-details .lpr-role {
+            font-size: 13px;
+            color: var(--purple);
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .lpr-traits {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .lpr-trait {
+            background: var(--purple-soft);
+            border: 1px solid var(--purple-border);
+            color: var(--purple);
+            padding: 3px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .lpr-decision {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: var(--gray-100);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--gray-700);
+            border-left: 3px solid var(--purple);
+        }
+
+        .lpr-decision strong {
+            color: var(--purple);
+        }
+
+        /* ===== NEEDS CARDS ===== */
+        .needs-icon-int { background: linear-gradient(135deg, rgba(37,99,235,0.12), rgba(37,99,235,0.04)); }
+        .needs-icon-ext { background: linear-gradient(135deg, rgba(22,163,74,0.12), rgba(22,163,74,0.04)); }
+
+        .need-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--gray-100);
+            font-size: 13px;
+            color: var(--graphite);
+        }
+
+        .need-item:last-child { border-bottom: none; }
+
+        .need-dot-blue {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--blue);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        .need-dot-green {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--green);
+            margin-top: 6px;
+            flex-shrink: 0;
+        }
+
+        /* ===== SIZE & REGION CARD ===== */
+        .region-icon { background: linear-gradient(135deg, rgba(217,119,6,0.12), rgba(217,119,6,0.04)); }
+
+        .region-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .region-box {
+            padding: 16px;
+            border-radius: 12px;
+            background: var(--gray-100);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .region-box:hover {
+            background: var(--amber-soft);
+            transform: translateY(-2px);
+        }
+
+        .region-box .rb-icon {
+            font-size: 24px;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .region-box .rb-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--gray-600);
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .region-box .rb-value {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--graphite);
+            display: block;
+        }
+
+        .region-box .rb-sub {
+            font-size: 11px;
+            color: var(--gray-400);
+            display: block;
+            margin-top: 2px;
+        }
+
+        .region-note {
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: var(--amber-soft);
+            border: 1px solid var(--amber-border);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--amber);
+            font-weight: 500;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            text-align: center;
+            padding: 32px 40px;
+            color: var(--gray-400);
+            font-size: 12px;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .footer strong {
+            color: var(--gold-dark);
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .header { padding: 32px 24px; }
+            .header h1 { font-size: 28px; }
+            .main { padding: 24px 20px 40px; }
+            .content-grid { grid-template-columns: 1fr; }
+            .profile-banner { grid-template-columns: 1fr; text-align: center; }
+            .profile-info .meta { justify-content: center; }
+            .profile-stats { align-items: center; flex-direction: row; }
+            .utp-pillars { grid-template-columns: 1fr; }
+            .region-grid { grid-template-columns: 1fr 1fr; }
+            .lpr-profile { flex-direction: column; align-items: center; text-align: center; }
+            .lpr-traits { justify-content: center; }
+        }
+
+        @media (max-width: 600px) {
+            .selector-bar { padding: 20px 16px 0; }
+            .seg-btn { padding: 12px 18px; font-size: 13px; }
+            .region-grid { grid-template-columns: 1fr; }
+        }
+
+        @media print {
+            .selector-bar { display: none; }
+            .avatar-panel { display: block !important; page-break-after: always; }
+            .card { break-inside: avoid; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+    <div class="header-badge">Etappe 2 von 3 &bull; B2B-Kunden-Avatare</div>
+    <h1>Kunden-<span>Avatare</span></h1>
+    <p>Detaillierte B2B-Zielgruppen-Profile f&uuml;r drei Kernsegmente &mdash; AI-Consulting Region OWL</p>
+</div>
+
+<!-- SEGMENT SELECTOR -->
+<div class="selector-bar">
+    <button class="seg-btn active" onclick="showAvatar('stb')">
+        <span class="seg-icon">&#9878;</span>
+        Steuerberater
+        <span class="seg-sub">Steuerkanzleien &amp; WP</span>
+    </button>
+    <button class="seg-btn" onclick="showAvatar('hw')">
+        <span class="seg-icon">&#9881;</span>
+        Handwerk
+        <span class="seg-sub">Handwerksbetriebe</span>
+    </button>
+    <button class="seg-btn" onclick="showAvatar('ver')">
+        <span class="seg-icon">&#9829;</span>
+        Vereine / NKO
+        <span class="seg-sub">Gemeinn&uuml;tzige Org.</span>
+    </button>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+<!-- ============================================================ -->
+<!--                 AVATAR 1: STEUERBERATER                      -->
+<!-- ============================================================ -->
+<div id="avatar-stb" class="avatar-panel active">
+
+    <!-- PROFILE BANNER -->
+    <div class="profile-banner">
+        <div class="profile-avatar">&#9878;</div>
+        <div class="profile-info">
+            <h2>Avatar: Steuerkanzlei im Mittelstand</h2>
+            <div class="role">Kanzleiinhaber:in / Partner:in &mdash; Region OWL</div>
+            <div class="meta">
+                <span class="meta-tag"><span class="meta-icon">&#128101;</span> 5&ndash;25 Mitarbeiter:innen</span>
+                <span class="meta-tag"><span class="meta-icon">&#128176;</span> 200&ndash;800 Mandate</span>
+                <span class="meta-tag"><span class="meta-icon">&#128205;</span> Paderborn / Bielefeld / OWL</span>
+                <span class="meta-tag"><span class="meta-icon">&#9792;</span> H&auml;ufig: Kanzleichefin</span>
+            </div>
+        </div>
+        <div class="profile-stats">
+            <div class="stat-box">
+                <div class="stat-val">10.000&ndash;15.000 &euro;</div>
+                <div class="stat-label">Projektbudget</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val">1.200&ndash;2.000 &euro;/M.</div>
+                <div class="stat-label">Retainer-Potenzial</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-grid">
+
+        <!-- UTP -->
+        <div class="card card-utp full-width" style="animation-delay: 0.15s;">
+            <div class="card-header">
+                <div class="card-header-icon utp-icon">&#127942;</div>
+                <div>
+                    <div class="card-header-title">Einzigartiges Wertversprechen (UTP)</div>
+                    <div class="card-header-sub">Warum eine Mathematikerin mit PhD?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="utp-statement">
+                    &laquo;Eine promovierte Mathematikerin baut Ihre KI-Systeme &mdash; mit der gleichen Pr&auml;zision, die Sie von Ihren Jahresabschl&uuml;ssen erwarten. Keine Blackbox, sondern nachvollziehbare Logik. Auf eigenen Servern, DSGVO-konform.&raquo;
+                </div>
+                <div class="utp-pillars">
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128272;</span>
+                        <span class="pillar-title">Datenschutz-Garantie</span>
+                        <span class="pillar-text">Eigene Server in DE &mdash; keine Cloud-Abh&auml;ngigkeit, volle DSGVO-Konformit&auml;t</span>
+                    </div>
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128300;</span>
+                        <span class="pillar-title">Mathematische Pr&auml;zision</span>
+                        <span class="pillar-text">PhD in algebraischer Geometrie = logisch einwandfreie Systemarchitektur</span>
+                    </div>
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#129309;</span>
+                        <span class="pillar-title">Mitarbeiterinnen-Fokus</span>
+                        <span class="pillar-text">KI als Unterst&uuml;tzung, nicht als Ersatz &mdash; Entlastung der Steuerfachangestellten</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINS -->
+        <div class="card" style="animation-delay: 0.2s;">
+            <div class="card-header">
+                <div class="card-header-icon pain-icon">&#128293;</div>
+                <div>
+                    <div class="card-header-title">Schmerzpunkte (Pains)</div>
+                    <div class="card-header-sub">Was h&auml;lt nachts wach?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="pain-item">
+                    <div class="pain-num">1</div>
+                    <div class="pain-text"><strong>Fachkr&auml;ftemangel:</strong> 2&ndash;3 Stellen dauerhaft unbesetzt. Kanzleichefinnen kompensieren mit eigener Mehrarbeit &mdash; 55+ Stunden/Woche in Spitzenzeiten.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">2</div>
+                    <div class="pain-text"><strong>Burnout im Team:</strong> Steuerfachangestellte (80 % weiblich) tragen die operative Last. Fluktuation steigt, Krankenstand w&auml;chst.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">3</div>
+                    <div class="pain-text"><strong>Informationschaos:</strong> Mandanten-Belege in E-Mails, WhatsApp, Papier &mdash; keine zentrale Ablage. Fehlende Belege verz&ouml;gern Abschl&uuml;sse.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">4</div>
+                    <div class="pain-text"><strong>Regulatorischer Druck:</strong> E-Rechnung (2025), Grundsteuerreform, MoPeG &mdash; jede Neuerung frisst Kapazit&auml;t, die nicht vorhanden ist.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">5</div>
+                    <div class="pain-text"><strong>Mandanten-Erwartungen:</strong> Gro&szlig;kanzleien bieten digitale Portale an. Kleine Kanzleien verlieren Mandate, weil sie &laquo;nicht modern genug&raquo; wirken.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LPR -->
+        <div class="card" style="animation-delay: 0.25s;">
+            <div class="card-header">
+                <div class="card-header-icon lpr-icon">&#128081;</div>
+                <div>
+                    <div class="card-header-title">Entscheider:in (LPR)</div>
+                    <div class="card-header-sub">Wer entscheidet &uuml;ber den Kauf?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="lpr-profile">
+                    <div class="lpr-avatar">&#128105;&#8205;&#128188;</div>
+                    <div class="lpr-details">
+                        <h4>Kanzleiinhaber:in / Partnerin</h4>
+                        <div class="lpr-role">Steuerberaterin, 42&ndash;58 Jahre</div>
+                        <div class="lpr-traits">
+                            <span class="lpr-trait">Wirtschaftlich versiert</span>
+                            <span class="lpr-trait">Risikobewusst</span>
+                            <span class="lpr-trait">DATEV-affin</span>
+                            <span class="lpr-trait">Qualit&auml;tsorientiert</span>
+                            <span class="lpr-trait">Zeitmangel</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lpr-decision">
+                    <strong>Entscheidungsprozess:</strong> Allein oder im kleinen Partner:innen-Kreis (2&ndash;3 Personen). Braucht klaren ROI-Nachweis und Referenzen aus der Branche. Vertraut auf Empfehlungen von Kolleg:innen im StBV.
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERNAL NEEDS -->
+        <div class="card" style="animation-delay: 0.3s;">
+            <div class="card-header">
+                <div class="card-header-icon needs-icon-int">&#127968;</div>
+                <div>
+                    <div class="card-header-title">Interne Bed&uuml;rfnisse</div>
+                    <div class="card-header-sub">Was wird intern gebraucht?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Entlastung der Mitarbeiterinnen</strong> &mdash; Automatisierung repetitiver Aufgaben (Belegerfassung, Fristenmonitoring), damit Fachkr&auml;fte sich auf Beratung konzentrieren</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Fehlerreduktion</strong> &mdash; KI-gest&uuml;tzte Plausibilit&auml;tspr&uuml;fungen bei Bescheiden und Steuerkl&auml;rungen, Vier-Augen-Prinzip durch Algorithmen</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Wissensmanagement</strong> &mdash; Zentrale, durchsuchbare Wissensbasis (RAG) f&uuml;r steuerrechtliche &Auml;nderungen, Kanzlei-interne Richtlinien und Mandanten-Historien</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Onboarding beschleunigen</strong> &mdash; Neue Mitarbeiter:innen schneller produktiv machen durch KI-Assistenten, der Kanzleiprozesse erkl&auml;rt</span></div>
+            </div>
+        </div>
+
+        <!-- EXTERNAL NEEDS -->
+        <div class="card" style="animation-delay: 0.35s;">
+            <div class="card-header">
+                <div class="card-header-icon needs-icon-ext">&#127760;</div>
+                <div>
+                    <div class="card-header-title">Externe Bed&uuml;rfnisse</div>
+                    <div class="card-header-sub">Was wird am Markt gebraucht?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Mandanten-Portal / Self-Service</strong> &mdash; Digitale Belegeinreichung, Statusabfragen und automatisierte Zwischenbescheide &mdash; um mit Gro&szlig;kanzleien mitzuhalten</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>24/7-Erreichbarkeit</strong> &mdash; KI-Chatbot beantwortet Standard-Mandantenfragen (Fristen, Belegstatus) au&szlig;erhalb der B&uuml;rozeiten</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Compliance &amp; Datenschutz</strong> &mdash; Nachweisbare DSGVO-Konformit&auml;t gegen&uuml;ber Mandanten und Finanzbeh&ouml;rden &mdash; eigene Server statt US-Cloud</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Positionierung als moderne Kanzlei</strong> &mdash; Digitale Innovation als Differenzierungsmerkmal bei Mandantenakquise und Fachkr&auml;ftegewinnung</span></div>
+            </div>
+        </div>
+
+        <!-- SIZE & REGION -->
+        <div class="card full-width" style="animation-delay: 0.4s;">
+            <div class="card-header">
+                <div class="card-header-icon region-icon">&#128205;</div>
+                <div>
+                    <div class="card-header-title">Unternehmensgr&ouml;&szlig;e &amp; Region</div>
+                    <div class="card-header-sub">Zielgruppen-Dimensionierung OWL</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="region-grid">
+                    <div class="region-box">
+                        <span class="rb-icon">&#128101;</span>
+                        <span class="rb-label">Teamgr&ouml;&szlig;e</span>
+                        <span class="rb-value">5&ndash;25 Mitarbeiter:innen</span>
+                        <span class="rb-sub">Steuerfachangestellte, Bilanzbuchhalter:innen</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#128176;</span>
+                        <span class="rb-label">Jahresumsatz</span>
+                        <span class="rb-value">500k &ndash; 3 Mio. &euro;</span>
+                        <span class="rb-sub">Inhabergef&uuml;hrte Einzelkanzlei bis kleine Soziet&auml;t</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#128200;</span>
+                        <span class="rb-label">Marktpotenzial OWL</span>
+                        <span class="rb-value">ca. 450 Kanzleien</span>
+                        <span class="rb-sub">Kreise PB, BI, GT, LIP, MI, HF, HX</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#127919;</span>
+                        <span class="rb-label">Zielsegment (Sweet Spot)</span>
+                        <span class="rb-value">80&ndash;120 Kanzleien</span>
+                        <span class="rb-sub">Inhabergef&uuml;hrt, 8&ndash;20 MA, DATEV-Nutzer</span>
+                    </div>
+                </div>
+                <div class="region-note">
+                    &#128161; <strong>OWL-Besonderheit:</strong> Hohe Kanzleidichte in Bielefeld und Paderborn. Starke Vernetzung &uuml;ber den Steuerberaterverband Westfalen-Lippe &mdash; Empfehlungsmarketing ist der st&auml;rkste Vertriebskanal.
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /content-grid -->
+</div><!-- /avatar-stb -->
+
+
+<!-- ============================================================ -->
+<!--                 AVATAR 2: HANDWERK                           -->
+<!-- ============================================================ -->
+<div id="avatar-hw" class="avatar-panel">
+
+    <!-- PROFILE BANNER -->
+    <div class="profile-banner">
+        <div class="profile-avatar">&#9881;</div>
+        <div class="profile-info">
+            <h2>Avatar: Handwerksbetrieb im Mittelstand</h2>
+            <div class="role">Gesch&auml;ftsf&uuml;hrer:in / Meister:in &mdash; Region OWL</div>
+            <div class="meta">
+                <span class="meta-tag"><span class="meta-icon">&#128101;</span> 10&ndash;80 Mitarbeiter:innen</span>
+                <span class="meta-tag"><span class="meta-icon">&#128176;</span> 1&ndash;10 Mio. &euro; Umsatz</span>
+                <span class="meta-tag"><span class="meta-icon">&#128205;</span> Paderborn / Bielefeld / OWL</span>
+                <span class="meta-tag"><span class="meta-icon">&#9792;</span> B&uuml;roleitung: oft weiblich</span>
+            </div>
+        </div>
+        <div class="profile-stats">
+            <div class="stat-box">
+                <div class="stat-val">5.000&ndash;12.000 &euro;</div>
+                <div class="stat-label">Projektbudget</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val">800&ndash;1.500 &euro;/M.</div>
+                <div class="stat-label">Retainer-Potenzial</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-grid">
+
+        <!-- UTP -->
+        <div class="card card-utp full-width" style="animation-delay: 0.15s;">
+            <div class="card-header">
+                <div class="card-header-icon utp-icon">&#127942;</div>
+                <div>
+                    <div class="card-header-title">Einzigartiges Wertversprechen (UTP)</div>
+                    <div class="card-header-sub">Warum eine Mathematikerin mit PhD?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="utp-statement">
+                    &laquo;Ihre B&uuml;roleiterin arbeitet f&uuml;r drei &mdash; wir geben ihr einen KI-Assistenten, der wie eine zweite Kollegin funktioniert. Gebaut von einer Mathematikerin, die Zuverl&auml;ssigkeit in die Architektur einbaut, nicht nur verspricht.&raquo;
+                </div>
+                <div class="utp-pillars">
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128170;</span>
+                        <span class="pillar-title">B&uuml;ro-Entlastung</span>
+                        <span class="pillar-text">Angebote, Rechnungen, Kundenanfragen &mdash; automatisiert, fehlerfrei, sofort</span>
+                    </div>
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128274;</span>
+                        <span class="pillar-title">Ihre Daten, Ihr Server</span>
+                        <span class="pillar-text">Kundendaten bleiben auf lokaler Infrastruktur &mdash; kein US-Cloud-Risiko</span>
+                    </div>
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128736;</span>
+                        <span class="pillar-title">Handwerk versteht Handwerk</span>
+                        <span class="pillar-text">L&ouml;sungen, die in den Betriebsalltag passen &mdash; kein IT-Fachchinesisch</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINS -->
+        <div class="card" style="animation-delay: 0.2s;">
+            <div class="card-header">
+                <div class="card-header-icon pain-icon">&#128293;</div>
+                <div>
+                    <div class="card-header-title">Schmerzpunkte (Pains)</div>
+                    <div class="card-header-sub">Was h&auml;lt nachts wach?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="pain-item">
+                    <div class="pain-num">1</div>
+                    <div class="pain-text"><strong>Eine-Frau-B&uuml;ro:</strong> Die B&uuml;roleiterin (oft Ehefrau oder langj&auml;hrige Mitarbeiterin) macht Buchhaltung, Angebote, Einkauf und Telefon &mdash; allein. Ein Krankheitstag = Stillstand.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">2</div>
+                    <div class="pain-text"><strong>Angebots-Chaos:</strong> Angebote werden abends am K&uuml;chentisch geschrieben. Fehler in der Kalkulation kosten tausende Euro pro Auftrag.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">3</div>
+                    <div class="pain-text"><strong>Nachwuchsmangel:</strong> 19.000 unbesetzte Lehrstellen im NRW-Handwerk. Wer eine B&uuml;rokraft verliert, findet monatelang keinen Ersatz.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">4</div>
+                    <div class="pain-text"><strong>Wachstumsblockade:</strong> Auftr&auml;ge werden abgelehnt, nicht weil Monteure fehlen, sondern weil niemand sie administrativ abwickeln kann.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">5</div>
+                    <div class="pain-text"><strong>Zettelwirtschaft:</strong> Aufma&szlig;e auf Papier, Fotos in WhatsApp, Rechnungen in Excel &mdash; nichts ist verkn&uuml;pft. Informationsverlust ist Alltag.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LPR -->
+        <div class="card" style="animation-delay: 0.25s;">
+            <div class="card-header">
+                <div class="card-header-icon lpr-icon">&#128081;</div>
+                <div>
+                    <div class="card-header-title">Entscheider:in (LPR)</div>
+                    <div class="card-header-sub">Wer entscheidet &uuml;ber den Kauf?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="lpr-profile">
+                    <div class="lpr-avatar">&#128119;</div>
+                    <div class="lpr-details">
+                        <h4>Gesch&auml;ftsf&uuml;hrer:in / Meister:in</h4>
+                        <div class="lpr-role">Inhaber:in, 38&ndash;60 Jahre</div>
+                        <div class="lpr-traits">
+                            <span class="lpr-trait">Praxisorientiert</span>
+                            <span class="lpr-trait">Bauchentscheider</span>
+                            <span class="lpr-trait">Preissensibel</span>
+                            <span class="lpr-trait">Vertrauensbasiert</span>
+                            <span class="lpr-trait">Zeitmangel</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lpr-decision">
+                    <strong>Entscheidungsprozess:</strong> Chef:in entscheidet allein, oft intuitiv (&laquo;am K&uuml;chentisch&raquo;). Braucht schnelle, greifbare Demos statt langer Pr&auml;sentationen. Vertraut auf Empfehlungen von Innungskollegen und der B&uuml;roleiter:in.
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERNAL NEEDS -->
+        <div class="card" style="animation-delay: 0.3s;">
+            <div class="card-header">
+                <div class="card-header-icon needs-icon-int">&#127968;</div>
+                <div>
+                    <div class="card-header-title">Interne Bed&uuml;rfnisse</div>
+                    <div class="card-header-sub">Was wird intern gebraucht?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>B&uuml;ro-Entlastung</strong> &mdash; Die eine B&uuml;rokraft muss von repetitiven Aufgaben befreit werden: Angebote generieren, Rechnungen versenden, Mahnungen schreiben</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Kalkulationssicherheit</strong> &mdash; Automatisierte Angebotserstellung aus Aufma&szlig;-Daten reduziert teure Kalkulationsfehler um bis zu 80 %</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Digitale Bauakte</strong> &mdash; Fotos, Protokolle, Abnahmen zentral sortiert und durchsuchbar statt verstreut auf 5 verschiedenen Ger&auml;ten</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Ausfallsicherheit</strong> &mdash; Wenn die B&uuml;roleiter:in krank wird oder in Urlaub geht, muss der Betrieb trotzdem funktionieren</span></div>
+            </div>
+        </div>
+
+        <!-- EXTERNAL NEEDS -->
+        <div class="card" style="animation-delay: 0.35s;">
+            <div class="card-header">
+                <div class="card-header-icon needs-icon-ext">&#127760;</div>
+                <div>
+                    <div class="card-header-title">Externe Bed&uuml;rfnisse</div>
+                    <div class="card-header-sub">Was wird am Markt gebraucht?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Erreichbarkeit</strong> &mdash; Kunden rufen an, wenn das B&uuml;ro besetzt ist &mdash; 50 % der Erstanfragen gehen verloren. Ein WhatsApp-/Telefon-Bot f&auml;ngt sie 24/7 auf.</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Schnelle Angebote</strong> &mdash; Wer zuerst ein Angebot schickt, bekommt den Auftrag. KI-Angebotserstellung in Minuten statt Tagen.</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Professioneller Auftritt</strong> &mdash; Automatisierte, fehlerfreie Rechnungen und Kommunikation heben den Betrieb von der Konkurrenz ab.</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Kundenbindung</strong> &mdash; Automatische Wartungserinnerungen (SHK, Elektro) generieren Folgeauftr&auml;ge ohne Vertriebsaufwand.</span></div>
+            </div>
+        </div>
+
+        <!-- SIZE & REGION -->
+        <div class="card full-width" style="animation-delay: 0.4s;">
+            <div class="card-header">
+                <div class="card-header-icon region-icon">&#128205;</div>
+                <div>
+                    <div class="card-header-title">Unternehmensgr&ouml;&szlig;e &amp; Region</div>
+                    <div class="card-header-sub">Zielgruppen-Dimensionierung OWL</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="region-grid">
+                    <div class="region-box">
+                        <span class="rb-icon">&#128101;</span>
+                        <span class="rb-label">Teamgr&ouml;&szlig;e</span>
+                        <span class="rb-value">10&ndash;80 Mitarbeiter:innen</span>
+                        <span class="rb-sub">Monteure, Gesellen, 1&ndash;3 B&uuml;rokr&auml;fte</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#128176;</span>
+                        <span class="rb-label">Jahresumsatz</span>
+                        <span class="rb-value">1&ndash;10 Mio. &euro;</span>
+                        <span class="rb-sub">SHK, Elektro, Bau, Tischler, Maler</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#128200;</span>
+                        <span class="rb-label">Marktpotenzial OWL</span>
+                        <span class="rb-value">ca. 4.500 Betriebe</span>
+                        <span class="rb-sub">HWK-Bezirk OWL (10&ndash;80 MA)</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#127919;</span>
+                        <span class="rb-label">Zielsegment (Sweet Spot)</span>
+                        <span class="rb-value">300&ndash;600 Betriebe</span>
+                        <span class="rb-sub">SHK &amp; Elektro, 15&ndash;50 MA, wachsend</span>
+                    </div>
+                </div>
+                <div class="region-note">
+                    &#128161; <strong>OWL-Besonderheit:</strong> Extrem starke Handwerkslandschaft mit hoher Eigentumsquote. Viele Betriebe in 2./3. Generation. Die Handwerkskammer OWL bietet aktiv Digitalisierungs-Beratung an &mdash; idealer Multiplikator f&uuml;r Empfehlungen.
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /content-grid -->
+</div><!-- /avatar-hw -->
+
+
+<!-- ============================================================ -->
+<!--                 AVATAR 3: VEREINE / NKO                      -->
+<!-- ============================================================ -->
+<div id="avatar-ver" class="avatar-panel">
+
+    <!-- PROFILE BANNER -->
+    <div class="profile-banner">
+        <div class="profile-avatar">&#9829;</div>
+        <div class="profile-info">
+            <h2>Avatar: Verein / Gemeinn&uuml;tzige Organisation</h2>
+            <div class="role">Vorstandsvorsitzende:r / Gesch&auml;ftsf&uuml;hrer:in &mdash; Region OWL</div>
+            <div class="meta">
+                <span class="meta-tag"><span class="meta-icon">&#128101;</span> 200&ndash;5.000 Mitglieder</span>
+                <span class="meta-tag"><span class="meta-icon">&#128176;</span> 50k&ndash;500k &euro; Budget</span>
+                <span class="meta-tag"><span class="meta-icon">&#128205;</span> Kreisebene OWL</span>
+                <span class="meta-tag"><span class="meta-icon">&#9792;</span> Ehrenamt: oft weiblich</span>
+            </div>
+        </div>
+        <div class="profile-stats">
+            <div class="stat-box">
+                <div class="stat-val">5.000&ndash;10.000 &euro;</div>
+                <div class="stat-label">Projektbudget</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-val">800&ndash;1.200 &euro;/M.</div>
+                <div class="stat-label">Retainer-Potenzial</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content-grid">
+
+        <!-- UTP -->
+        <div class="card card-utp full-width" style="animation-delay: 0.15s;">
+            <div class="card-header">
+                <div class="card-header-icon utp-icon">&#127942;</div>
+                <div>
+                    <div class="card-header-title">Einzigartiges Wertversprechen (UTP)</div>
+                    <div class="card-header-sub">Warum eine Mathematikerin mit PhD?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="utp-statement">
+                    &laquo;Ihr Ehrenamt verdient mehr als Excel-Tabellen und schlaflose N&auml;chte vor der JHV. Eine KI, gebaut mit mathematischer Sorgfalt, &uuml;bernimmt die Administration &mdash; damit Sie sich wieder Ihrer Mission widmen k&ouml;nnen.&raquo;
+                </div>
+                <div class="utp-pillars">
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128153;</span>
+                        <span class="pillar-title">Mission First</span>
+                        <span class="pillar-text">KI befreit Ehrenamtliche von Verwaltung &mdash; mehr Zeit f&uuml;r den eigentlichen Vereinszweck</span>
+                    </div>
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128272;</span>
+                        <span class="pillar-title">Datenschutz f&uuml;r Mitglieder</span>
+                        <span class="pillar-text">Mitgliederdaten auf eigenen Servern &mdash; volles Vertrauen der Gemeinschaft</span>
+                    </div>
+                    <div class="utp-pillar">
+                        <span class="pillar-icon">&#128170;</span>
+                        <span class="pillar-title">Ehrenamt st&auml;rken</span>
+                        <span class="pillar-text">Frauen im Ehrenamt gezielt entlasten &mdash; gegen Burnout und Abwanderung</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINS -->
+        <div class="card" style="animation-delay: 0.2s;">
+            <div class="card-header">
+                <div class="card-header-icon pain-icon">&#128293;</div>
+                <div>
+                    <div class="card-header-title">Schmerzpunkte (Pains)</div>
+                    <div class="card-header-sub">Was h&auml;lt nachts wach?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="pain-item">
+                    <div class="pain-num">1</div>
+                    <div class="pain-text"><strong>Ehrenamts-Burnout:</strong> Wenige Schultern tragen alles &mdash; besonders Frauen. Vorstandsarbeit = 60 % Administration, 40 % Mission. Die Motivation sinkt.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">2</div>
+                    <div class="pain-text"><strong>Nachfolge-Krise:</strong> Niemand will Vorstandsposten &uuml;bernehmen, weil der Verwaltungsaufwand abschreckt. Vereine drohen handlungsunf&auml;hig zu werden.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">3</div>
+                    <div class="pain-text"><strong>F&ouml;rdermittel-Frust:</strong> Komplexe Antragsformulare, Verwendungsnachweise und Berichts&shy;pflichten &uuml;berfordern Ehrenamtliche &mdash; Gelder werden nicht abgerufen.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">4</div>
+                    <div class="pain-text"><strong>Informationschaos:</strong> Mitgliederdaten in 3 verschiedenen Excel-Listen, Protokolle in E-Mails, Satzung auf dem alten PC &mdash; niemand findet etwas.</div>
+                </div>
+                <div class="pain-item">
+                    <div class="pain-num">5</div>
+                    <div class="pain-text"><strong>Mitgliederschwund:</strong> Schlechte Kommunikation und veraltete Prozesse f&uuml;hren dazu, dass vor allem j&uuml;ngere Mitglieder austreten oder nicht eintreten.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LPR -->
+        <div class="card" style="animation-delay: 0.25s;">
+            <div class="card-header">
+                <div class="card-header-icon lpr-icon">&#128081;</div>
+                <div>
+                    <div class="card-header-title">Entscheider:in (LPR)</div>
+                    <div class="card-header-sub">Wer entscheidet &uuml;ber den Kauf?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="lpr-profile">
+                    <div class="lpr-avatar">&#128105;&#8205;&#128188;</div>
+                    <div class="lpr-details">
+                        <h4>Vorstandsvorsitzende / Gesch&auml;ftsf&uuml;hrer:in</h4>
+                        <div class="lpr-role">Ehrenamtlich oder einzige Hauptamtliche, 45&ndash;65 Jahre</div>
+                        <div class="lpr-traits">
+                            <span class="lpr-trait">Missiongetrieben</span>
+                            <span class="lpr-trait">Budgetbewusst</span>
+                            <span class="lpr-trait">Konsensorientiert</span>
+                            <span class="lpr-trait">Skeptisch gg. Technik</span>
+                            <span class="lpr-trait">&Uuml;berlastet</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="lpr-decision">
+                    <strong>Entscheidungsprozess:</strong> Vorstandsbeschluss (3&ndash;7 Personen), konsensbasiert. Braucht: klare Sprache (kein IT-Jargon), nachweisbaren Nutzen und idealerweise F&ouml;rderf&auml;higkeit des Projekts. Vertraut auf Empfehlungen von Dachverb&auml;nden.
+                </div>
+            </div>
+        </div>
+
+        <!-- INTERNAL NEEDS -->
+        <div class="card" style="animation-delay: 0.3s;">
+            <div class="card-header">
+                <div class="card-header-icon needs-icon-int">&#127968;</div>
+                <div>
+                    <div class="card-header-title">Interne Bed&uuml;rfnisse</div>
+                    <div class="card-header-sub">Was wird intern gebraucht?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Verwaltungsautomatisierung</strong> &mdash; Mitgliederverwaltung, Beitragseinzug, An-/Abmeldungen und Spendenquittungen automatisch statt manuell in Excel</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>F&ouml;rderantrags-Assistent</strong> &mdash; RAG-System durchsucht F&ouml;rderdatenbanken, identifiziert passende T&ouml;pfe und hilft beim Formulieren von Antr&auml;gen</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Wissenssicherung</strong> &mdash; Satzungen, Protokolle, Beschl&uuml;sse, Abl&auml;ufe zentral und durchsuchbar &mdash; wenn ein Vorstandsmitglied aufh&ouml;rt, geht das Wissen nicht verloren</span></div>
+                <div class="need-item"><span class="need-dot-blue"></span><span><strong>Event-Workflows</strong> &mdash; Einladungen, Anmeldungen, Teilnehmerlisten, Dankes-Mails &mdash; alles automatisiert f&uuml;r Veranstaltungen und JHV</span></div>
+            </div>
+        </div>
+
+        <!-- EXTERNAL NEEDS -->
+        <div class="card" style="animation-delay: 0.35s;">
+            <div class="card-header">
+                <div class="card-header-icon needs-icon-ext">&#127760;</div>
+                <div>
+                    <div class="card-header-title">Externe Bed&uuml;rfnisse</div>
+                    <div class="card-header-sub">Was wird nach au&szlig;en gebraucht?</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Mitglieder-Kommunikation</strong> &mdash; KI-Chatbot beantwortet Mitglieder-FAQ (Kurse, Termine, Beitr&auml;ge, Satzung) &mdash; 24/7 ohne Ehrenamtliche zu belasten</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Sichtbarkeit &amp; Mitgliedergewinnung</strong> &mdash; Automatisierte Social-Media-Posts und Newsletter halten den Verein sichtbar und attraktiv f&uuml;r neue Mitglieder</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>Transparenz f&uuml;r F&ouml;rdergeber</strong> &mdash; Automatisierte Verwendungsnachweise und Berichte erh&ouml;hen Vertrauen und sichern zuk&uuml;nftige F&ouml;rderung</span></div>
+                <div class="need-item"><span class="need-dot-green"></span><span><strong>DSGVO-Compliance</strong> &mdash; Saubere Mitgliederdaten-Verwaltung auf eigenen Servern &mdash; kein Risiko durch US-Cloud-Dienste</span></div>
+            </div>
+        </div>
+
+        <!-- SIZE & REGION -->
+        <div class="card full-width" style="animation-delay: 0.4s;">
+            <div class="card-header">
+                <div class="card-header-icon region-icon">&#128205;</div>
+                <div>
+                    <div class="card-header-title">Unternehmensgr&ouml;&szlig;e &amp; Region</div>
+                    <div class="card-header-sub">Zielgruppen-Dimensionierung OWL</div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="region-grid">
+                    <div class="region-box">
+                        <span class="rb-icon">&#128101;</span>
+                        <span class="rb-label">Mitglieder</span>
+                        <span class="rb-value">200&ndash;5.000 Mitglieder</span>
+                        <span class="rb-sub">1&ndash;5 Hauptamtliche, 10&ndash;50 aktive Ehrenamtliche</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#128176;</span>
+                        <span class="rb-label">Jahresbudget</span>
+                        <span class="rb-value">50k&ndash;500k &euro;</span>
+                        <span class="rb-sub">Beitr&auml;ge, F&ouml;rdermittel, Spenden</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#128200;</span>
+                        <span class="rb-label">Marktpotenzial OWL</span>
+                        <span class="rb-value">ca. 8.000 Vereine</span>
+                        <span class="rb-sub">Sport, Soziales, Kultur, Umwelt (200+ Mitgl.)</span>
+                    </div>
+                    <div class="region-box">
+                        <span class="rb-icon">&#127919;</span>
+                        <span class="rb-label">Zielsegment (Sweet Spot)</span>
+                        <span class="rb-value">200&ndash;400 Vereine</span>
+                        <span class="rb-sub">500+ Mitglieder, mind. 1 Hauptamtliche:r, F&ouml;rdermittel-Empf&auml;nger</span>
+                    </div>
+                </div>
+                <div class="region-note">
+                    &#128161; <strong>OWL-Besonderheit:</strong> Starke Vereinslandschaft mit hohem ehrenamtlichen Engagement. Stadtsportverb&auml;nde (Bielefeld, Paderborn) und Freiwilligenagenturen sind ideale Multiplikatoren. Viele Vereine erhalten kommunale F&ouml;rderung &mdash; das Projekt kann als Digitalisierungsma&szlig;nahme f&ouml;rderf&auml;hig sein.
+                </div>
+            </div>
+        </div>
+
+    </div><!-- /content-grid -->
+</div><!-- /avatar-ver -->
+
+</div><!-- /main -->
+
+<!-- FOOTER -->
+<div class="footer">
+    <strong>AI-Consulting OWL</strong> &mdash; B2B-Kunden-Avatare &bull; Erstellt: April 2026 &bull; Vertraulich
+</div>
+
+<script>
+    function showAvatar(id) {
+        // Hide all panels
+        document.querySelectorAll('.avatar-panel').forEach(function(el) {
+            el.classList.remove('active');
+        });
+
+        // Deactivate all buttons
+        document.querySelectorAll('.seg-btn').forEach(function(btn) {
+            btn.classList.remove('active');
+        });
+
+        // Show selected panel
+        var target = document.getElementById('avatar-' + id);
+        if (target) {
+            target.classList.add('active');
+        }
+
+        // Activate clicked button
+        var map = {'stb': 0, 'hw': 1, 'ver': 2};
+        var btns = document.querySelectorAll('.seg-btn');
+        if (btns[map[id]]) {
+            btns[map[id]].classList.add('active');
+        }
+
+        // Re-trigger animations
+        var cards = target.querySelectorAll('.card, .profile-banner');
+        cards.forEach(function(card, i) {
+            card.style.animation = 'none';
+            card.offsetHeight;
+            card.style.animation = 'fadeInUp 0.5s ease-out ' + (i * 0.08) + 's both';
+        });
+    }
+</script>
+
+</body>
+</html>
