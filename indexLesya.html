@@ -1,0 +1,1780 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Lesya Burban — KI-Automatisierung f&uuml;r den Mittelstand</title>
+    <meta name="description" content="Praxisnahe KI-Automatisierung f&uuml;r den Mittelstand in OWL. DSGVO-konform, Self-Hosted, ohne Abh&auml;ngigkeit von US-Cloud-Diensten.">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* ============================================= */
+        /*  CSS VARIABLES                                */
+        /* ============================================= */
+        :root {
+            --black: #111111;
+            --graphite: #1a1a1a;
+            --graphite-mid: #2d2d2d;
+            --graphite-light: #3a3a3a;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --gold-glow: rgba(201,168,76,0.10);
+            --gold-glow2: rgba(201,168,76,0.05);
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #8a8a8a;
+            --gray-600: #737373;
+            --gray-700: #525252;
+            --green: #22c55e;
+            --green-dark: #16a34a;
+            --nav-h: 72px;
+        }
+
+        /* ============================================= */
+        /*  RESET & BASE                                 */
+        /* ============================================= */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: var(--nav-h);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--graphite);
+            background: var(--white);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* ============================================= */
+        /*  REVEAL ANIMATIONS                            */
+        /* ============================================= */
+        .reveal {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-left {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .reveal-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-right {
+            opacity: 0;
+            transform: translateX(40px);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .reveal-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+        }
+
+        .reveal-scale.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .delay-1 { transition-delay: 0.1s; }
+        .delay-2 { transition-delay: 0.2s; }
+        .delay-3 { transition-delay: 0.3s; }
+        .delay-4 { transition-delay: 0.4s; }
+        .delay-5 { transition-delay: 0.5s; }
+
+        /* ============================================= */
+        /*  NAVIGATION                                   */
+        /* ============================================= */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            padding: 0 40px;
+            background: rgba(17,17,17,0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            transition: background 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .nav.scrolled {
+            background: rgba(17,17,17,0.96);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+        }
+
+        .nav-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .nav-brand-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--white);
+            letter-spacing: -0.3px;
+        }
+
+        .nav-brand-sub {
+            font-size: 10px;
+            font-weight: 500;
+            color: var(--gold);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--gray-400);
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-cta {
+            background: var(--gold);
+            color: var(--black);
+            padding: 10px 22px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .nav-cta:hover {
+            background: var(--gold-light);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+        }
+
+        /* Mobile menu */
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            width: 32px;
+            height: 24px;
+            position: relative;
+            z-index: 1001;
+        }
+
+        .nav-toggle span {
+            display: block;
+            width: 100%;
+            height: 2px;
+            background: var(--white);
+            border-radius: 2px;
+            position: absolute;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-toggle span:nth-child(1) { top: 0; }
+        .nav-toggle span:nth-child(2) { top: 11px; }
+        .nav-toggle span:nth-child(3) { top: 22px; }
+
+        .nav-toggle.open span:nth-child(1) { top: 11px; transform: rotate(45deg); }
+        .nav-toggle.open span:nth-child(2) { opacity: 0; }
+        .nav-toggle.open span:nth-child(3) { top: 11px; transform: rotate(-45deg); }
+
+        /* ============================================= */
+        /*  HERO                                         */
+        /* ============================================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(165deg, var(--black) 0%, var(--graphite) 40%, #1f1b12 80%, var(--graphite-mid) 100%);
+            overflow: hidden;
+            padding-top: var(--nav-h);
+        }
+
+        .hero-bg-grid {
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+            background-size: 80px 80px;
+            mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
+            -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
+        }
+
+        .hero-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+        }
+
+        .hero-orb-1 {
+            width: 600px;
+            height: 600px;
+            top: -15%;
+            right: -10%;
+            background: rgba(201,168,76,0.07);
+            animation: orbFloat 8s ease-in-out infinite;
+        }
+
+        .hero-orb-2 {
+            width: 400px;
+            height: 400px;
+            bottom: -10%;
+            left: -5%;
+            background: rgba(201,168,76,0.04);
+            animation: orbFloat 10s ease-in-out infinite reverse;
+        }
+
+        .hero-orb-3 {
+            width: 250px;
+            height: 250px;
+            top: 40%;
+            left: 30%;
+            background: rgba(201,168,76,0.03);
+            animation: orbFloat 12s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0); }
+            33% { transform: translate(15px, -20px); }
+            66% { transform: translate(-10px, 15px); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 780px;
+            padding: 80px 0;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.2);
+            padding: 8px 18px;
+            border-radius: 100px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--gold-light);
+            letter-spacing: 0.5px;
+            margin-bottom: 28px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        .hero-badge-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--gold);
+            animation: blink 2s ease-in-out infinite;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 5.5vw, 64px);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.08;
+            letter-spacing: -1.5px;
+            margin-bottom: 24px;
+            animation: fadeInUp 0.8s 0.15s ease-out both;
+        }
+
+        .hero h1 .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-sub {
+            font-size: clamp(16px, 1.8vw, 20px);
+            color: var(--gray-400);
+            line-height: 1.65;
+            max-width: 620px;
+            margin-bottom: 40px;
+            animation: fadeInUp 0.8s 0.3s ease-out both;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.8s 0.45s ease-out both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            padding: 16px 32px;
+            border-radius: 14px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+        }
+
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--gray-300);
+            border: 2px solid rgba(255,255,255,0.12);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--gold);
+            color: var(--gold-light);
+            transform: translateY(-3px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 64px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            animation: fadeInUp 0.8s 0.6s ease-out both;
+        }
+
+        .hero-stat {
+            text-align: left;
+        }
+
+        .hero-stat-val {
+            font-size: 32px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-stat-label {
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        /* Scroll indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            animation: fadeInUp 1s 1s ease-out both;
+        }
+
+        .scroll-indicator span {
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--gray-600);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: linear-gradient(to bottom, var(--gold), transparent);
+            animation: scrollPulse 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% { opacity: 1; transform: scaleY(1); }
+            50% { opacity: 0.4; transform: scaleY(0.6); }
+        }
+
+        /* ============================================= */
+        /*  SECTION GENERAL                              */
+        /* ============================================= */
+        .section {
+            padding: 120px 0;
+        }
+
+        .section-dark {
+            background: var(--graphite);
+            color: var(--white);
+        }
+
+        .section-pearl {
+            background: var(--pearl-light);
+        }
+
+        .section-white {
+            background: var(--white);
+        }
+
+        .section-black {
+            background: var(--black);
+            color: var(--white);
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+        }
+
+        .section-label-line {
+            width: 32px;
+            height: 2px;
+            background: var(--gold);
+            border-radius: 1px;
+        }
+
+        .section-title {
+            font-size: clamp(28px, 4vw, 48px);
+            font-weight: 900;
+            letter-spacing: -0.8px;
+            line-height: 1.12;
+            margin-bottom: 16px;
+        }
+
+        .section-title .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-desc {
+            font-size: 17px;
+            color: var(--gray-600);
+            max-width: 600px;
+            line-height: 1.7;
+            margin-bottom: 48px;
+        }
+
+        .section-dark .section-desc { color: var(--gray-400); }
+        .section-black .section-desc { color: var(--gray-400); }
+
+        /* ============================================= */
+        /*  LEISTUNGEN (SERVICES)                        */
+        /* ============================================= */
+        .phases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .phase-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 36px 32px;
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            border-color: rgba(201,168,76,0.3);
+        }
+
+        .phase-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .phase-num {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--graphite), var(--black));
+            color: var(--gold);
+            font-size: 16px;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .phase-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold-dark);
+            background: var(--gold-glow);
+            border: 1px solid rgba(201,168,76,0.2);
+            padding: 4px 12px;
+            border-radius: 6px;
+            margin-bottom: 12px;
+            letter-spacing: 0.5px;
+        }
+
+        .phase-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 10px;
+        }
+
+        .phase-desc {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .phase-list {
+            list-style: none;
+        }
+
+        .phase-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 14px;
+            color: var(--gray-700);
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .phase-list li:last-child { border-bottom: none; }
+
+        .phase-check {
+            width: 20px;
+            height: 20px;
+            border-radius: 6px;
+            background: rgba(22,163,74,0.1);
+            color: var(--green-dark);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            flex-shrink: 0;
+        }
+
+        .phase-result {
+            margin-top: 20px;
+            padding: 14px 18px;
+            background: var(--gold-glow2);
+            border-left: 3px solid var(--gold);
+            border-radius: 0 10px 10px 0;
+            font-size: 13px;
+            color: var(--gray-700);
+            font-style: italic;
+        }
+
+        /* ============================================= */
+        /*  REFERENZEN (CASE STUDY)                      */
+        /* ============================================= */
+        .case-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+
+        .case-visual {
+            background: linear-gradient(160deg, var(--graphite-mid), var(--black));
+            border-radius: 24px;
+            padding: 48px 40px;
+            border: 1px solid rgba(255,255,255,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .case-visual::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%);
+            border-radius: 50%;
+        }
+
+        .case-metric {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-metric-val {
+            font-size: 72px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .case-metric-label {
+            font-size: 16px;
+            color: var(--gray-400);
+            margin-top: 8px;
+        }
+
+        .case-tags {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .case-tag {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            background: rgba(201,168,76,0.1);
+            border: 1px solid rgba(201,168,76,0.2);
+            color: var(--gold-light);
+        }
+
+        .case-info h3 {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .case-info .case-branche {
+            font-size: 14px;
+            color: var(--gold);
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .case-info p {
+            font-size: 15px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 16px;
+        }
+
+        .case-info strong {
+            color: var(--white);
+        }
+
+        .case-results {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-top: 24px;
+        }
+
+        .case-result-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 10px;
+            font-size: 13px;
+            color: var(--gray-300);
+        }
+
+        .case-result-icon {
+            font-size: 18px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================= */
+        /*  UEBER MICH (ABOUT ME)                        */
+        /* ============================================= */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 60px;
+            align-items: start;
+        }
+
+        .about-photo-wrap {
+            position: relative;
+        }
+
+        .about-photo {
+            width: 100%;
+            aspect-ratio: 3/4;
+            border-radius: 24px;
+            background: linear-gradient(160deg, var(--graphite-mid), var(--graphite-light));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            overflow: hidden;
+            border: 3px solid rgba(201,168,76,0.2);
+            position: relative;
+        }
+
+        .about-photo-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 24px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+        }
+
+        .about-photo-name {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .about-photo-title {
+            font-size: 13px;
+            color: var(--gold-light);
+            font-weight: 500;
+        }
+
+        .about-langs {
+            display: flex;
+            gap: 8px;
+            margin-top: 16px;
+            flex-wrap: wrap;
+        }
+
+        .about-lang {
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            color: var(--gray-700);
+        }
+
+        .about-text {
+            font-size: 17px;
+            color: var(--gray-600);
+            line-height: 1.8;
+            margin-bottom: 36px;
+        }
+
+        .about-text strong {
+            color: var(--graphite);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 14px;
+        }
+
+        .skill-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 18px;
+            background: var(--white);
+            border: 1px solid var(--gray-200);
+            border-radius: 14px;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--graphite);
+            transition: all 0.3s ease;
+        }
+
+        .skill-item:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+        }
+
+        .skill-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--gold-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        /* ============================================= */
+        /*  VORTEILE (ADVANTAGES)                        */
+        /* ============================================= */
+        .adv-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .adv-card {
+            display: flex;
+            gap: 20px;
+            padding: 32px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            transition: all 0.35s ease;
+        }
+
+        .adv-card:hover {
+            background: rgba(201,168,76,0.04);
+            border-color: rgba(201,168,76,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+        }
+
+        .adv-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 14px;
+            background: var(--gold-glow);
+            border: 1px solid rgba(201,168,76,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .adv-content h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 6px;
+        }
+
+        .adv-content p {
+            font-size: 14px;
+            color: var(--gray-500);
+            line-height: 1.65;
+        }
+
+        /* ============================================= */
+        /*  CTA & KONTAKTFORMULAR                        */
+        /* ============================================= */
+        .cta-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section .hero-orb-1,
+        .cta-section .hero-orb-2 {
+            position: absolute;
+        }
+
+        .cta-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .cta-text h2 {
+            font-size: clamp(28px, 3.5vw, 44px);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.12;
+            letter-spacing: -0.5px;
+            margin-bottom: 16px;
+        }
+
+        .cta-text h2 .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .cta-text p {
+            font-size: 16px;
+            color: var(--gray-400);
+            line-height: 1.7;
+            margin-bottom: 32px;
+            max-width: 480px;
+        }
+
+        .cta-features {
+            list-style: none;
+        }
+
+        .cta-features li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            font-size: 15px;
+            color: var(--gray-300);
+        }
+
+        .cta-features-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: rgba(201,168,76,0.12);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+
+        .form-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 24px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .form-card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--white);
+            margin-bottom: 4px;
+        }
+
+        .form-card .form-sub {
+            font-size: 14px;
+            color: var(--gray-500);
+            margin-bottom: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-400);
+            margin-bottom: 6px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            color: var(--white);
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            outline: none;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: var(--gray-600);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group select option {
+            background: var(--graphite);
+            color: var(--white);
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+
+        .form-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            margin-top: 8px;
+        }
+
+        .form-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+        }
+
+        .form-note {
+            font-size: 11px;
+            color: var(--gray-600);
+            text-align: center;
+            margin-top: 14px;
+        }
+
+        /* ============================================= */
+        /*  FOOTER                                       */
+        /* ============================================= */
+        .footer {
+            background: var(--black);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 48px 0 32px;
+            color: var(--gray-500);
+        }
+
+        .footer-inner {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .footer-brand-name {
+            font-size: 16px;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .footer-brand-sub {
+            font-size: 12px;
+            color: var(--gold);
+            font-weight: 500;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--gray-500);
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--gold);
+        }
+
+        .footer-copy {
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray-600);
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        /* ============================================= */
+        /*  KEYFRAMES                                    */
+        /* ============================================= */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(28px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================= */
+        /*  RESPONSIVE                                   */
+        /* ============================================= */
+        @media (max-width: 1024px) {
+            .container { padding: 0 24px; }
+            .section { padding: 80px 0; }
+            .phases-grid { grid-template-columns: 1fr; }
+            .case-grid { grid-template-columns: 1fr; }
+            .about-grid { grid-template-columns: 1fr; }
+            .about-photo-wrap { max-width: 320px; margin: 0 auto; }
+            .adv-grid { grid-template-columns: 1fr; }
+            .cta-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: repeat(2, 1fr); }
+            .hero-stats { gap: 28px; }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
+
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(17,17,17,0.98);
+                backdrop-filter: blur(20px);
+                -webkit-backdrop-filter: blur(20px);
+                justify-content: center;
+                align-items: center;
+                gap: 28px;
+                z-index: 999;
+            }
+
+            .nav-links.open a {
+                font-size: 20px;
+                color: var(--white);
+            }
+
+            .hero h1 { font-size: 32px; }
+            .hero-stats { flex-direction: column; gap: 20px; }
+            .form-row { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr; }
+            .case-results { grid-template-columns: 1fr; }
+            .footer-inner { flex-direction: column; text-align: center; }
+        }
+
+        /* ============================================= */
+        /*  PRINT                                        */
+        /* ============================================= */
+        @media print {
+            .nav, .scroll-indicator { display: none; }
+            .hero { min-height: auto; padding: 60px 0; }
+            .section { padding: 40px 0; }
+            .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1 !important; transform: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================================== -->
+<!--  NAVIGATION                        -->
+<!-- ================================== -->
+<nav class="nav" id="nav">
+    <div class="nav-inner">
+        <a href="#" class="nav-brand">
+            <span class="nav-brand-name">Dr. Lesya Burban</span>
+            <span class="nav-brand-sub">KI-Automatisierungsberatung</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#leistungen">Leistungen</a></li>
+            <li><a href="#referenzen">Referenzen</a></li>
+            <li><a href="#ueber-mich">&Uuml;ber mich</a></li>
+            <li><a href="#vorteile">Vorteile</a></li>
+            <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Men&uuml; &ouml;ffnen">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- ================================== -->
+<!--  HERO                              -->
+<!-- ================================== -->
+<section class="hero" id="hero">
+    <div class="hero-bg-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+    <div class="hero-orb hero-orb-3"></div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="hero-badge">
+                <span class="hero-badge-dot"></span>
+                Region OWL &bull; DSGVO-konform &bull; Self-Hosted
+            </div>
+            <h1>
+                KI-Automatisierung, die auf <span class="gold">Ihrer Infrastruktur</span> l&auml;uft.
+            </h1>
+            <p class="hero-sub">
+                Praxisnahe L&ouml;sungen f&uuml;r den Mittelstand in Ostwestfalen-Lippe &mdash; DSGVO-konform, Self-Hosted und ohne Abh&auml;ngigkeit von US-Cloud-Diensten.
+            </p>
+            <div class="hero-buttons">
+                <a href="#kontakt" class="btn btn-gold">Kostenlos beraten lassen</a>
+                <a href="#leistungen" class="btn btn-outline">Leistungen ansehen</a>
+            </div>
+            <div class="hero-stats">
+                <div class="hero-stat">
+                    <div class="hero-stat-val">60 %</div>
+                    <div class="hero-stat-label">weniger Bearbeitungszeit</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-val">4&ndash;6</div>
+                    <div class="hero-stat-label">Wochen bis zum Piloten</div>
+                </div>
+                <div class="hero-stat">
+                    <div class="hero-stat-val">200+</div>
+                    <div class="hero-stat-label">Seiten RAG-Wissensbasis</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="scroll-indicator">
+        <span>Scroll</span>
+        <div class="scroll-line"></div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  LEISTUNGEN                        -->
+<!-- ================================== -->
+<section class="section section-pearl" id="leistungen">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">
+                <span class="section-label-line"></span> Leistungen
+            </div>
+            <div class="section-title">Drei Phasen <span class="gold">zum Erfolg.</span></div>
+            <p class="section-desc">
+                Von der Analyse bis zum laufenden Betrieb &mdash; jede Phase liefert eigenst&auml;ndig Mehrwert.
+            </p>
+        </div>
+        <div class="phases-grid">
+            <!-- Phase 1 -->
+            <div class="phase-card reveal delay-1">
+                <div class="phase-num">01</div>
+                <div class="phase-badge">Phase 1</div>
+                <h3 class="phase-title">Assess &mdash; Analyse und Potenziale</h3>
+                <p class="phase-desc">Strukturierte Analyse Ihrer Prozesse und Identifikation der gr&ouml;&szlig;ten KI-Hebel.</p>
+                <ul class="phase-list">
+                    <li><span class="phase-check">&#10003;</span> Strukturiertes Prozess-Mapping</li>
+                    <li><span class="phase-check">&#10003;</span> Bewertung nach Aufwand, Impact und Machbarkeit</li>
+                    <li><span class="phase-check">&#10003;</span> Technologie-Empfehlung passend zu Ihrer IT-Landschaft</li>
+                    <li><span class="phase-check">&#10003;</span> Priorisierter Fahrplan f&uuml;r die Umsetzung</li>
+                </ul>
+                <div class="phase-result">
+                    Ergebnis: Ein dokumentierter Analyse-Bericht mit 3&ndash;5 priorisierten Automatisierungs-Kandidaten.
+                </div>
+            </div>
+            <!-- Phase 2 -->
+            <div class="phase-card reveal delay-2">
+                <div class="phase-num">02</div>
+                <div class="phase-badge">Phase 2</div>
+                <h3 class="phase-title">Pilot &mdash; Umsetzung und Validierung</h3>
+                <p class="phase-desc">Umsetzung des vielversprechendsten Automatisierungs-Kandidaten in 4&ndash;6 Wochen.</p>
+                <ul class="phase-list">
+                    <li><span class="phase-check">&#10003;</span> Workflow-Automatisierung mit n8n (Self-Hosted)</li>
+                    <li><span class="phase-check">&#10003;</span> KI-Agenten mit RAG f&uuml;r Unternehmensdaten</li>
+                    <li><span class="phase-check">&#10003;</span> Integration in bestehende Tools</li>
+                    <li><span class="phase-check">&#10003;</span> Praxisnahe Schulung</li>
+                </ul>
+                <div class="phase-result">
+                    Ergebnis: Ein produktiver Workflow, der nachweislich Zeit spart.
+                </div>
+            </div>
+            <!-- Phase 3 -->
+            <div class="phase-card reveal delay-3">
+                <div class="phase-num">03</div>
+                <div class="phase-badge">Phase 3</div>
+                <h3 class="phase-title">Operate &mdash; Betrieb und Optimierung</h3>
+                <p class="phase-desc">Langfristige Betreuung: Monitoring, Wartung und kontinuierliche Verbesserung.</p>
+                <ul class="phase-list">
+                    <li><span class="phase-check">&#10003;</span> Proaktives Monitoring und Alerting</li>
+                    <li><span class="phase-check">&#10003;</span> Qualit&auml;tschecks</li>
+                    <li><span class="phase-check">&#10003;</span> Erweiterung auf weitere Bereiche</li>
+                    <li><span class="phase-check">&#10003;</span> Self-Hosting-Betrieb</li>
+                </ul>
+                <div class="phase-result">
+                    Ergebnis: Stabile, skalierbare Automatisierung im laufenden Betrieb.
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  REFERENZEN                        -->
+<!-- ================================== -->
+<section class="section section-dark" id="referenzen">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">
+                <span class="section-label-line"></span> Referenzen
+            </div>
+            <div class="section-title">Ausgew&auml;hlte <span class="gold">Projekte.</span></div>
+            <p class="section-desc">
+                Ausgew&auml;hlte Projekte, die zeigen, wie KI-Automatisierung in der Praxis funktioniert.
+            </p>
+        </div>
+        <div class="case-grid">
+            <div class="case-visual reveal-left">
+                <div class="case-metric">
+                    <div class="case-metric-val">60 %</div>
+                    <div class="case-metric-label">weniger Bearbeitungszeit</div>
+                </div>
+                <div class="case-tags">
+                    <span class="case-tag">n8n</span>
+                    <span class="case-tag">Qdrant</span>
+                    <span class="case-tag">RAG</span>
+                    <span class="case-tag">Claude API</span>
+                    <span class="case-tag">Self-Hosting</span>
+                    <span class="case-tag">Coolify</span>
+                </div>
+            </div>
+            <div class="case-info reveal-right">
+                <h3>QA-Workflow-Automatisierung f&uuml;r B2B-SaaS</h3>
+                <div class="case-branche">Branche: B2B-SaaS-Anbieter im QA-Tooling-Umfeld</div>
+                <p><strong>Ausgangssituation:</strong> Ein wachsendes SaaS-Unternehmen im QA-Bereich konnte manuelle Prozesse bei der Datenverarbeitung und Qualit&auml;tssicherung nicht mehr skalieren. Wiederkehrende Aufgaben banden qualifizierte Mitarbeiter und verlangsamten die Produktentwicklung.</p>
+                <p><strong>L&ouml;sung:</strong> Entwicklung einer integrierten Automatisierungsl&ouml;sung mit n8n-Workflows und RAG-basiertem KI-Agenten. Die Infrastruktur l&auml;uft Self-Hosted auf dediziertem Server ohne externe Datentransfers.</p>
+                <div class="case-results">
+                    <div class="case-result-item">
+                        <span class="case-result-icon">&#9201;</span>
+                        60 % weniger Bearbeitungszeit
+                    </div>
+                    <div class="case-result-item">
+                        <span class="case-result-icon">&#128218;</span>
+                        200+ Seiten RAG-Wissensbasis
+                    </div>
+                    <div class="case-result-item">
+                        <span class="case-result-icon">&#128272;</span>
+                        Self-Hosted, DSGVO-konform
+                    </div>
+                    <div class="case-result-item">
+                        <span class="case-result-icon">&#128640;</span>
+                        Produktentwicklung beschleunigt
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  UEBER MICH                        -->
+<!-- ================================== -->
+<section class="section section-pearl" id="ueber-mich">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">
+                <span class="section-label-line"></span> &Uuml;ber mich
+            </div>
+            <div class="section-title">Dr. Lesya <span class="gold">Burban</span></div>
+        </div>
+        <div class="about-grid">
+            <div class="about-photo-wrap reveal-left">
+                <div class="about-photo">
+                    &#128105;&#8205;&#128187;
+                    <div class="about-photo-overlay">
+                        <div class="about-photo-name">Dr. Lesya Burban</div>
+                        <div class="about-photo-title">KI-Automatisierungsberaterin</div>
+                    </div>
+                </div>
+                <div class="about-langs">
+                    <span class="about-lang">&#127465;&#127466; Deutsch &mdash; Flie&szlig;end</span>
+                    <span class="about-lang">&#127482;&#127462; Ukrainisch &mdash; Muttersprache</span>
+                    <span class="about-lang">&#127468;&#127463; Englisch &mdash; Flie&szlig;end</span>
+                    <span class="about-lang">&#127479;&#127482; Russisch &mdash; Flie&szlig;end</span>
+                </div>
+            </div>
+            <div class="reveal-right">
+                <p class="about-text">
+                    Seit M&auml;rz 2026 berate ich mittelst&auml;ndische Unternehmen in Ostwestfalen-Lippe bei der Einf&uuml;hrung von KI-Automatisierung.
+                </p>
+                <p class="about-text">
+                    Mein Fokus liegt auf L&ouml;sungen, die auf <strong>Ihrer eigenen Infrastruktur</strong> laufen &mdash; DSGVO-konform und ohne Abh&auml;ngigkeit von US-Cloud-Diensten.
+                </p>
+                <p class="about-text">
+                    Meine Qualifikation vereint <strong>wissenschaftliche Forschung</strong> und <strong>praktische Softwareentwicklung</strong>. Als Wissenschaftlerin mit Doktortitel bringe ich analytisches Denken ein; als Entwicklerin beherrsche ich die Integration von Technologien in bestehende Systeme.
+                </p>
+                <div class="skills-grid">
+                    <div class="skill-item reveal delay-1">
+                        <div class="skill-icon">&#9881;</div>
+                        Workflow-Automatisierung (n8n)
+                    </div>
+                    <div class="skill-item reveal delay-2">
+                        <div class="skill-icon">&#129302;</div>
+                        KI-Agenten und RAG-Systeme
+                    </div>
+                    <div class="skill-item reveal delay-3">
+                        <div class="skill-icon">&#128272;</div>
+                        Self-Hosting und DSGVO
+                    </div>
+                    <div class="skill-item reveal delay-4">
+                        <div class="skill-icon">&#128200;</div>
+                        Prozessanalyse und -optimierung
+                    </div>
+                    <div class="skill-item reveal delay-5">
+                        <div class="skill-icon">&#128268;</div>
+                        API-Integrationen
+                    </div>
+                    <div class="skill-item reveal delay-5">
+                        <div class="skill-icon">&#128300;</div>
+                        Qualit&auml;tssicherung f&uuml;r KI
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  VORTEILE                          -->
+<!-- ================================== -->
+<section class="section section-black" id="vorteile">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">
+                <span class="section-label-line"></span> Vorteile
+            </div>
+            <div class="section-title">Warum mit mir <span class="gold">arbeiten?</span></div>
+            <p class="section-desc">
+                Was meine Beratung von gro&szlig;en IT-Dienstleistern und Standard-SaaS-L&ouml;sungen unterscheidet.
+            </p>
+        </div>
+        <div class="adv-grid">
+            <div class="adv-card reveal delay-1">
+                <div class="adv-icon">&#128272;</div>
+                <div class="adv-content">
+                    <h3>DSGVO by Design</h3>
+                    <p>Datenschutz ist Architekturprinzip, kein Nachgedanke. Alle Systeme laufen auf eigenen Servern in Deutschland &mdash; ohne US-Cloud-Abh&auml;ngigkeit.</p>
+                </div>
+            </div>
+            <div class="adv-card reveal delay-2">
+                <div class="adv-icon">&#127891;</div>
+                <div class="adv-content">
+                    <h3>Wissenschaftliche Pr&auml;zision</h3>
+                    <p>Ein PhD in Mathematik bedeutet: analytisches Denken, logisch einwandfreie Systemarchitektur und systematisches Testen statt Trial-and-Error.</p>
+                </div>
+            </div>
+            <div class="adv-card reveal delay-3">
+                <div class="adv-icon">&#128205;</div>
+                <div class="adv-content">
+                    <h3>Lokal in OWL</h3>
+                    <p>Pers&ouml;nliche Betreuung vor Ort. Workshops in Ihren R&auml;umen. Kurze Wege, schnelle Reaktion und echtes Verst&auml;ndnis f&uuml;r die Region.</p>
+                </div>
+            </div>
+            <div class="adv-card reveal delay-4">
+                <div class="adv-icon">&#128736;</div>
+                <div class="adv-content">
+                    <h3>Kein Vendor Lock-in</h3>
+                    <p>Open-Source-Technologien (n8n, Qdrant) und eigene Infrastruktur &mdash; Sie behalten die volle Kontrolle &uuml;ber Ihre Daten und Systeme.</p>
+                </div>
+            </div>
+            <div class="adv-card reveal delay-3">
+                <div class="adv-icon">&#128640;</div>
+                <div class="adv-content">
+                    <h3>Schnelle Ergebnisse</h3>
+                    <p>Vom Erstgespr&auml;ch zum produktiven Piloten in 4&ndash;6 Wochen. Jede Phase liefert eigenst&auml;ndig Mehrwert &mdash; kein monatelanges Warten.</p>
+                </div>
+            </div>
+            <div class="adv-card reveal delay-4">
+                <div class="adv-icon">&#128156;</div>
+                <div class="adv-content">
+                    <h3>Menschen im Fokus</h3>
+                    <p>KI als Unterst&uuml;tzung f&uuml;r Ihr Team, nicht als Ersatz. Praxisnahe Schulungen und L&ouml;sungen, die in den Arbeitsalltag passen.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  KONTAKT / CTA                     -->
+<!-- ================================== -->
+<section class="section section-dark cta-section" id="kontakt">
+    <div class="hero-orb hero-orb-1" style="top:-20%;right:-10%;"></div>
+    <div class="hero-orb hero-orb-2" style="bottom:-15%;left:-8%;"></div>
+    <div class="container" style="position:relative;z-index:2;">
+        <div class="cta-grid">
+            <div class="cta-text reveal-left">
+                <div class="section-label">
+                    <span class="section-label-line"></span> Kontakt
+                </div>
+                <h2>Bereit f&uuml;r den <span class="gold">n&auml;chsten Schritt?</span></h2>
+                <p>Lassen Sie uns in einem kostenlosen Erstgespr&auml;ch herausfinden, wo KI-Automatisierung in Ihrem Unternehmen den gr&ouml;&szlig;ten Hebel hat.</p>
+                <ul class="cta-features">
+                    <li>
+                        <span class="cta-features-check">&#10003;</span>
+                        Kostenfreies Erstgespr&auml;ch (30 Min.)
+                    </li>
+                    <li>
+                        <span class="cta-features-check">&#10003;</span>
+                        Analyse Ihres Automatisierungs-Potenzials
+                    </li>
+                    <li>
+                        <span class="cta-features-check">&#10003;</span>
+                        Konkrete n&auml;chste Schritte &mdash; kein Verkaufsdruck
+                    </li>
+                    <li>
+                        <span class="cta-features-check">&#10003;</span>
+                        Vor Ort in OWL oder digital
+                    </li>
+                </ul>
+            </div>
+            <div class="form-card reveal-right">
+                <h3>Erstgespr&auml;ch vereinbaren</h3>
+                <p class="form-sub">Ich melde mich innerhalb von 24 Stunden bei Ihnen.</p>
+                <form id="contactForm" onsubmit="handleSubmit(event)">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vorname *</label>
+                            <input type="text" placeholder="Ihr Vorname" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nachname *</label>
+                            <input type="text" placeholder="Ihr Nachname" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>E-Mail *</label>
+                        <input type="email" placeholder="ihre@email.de" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Unternehmen</label>
+                        <input type="text" placeholder="Ihr Unternehmen">
+                    </div>
+                    <div class="form-group">
+                        <label>Interesse</label>
+                        <select>
+                            <option value="">Bitte w&auml;hlen...</option>
+                            <option value="assess">Phase 1: Assess &mdash; Prozessanalyse</option>
+                            <option value="pilot">Phase 2: Pilot &mdash; Umsetzung</option>
+                            <option value="operate">Phase 3: Operate &mdash; Betreuung</option>
+                            <option value="other">Sonstiges</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ihre Nachricht</label>
+                        <textarea placeholder="Beschreiben Sie kurz Ihr Anliegen..."></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">Erstgespr&auml;ch vereinbaren</button>
+                    <p class="form-note">Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  FOOTER                            -->
+<!-- ================================== -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <span class="footer-brand-name">Dr. Lesya Burban</span>
+                <span class="footer-brand-sub">KI-Automatisierungsberatung</span>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#">Impressum</a></li>
+                <li><a href="#">Datenschutz</a></li>
+                <li><a href="mailto:lesyab@gmx.de">lesyab@gmx.de</a></li>
+            </ul>
+        </div>
+        <div class="footer-copy">
+            &copy; 2026 Dr. Lesya Burban. Alle Rechte vorbehalten.
+        </div>
+    </div>
+</footer>
+
+<!-- ================================== -->
+<!--  SCRIPTS                           -->
+<!-- ================================== -->
+<script>
+    /* ---- Scroll Reveal ---- */
+    var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+
+    function checkReveal() {
+        var wH = window.innerHeight;
+        revealEls.forEach(function(el) {
+            var top = el.getBoundingClientRect().top;
+            if (top < wH - 80) {
+                el.classList.add('visible');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', checkReveal, { passive: true });
+    window.addEventListener('load', checkReveal);
+
+    /* ---- Nav scroll state ---- */
+    var nav = document.getElementById('nav');
+    window.addEventListener('scroll', function() {
+        if (window.scrollY > 40) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    }, { passive: true });
+
+    /* ---- Mobile menu ---- */
+    var toggle = document.getElementById('navToggle');
+    var links = document.getElementById('navLinks');
+
+    toggle.addEventListener('click', function() {
+        toggle.classList.toggle('open');
+        links.classList.toggle('open');
+    });
+
+    links.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+            toggle.classList.remove('open');
+            links.classList.remove('open');
+        });
+    });
+
+    /* ---- Form submit ---- */
+    function handleSubmit(e) {
+        e.preventDefault();
+        var btn = e.target.querySelector('.form-submit');
+        btn.textContent = 'Gesendet! Vielen Dank.';
+        btn.style.background = '#16a34a';
+        btn.style.pointerEvents = 'none';
+        setTimeout(function() {
+            btn.textContent = 'Erstgespr\u00e4ch vereinbaren';
+            btn.style.background = '';
+            btn.style.pointerEvents = '';
+            e.target.reset();
+        }, 3000);
+    }
+
+    /* ---- Smooth anchor offset fix for Safari ---- */
+    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
+        a.addEventListener('click', function(e) {
+            var id = this.getAttribute('href').substring(1);
+            var target = document.getElementById(id);
+            if (target) {
+                e.preventDefault();
+                var offset = 72;
+                var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                window.scrollTo({ top: top, behavior: 'smooth' });
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
