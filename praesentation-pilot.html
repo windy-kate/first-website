@@ -1,0 +1,1439 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pilotprojekt-Pr&auml;sentation &mdash; AI-Consulting OWL</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        :root {
+            --black: #1a1a1a;
+            --graphite: #2d2d2d;
+            --graphite-mid: #3a3a3a;
+            --gold: #c9a84c;
+            --gold-light: #e8d48b;
+            --gold-dark: #a07e2e;
+            --gold-glow: rgba(201,168,76,0.12);
+            --gold-glow2: rgba(201,168,76,0.06);
+            --pearl: #f5f0e8;
+            --pearl-light: #faf7f2;
+            --white: #ffffff;
+            --gray-50: #fafafa;
+            --gray-100: #f5f5f5;
+            --gray-200: #e5e5e5;
+            --gray-300: #d4d4d4;
+            --gray-400: #a3a3a3;
+            --gray-500: #8a8a8a;
+            --gray-600: #737373;
+            --gray-700: #525252;
+            --red: #dc2626;
+            --red-soft: rgba(220,38,38,0.08);
+            --green: #16a34a;
+            --green-soft: rgba(22,163,74,0.08);
+            --blue: #2563eb;
+            --blue-soft: rgba(37,99,235,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html, body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            background: var(--black);
+            color: var(--white);
+            height: 100%;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ============================== */
+        /*          SLIDE ENGINE          */
+        /* ============================== */
+        .deck {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+            transform: translateX(60px);
+            overflow-y: auto;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateX(0);
+            z-index: 2;
+        }
+
+        .slide.prev {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateX(-60px);
+            z-index: 1;
+        }
+
+        /* ============================== */
+        /*         SLIDE BACKGROUNDS      */
+        /* ============================== */
+        .bg-dark {
+            background: linear-gradient(160deg, var(--black) 0%, var(--graphite) 60%, #2a2418 100%);
+        }
+
+        .bg-pearl {
+            background: linear-gradient(160deg, var(--pearl-light) 0%, var(--pearl) 100%);
+            color: var(--graphite);
+        }
+
+        .bg-gold-dark {
+            background: linear-gradient(160deg, #1f1a0e 0%, var(--black) 40%, #2a2418 100%);
+        }
+
+        .bg-graphite {
+            background: linear-gradient(160deg, var(--graphite) 0%, var(--graphite-mid) 50%, #2d2820 100%);
+        }
+
+        /* ============================== */
+        /*         AMBIENT EFFECTS        */
+        /* ============================== */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glow-orb.gold-tr { top: -15%; right: -8%; width: 420px; height: 420px; background: rgba(201,168,76,0.07); }
+        .glow-orb.gold-bl { bottom: -12%; left: -5%; width: 350px; height: 350px; background: rgba(201,168,76,0.05); }
+        .glow-orb.gold-c  { top: 30%; left: 40%; width: 500px; height: 500px; background: rgba(201,168,76,0.04); }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ============================== */
+        /*         TYPOGRAPHY             */
+        /* ============================== */
+        .slide-num {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 16px;
+            opacity: 0;
+            animation: none;
+        }
+
+        .active .slide-num { animation: fadeUp 0.6s 0.15s ease-out forwards; }
+
+        .slide-title {
+            font-size: clamp(32px, 4.5vw, 56px);
+            font-weight: 900;
+            letter-spacing: -1px;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            opacity: 0;
+        }
+
+        .active .slide-title { animation: fadeUp 0.6s 0.25s ease-out forwards; }
+
+        .slide-title .gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .slide-subtitle {
+            font-size: clamp(16px, 2vw, 20px);
+            font-weight: 400;
+            color: var(--gray-400);
+            max-width: 700px;
+            line-height: 1.6;
+            margin-bottom: 32px;
+            opacity: 0;
+        }
+
+        .bg-pearl .slide-subtitle { color: var(--gray-600); }
+
+        .active .slide-subtitle { animation: fadeUp 0.6s 0.35s ease-out forwards; }
+
+        /* ============================== */
+        /*         GRID LAYOUTS           */
+        /* ============================== */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .grid-4 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        /* ============================== */
+        /*         CARDS                  */
+        /* ============================== */
+        .s-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            padding: 28px;
+            opacity: 0;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .s-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 40px rgba(201,168,76,0.1);
+            border-color: rgba(201,168,76,0.25);
+        }
+
+        .bg-pearl .s-card {
+            background: var(--white);
+            border-color: var(--gray-200);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        .bg-pearl .s-card:hover {
+            box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+            border-color: var(--gold);
+        }
+
+        .active .s-card { animation: fadeUp 0.5s ease-out forwards; }
+        .active .s-card:nth-child(1) { animation-delay: 0.3s; }
+        .active .s-card:nth-child(2) { animation-delay: 0.4s; }
+        .active .s-card:nth-child(3) { animation-delay: 0.5s; }
+        .active .s-card:nth-child(4) { animation-delay: 0.6s; }
+
+        .s-card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            margin-bottom: 16px;
+            background: var(--gold-glow);
+            border: 1px solid rgba(201,168,76,0.15);
+        }
+
+        .s-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--white);
+        }
+
+        .bg-pearl .s-card h3 { color: var(--graphite); }
+
+        .s-card p {
+            font-size: 14px;
+            line-height: 1.65;
+            color: var(--gray-400);
+        }
+
+        .bg-pearl .s-card p { color: var(--gray-600); }
+
+        /* ============================== */
+        /*         SPECIAL: PAIN BARS     */
+        /* ============================== */
+        .pain-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 20px;
+            background: rgba(220,38,38,0.06);
+            border: 1px solid rgba(220,38,38,0.12);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            opacity: 0;
+        }
+
+        .active .pain-bar { animation: fadeLeft 0.5s ease-out forwards; }
+        .active .pain-bar:nth-child(1) { animation-delay: 0.3s; }
+        .active .pain-bar:nth-child(2) { animation-delay: 0.4s; }
+        .active .pain-bar:nth-child(3) { animation-delay: 0.5s; }
+        .active .pain-bar:nth-child(4) { animation-delay: 0.6s; }
+
+        .pain-bar .p-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .pain-bar .p-text {
+            font-size: 15px;
+            color: var(--gray-300);
+            line-height: 1.5;
+        }
+
+        .pain-bar .p-text strong {
+            color: #fca5a5;
+        }
+
+        .bg-pearl .pain-bar {
+            background: rgba(220,38,38,0.04);
+            border-color: rgba(220,38,38,0.1);
+        }
+
+        .bg-pearl .pain-bar .p-text { color: var(--gray-700); }
+        .bg-pearl .pain-bar .p-text strong { color: var(--red); }
+
+        /* ============================== */
+        /*     SPECIAL: ROI TABLE         */
+        /* ============================== */
+        .roi-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 8px;
+            opacity: 0;
+        }
+
+        .active .roi-table { animation: fadeUp 0.6s 0.4s ease-out forwards; }
+
+        .roi-table th {
+            text-align: left;
+            padding: 14px 18px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--gold);
+            border-bottom: 2px solid rgba(201,168,76,0.2);
+        }
+
+        .roi-table td {
+            padding: 14px 18px;
+            font-size: 15px;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            color: var(--gray-300);
+        }
+
+        .roi-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .roi-table .val {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 17px;
+        }
+
+        .roi-table .highlight-row td {
+            background: rgba(201,168,76,0.08);
+            border-radius: 8px;
+        }
+
+        .roi-table .highlight-row .val {
+            color: var(--gold-light);
+            font-size: 20px;
+        }
+
+        .roi-big {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+            margin-top: 24px;
+            opacity: 0;
+        }
+
+        .active .roi-big { animation: scaleIn 0.7s 0.6s ease-out forwards; }
+
+        .roi-number {
+            font-size: clamp(48px, 7vw, 80px);
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1;
+        }
+
+        .roi-label {
+            font-size: 18px;
+            color: var(--gray-400);
+            line-height: 1.5;
+        }
+
+        .roi-label strong {
+            color: var(--white);
+            display: block;
+            font-size: 20px;
+        }
+
+        /* ============================== */
+        /*     SPECIAL: TIMELINE          */
+        /* ============================== */
+        .timeline {
+            display: flex;
+            gap: 0;
+            position: relative;
+            margin-top: 8px;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 36px;
+            left: 24px;
+            right: 24px;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold-dark), var(--gold), var(--gold-light));
+            border-radius: 2px;
+            z-index: 0;
+        }
+
+        .t-step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        .active .t-step { animation: fadeUp 0.5s ease-out forwards; }
+        .active .t-step:nth-child(1) { animation-delay: 0.3s; }
+        .active .t-step:nth-child(2) { animation-delay: 0.45s; }
+        .active .t-step:nth-child(3) { animation-delay: 0.6s; }
+        .active .t-step:nth-child(4) { animation-delay: 0.75s; }
+
+        .t-dot {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--gold);
+            margin: 26px auto 16px;
+            box-shadow: 0 0 0 6px rgba(201,168,76,0.2), 0 0 20px rgba(201,168,76,0.15);
+            position: relative;
+        }
+
+        .t-week {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .t-title {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--white);
+            margin: 8px 0 4px;
+        }
+
+        .t-desc {
+            font-size: 12px;
+            color: var(--gray-500);
+            line-height: 1.5;
+            max-width: 200px;
+            margin: 0 auto;
+        }
+
+        /* ============================== */
+        /*     SPECIAL: TRUST BADGES      */
+        /* ============================== */
+        .trust-row {
+            display: flex;
+            gap: 20px;
+            margin-top: 8px;
+            flex-wrap: wrap;
+        }
+
+        .trust-badge {
+            flex: 1;
+            min-width: 200px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 20px 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 14px;
+            opacity: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .trust-badge:hover {
+            transform: translateY(-3px);
+            border-color: rgba(201,168,76,0.3);
+        }
+
+        .active .trust-badge { animation: fadeUp 0.5s ease-out forwards; }
+        .active .trust-badge:nth-child(1) { animation-delay: 0.3s; }
+        .active .trust-badge:nth-child(2) { animation-delay: 0.4s; }
+        .active .trust-badge:nth-child(3) { animation-delay: 0.5s; }
+
+        .trust-badge .tb-icon {
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .trust-badge .tb-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--white);
+        }
+
+        .trust-badge .tb-text {
+            font-size: 12px;
+            color: var(--gray-500);
+            margin-top: 2px;
+        }
+
+        /* ============================== */
+        /*     SPECIAL: CTA SECTION       */
+        /* ============================== */
+        .cta-box {
+            text-align: center;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(201,168,76,0.08), rgba(201,168,76,0.02));
+            border: 2px solid rgba(201,168,76,0.2);
+            border-radius: 24px;
+            margin-top: 16px;
+            opacity: 0;
+        }
+
+        .active .cta-box { animation: scaleIn 0.7s 0.5s ease-out forwards; }
+
+        .cta-box .cta-title {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 8px;
+        }
+
+        .cta-box .cta-sub {
+            font-size: 16px;
+            color: var(--gray-400);
+            margin-bottom: 24px;
+        }
+
+        .cta-steps {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+        }
+
+        .cta-step {
+            text-align: center;
+        }
+
+        .cta-step .cs-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold);
+            color: var(--black);
+            font-weight: 800;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px;
+        }
+
+        .cta-step .cs-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gray-300);
+        }
+
+        /* ============================== */
+        /*     SPECIAL: QUOTE             */
+        /* ============================== */
+        .quote-block {
+            padding: 32px 36px;
+            background: rgba(201,168,76,0.06);
+            border-left: 4px solid var(--gold);
+            border-radius: 0 16px 16px 0;
+            margin: 20px 0;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--gray-300);
+            line-height: 1.7;
+            opacity: 0;
+        }
+
+        .active .quote-block { animation: fadeLeft 0.6s 0.4s ease-out forwards; }
+
+        .quote-block .q-author {
+            font-style: normal;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gold);
+            margin-top: 12px;
+            display: block;
+        }
+
+        /* ============================== */
+        /*     SPECIAL: STAT ROW          */
+        /* ============================== */
+        .stat-row {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+            padding: 24px 16px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            opacity: 0;
+        }
+
+        .active .stat-item { animation: scaleIn 0.5s ease-out forwards; }
+        .active .stat-item:nth-child(1) { animation-delay: 0.3s; }
+        .active .stat-item:nth-child(2) { animation-delay: 0.4s; }
+        .active .stat-item:nth-child(3) { animation-delay: 0.5s; }
+
+        .stat-item .si-val {
+            font-size: 36px;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-item .si-label {
+            font-size: 13px;
+            color: var(--gray-500);
+            margin-top: 4px;
+        }
+
+        /* ============================== */
+        /*     SPECIAL: PILLARS           */
+        /* ============================== */
+        .pillar-card {
+            text-align: center;
+            padding: 32px 24px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 16px;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .pillar-card:hover {
+            background: rgba(201,168,76,0.06);
+            border-color: rgba(201,168,76,0.25);
+            transform: translateY(-4px);
+        }
+
+        .active .pillar-card { animation: fadeUp 0.5s ease-out forwards; }
+        .active .pillar-card:nth-child(1) { animation-delay: 0.3s; }
+        .active .pillar-card:nth-child(2) { animation-delay: 0.4s; }
+        .active .pillar-card:nth-child(3) { animation-delay: 0.5s; }
+
+        .pillar-card .pc-icon {
+            font-size: 40px;
+            margin-bottom: 14px;
+            display: block;
+        }
+
+        .pillar-card h3 {
+            font-size: 17px;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+
+        .pillar-card p {
+            font-size: 13px;
+            color: var(--gray-500);
+            line-height: 1.6;
+        }
+
+        /* ============================== */
+        /*        SOLUTION LIST           */
+        /* ============================== */
+        .sol-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sol-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            padding: 14px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            font-size: 15px;
+            color: var(--gray-300);
+            opacity: 0;
+        }
+
+        .sol-list li:last-child { border-bottom: none; }
+
+        .active .sol-list li { animation: fadeLeft 0.4s ease-out forwards; }
+        .active .sol-list li:nth-child(1) { animation-delay: 0.3s; }
+        .active .sol-list li:nth-child(2) { animation-delay: 0.38s; }
+        .active .sol-list li:nth-child(3) { animation-delay: 0.46s; }
+        .active .sol-list li:nth-child(4) { animation-delay: 0.54s; }
+        .active .sol-list li:nth-child(5) { animation-delay: 0.62s; }
+
+        .sol-check {
+            width: 24px;
+            height: 24px;
+            border-radius: 8px;
+            background: rgba(22,163,74,0.15);
+            border: 1px solid rgba(22,163,74,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            flex-shrink: 0;
+            margin-top: 1px;
+            color: #4ade80;
+        }
+
+        .sol-list li strong {
+            color: var(--white);
+        }
+
+        /* ============================== */
+        /*       NAVIGATION               */
+        /* ============================== */
+        .nav-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 14px 32px;
+            background: rgba(26,26,26,0.92);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .nav-brand {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--gold);
+            letter-spacing: 1px;
+        }
+
+        .nav-center {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.15);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .nav-dot.active {
+            background: var(--gold);
+            box-shadow: 0 0 8px rgba(201,168,76,0.4);
+            transform: scale(1.3);
+        }
+
+        .nav-dot:hover {
+            background: rgba(201,168,76,0.5);
+        }
+
+        .nav-btns {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: var(--gray-400);
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            font-family: 'Inter', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--gold);
+            color: var(--black);
+            border-color: var(--gold);
+        }
+
+        .nav-counter {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--gray-500);
+            min-width: 50px;
+            text-align: center;
+        }
+
+        /* ============================== */
+        /*       TWO COLUMN LAYOUT        */
+        /* ============================== */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: start;
+        }
+
+        /* ============================== */
+        /*       ANIMATIONS               */
+        /* ============================== */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes scaleIn {
+            from { opacity: 0; transform: scale(0.92); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================== */
+        /*       RESPONSIVE               */
+        /* ============================== */
+        @media (max-width: 1024px) {
+            .slide { padding: 40px 32px 80px; }
+            .grid-3, .grid-4 { grid-template-columns: 1fr 1fr; }
+            .two-col { grid-template-columns: 1fr; }
+            .timeline { flex-direction: column; gap: 16px; }
+            .timeline::before { display: none; }
+            .t-dot { margin: 8px auto; }
+            .roi-big { flex-direction: column; text-align: center; }
+            .stat-row { flex-direction: column; }
+        }
+
+        @media (max-width: 600px) {
+            .slide { padding: 32px 20px 80px; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            .cta-steps { flex-direction: column; gap: 16px; }
+            .trust-row { flex-direction: column; }
+        }
+
+        @media print {
+            .nav-bar { display: none; }
+            .slide { position: relative; opacity: 1 !important; visibility: visible !important; transform: none !important; page-break-after: always; height: auto; min-height: 100vh; }
+            .glow-orb { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="deck" id="deck">
+
+<!-- ============================================================ -->
+<!-- SLIDE 1: TITELFOLIE                                          -->
+<!-- ============================================================ -->
+<div class="slide bg-dark active" data-slide="0">
+    <div class="glow-orb gold-tr"></div>
+    <div class="glow-orb gold-bl"></div>
+    <div class="slide-content">
+        <div class="slide-num">AI-Consulting &bull; Pilotprojekt 2026</div>
+        <div class="slide-title">
+            Ihre Mitarbeiterinnen<br>verdienen eine <span class="gold">KI-Kollegin.</span>
+        </div>
+        <div class="slide-subtitle">
+            Intelligente Automatisierung f&uuml;r den Mittelstand &mdash; entwickelt mit mathematischer Pr&auml;zision, gehostet auf eigenen Servern, 100 % DSGVO-konform.
+        </div>
+        <div class="stat-row">
+            <div class="stat-item">
+                <div class="si-val">25 %</div>
+                <div class="si-label">der Fachkraft-Stellen in NRW unbesetzt</div>
+            </div>
+            <div class="stat-item">
+                <div class="si-val">55+ Std.</div>
+                <div class="si-label">Wochenarbeitszeit in Spitzenzeiten</div>
+            </div>
+            <div class="stat-item">
+                <div class="si-val">60 %</div>
+                <div class="si-label">der Arbeitszeit = repetitive Administration</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 2: DAS PROBLEM                                         -->
+<!-- ============================================================ -->
+<div class="slide bg-graphite" data-slide="1">
+    <div class="glow-orb gold-tr"></div>
+    <div class="slide-content">
+        <div class="slide-num">01 &mdash; Das Problem</div>
+        <div class="slide-title">
+            Unsichtbare <span class="gold">Routinelast.</span>
+        </div>
+        <div class="slide-subtitle">
+            Was Ihre besten Mitarbeiterinnen t&auml;glich ausbremst &mdash; und warum es immer schlimmer wird.
+        </div>
+        <div class="pain-bar">
+            <span class="p-icon">&#128694;</span>
+            <span class="p-text"><strong>Fachkr&auml;ftemangel:</strong> Offene Stellen bleiben Monate unbesetzt. Die vorhandenen Kr&auml;fte kompensieren &mdash; bis sie selbst gehen.</span>
+        </div>
+        <div class="pain-bar">
+            <span class="p-icon">&#128293;</span>
+            <span class="p-text"><strong>Burnout-Spirale:</strong> Steuerfachangestellte, B&uuml;roleiterinnen, Ehrenamtliche &mdash; Frauen tragen die operative Last und zahlen den h&ouml;chsten Preis.</span>
+        </div>
+        <div class="pain-bar">
+            <span class="p-icon">&#128451;</span>
+            <span class="p-text"><strong>Informationschaos:</strong> Belege in E-Mails, Daten in Excel, Fotos in WhatsApp &mdash; nichts ist verkn&uuml;pft. Jede Suche kostet 15 Min.</span>
+        </div>
+        <div class="pain-bar">
+            <span class="p-icon">&#128683;</span>
+            <span class="p-text"><strong>Wachstumsblockade:</strong> Sie k&ouml;nnten mehr Kunden / Mandate / Mitglieder betreuen &mdash; aber die Verwaltung skaliert nicht mit.</span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 3: UNSERE MISSION                                      -->
+<!-- ============================================================ -->
+<div class="slide bg-dark" data-slide="2">
+    <div class="glow-orb gold-c"></div>
+    <div class="slide-content">
+        <div class="slide-num">02 &mdash; Unsere Mission</div>
+        <div class="slide-title">
+            Menschen von <span class="gold">unsichtbarer Routine</span> befreien.
+        </div>
+        <div class="slide-subtitle">
+            Wir bauen KI-Agenten, die repetitive Aufgaben &uuml;bernehmen &mdash; damit Ihre Mitarbeiterinnen das tun k&ouml;nnen, wof&uuml;r sie ausgebildet wurden.
+        </div>
+        <div class="quote-block">
+            &laquo;Ich habe als Mathematikerin gelernt, komplexe Systeme auf ihre Essenz zu reduzieren. Genau das tue ich jetzt mit Ihren Gesch&auml;ftsprozessen &mdash; ich finde die Muster in Ihrer Routine und &uuml;bergebe sie an intelligente Algorithmen.&raquo;
+            <span class="q-author">&mdash; Gr&uuml;nderin, PhD Algebraische Geometrie</span>
+        </div>
+        <div class="trust-row">
+            <div class="trust-badge">
+                <span class="tb-icon">&#127891;</span>
+                <div>
+                    <div class="tb-title">PhD Mathematik</div>
+                    <div class="tb-text">Algebraische Geometrie &mdash; logische Pr&auml;zision als Fundament</div>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <span class="tb-icon">&#128421;</span>
+                <div>
+                    <div class="tb-title">Eigene Server</div>
+                    <div class="tb-text">Infrastruktur in Deutschland &mdash; keine US-Cloud-Abh&auml;ngigkeit</div>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <span class="tb-icon">&#128156;</span>
+                <div>
+                    <div class="tb-title">Frauen-Fokus</div>
+                    <div class="tb-text">KI als Unterst&uuml;tzung &mdash; gegen Burnout in B&uuml;ro &amp; Ehrenamt</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 4: DATENSCHUTZ & PhD-GARANTIE                          -->
+<!-- ============================================================ -->
+<div class="slide bg-gold-dark" data-slide="3">
+    <div class="glow-orb gold-tr"></div>
+    <div class="glow-orb gold-bl"></div>
+    <div class="slide-content">
+        <div class="slide-num">03 &mdash; Datenschutz &amp; Vertrauen</div>
+        <div class="slide-title">
+            PhD-Garantie:<br><span class="gold">Mathematisch sicher.</span>
+        </div>
+        <div class="slide-subtitle">
+            Warum ein PhD in Mathematik Ihre beste Datenschutz-Versicherung ist.
+        </div>
+        <div class="grid-3">
+            <div class="pillar-card">
+                <span class="pc-icon">&#128272;</span>
+                <h3>DSGVO by Design</h3>
+                <p>Datenschutz ist kein Nachgedanke, sondern Architektur-Prinzip. Jedes System wird von Grund auf DSGVO-konform entworfen &mdash; mathematisch verifizierbar.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pc-icon">&#128421;</span>
+                <h3>Eigene Infrastruktur</h3>
+                <p>Ihre Daten verlassen niemals unsere Server in Deutschland. Keine US-Cloud, kein Drittland-Transfer, keine Abh&auml;ngigkeit von Big Tech.</p>
+            </div>
+            <div class="pillar-card">
+                <span class="pc-icon">&#128300;</span>
+                <h3>Logische Korrektheit</h3>
+                <p>Ein PhD in algebraischer Geometrie trainiert, Fehler in komplexen Systemen zu finden. Ihre KI-Agenten werden systematisch getestet &mdash; nicht nur ausprobiert.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 5: UNSERE LÖSUNG                                       -->
+<!-- ============================================================ -->
+<div class="slide bg-dark" data-slide="4">
+    <div class="glow-orb gold-bl"></div>
+    <div class="slide-content">
+        <div class="slide-num">04 &mdash; Unsere L&ouml;sung</div>
+        <div class="slide-title">
+            KI-Agenten, die <span class="gold">wirklich arbeiten.</span>
+        </div>
+        <div class="slide-subtitle">
+            Ma&szlig;geschneiderte Automatisierung &mdash; kein Standardprodukt, sondern Ihr individueller digitaler Assistent.
+        </div>
+        <div class="two-col">
+            <div>
+                <ul class="sol-list">
+                    <li>
+                        <span class="sol-check">&#10003;</span>
+                        <span><strong>RAG-Wissensbasis</strong> &mdash; Ihr gesamtes Firmenwissen, sofort durchsuchbar. Vom Steuerrecht bis zur Vereinssatzung.</span>
+                    </li>
+                    <li>
+                        <span class="sol-check">&#10003;</span>
+                        <span><strong>n8n-Workflows</strong> &mdash; Automatisierte Prozesse f&uuml;r Belegerfassung, Rechnungen, Angebote, Mahnungen und Mitgliederverwaltung.</span>
+                    </li>
+                    <li>
+                        <span class="sol-check">&#10003;</span>
+                        <span><strong>KI-Chatbots</strong> &mdash; 24/7-Erreichbarkeit f&uuml;r Mandanten, Kunden oder Mitglieder &mdash; ohne Ihre Mitarbeiterinnen zu belasten.</span>
+                    </li>
+                    <li>
+                        <span class="sol-check">&#10003;</span>
+                        <span><strong>Dokumenten-KI</strong> &mdash; Automatische Erkennung, Klassifizierung und Verarbeitung eingehender Dokumente.</span>
+                    </li>
+                    <li>
+                        <span class="sol-check">&#10003;</span>
+                        <span><strong>Nahtlose Integration</strong> &mdash; Anbindung an DATEV, ERP-Systeme, E-Mail und bestehende Software.</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="grid-2" style="gap: 14px;">
+                <div class="s-card">
+                    <div class="s-card-icon">&#9878;</div>
+                    <h3>Steuerkanzleien</h3>
+                    <p>Belegerfassung, Mandanten-Bot, Fristenmanagement</p>
+                </div>
+                <div class="s-card">
+                    <div class="s-card-icon">&#9881;</div>
+                    <h3>Handwerk</h3>
+                    <p>Angebots-KI, WhatsApp-Bot, digitale Bauakte</p>
+                </div>
+                <div class="s-card">
+                    <div class="s-card-icon">&#9829;</div>
+                    <h3>Vereine</h3>
+                    <p>F&ouml;rder-RAG, Mitglieder-Bot, Event-Workflows</p>
+                </div>
+                <div class="s-card">
+                    <div class="s-card-icon">&#128736;</div>
+                    <h3>Individuell</h3>
+                    <p>Jede L&ouml;sung wird exakt auf Ihren Betrieb zugeschnitten</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 6: ROI & WIRTSCHAFTLICHKEIT                            -->
+<!-- ============================================================ -->
+<div class="slide bg-graphite" data-slide="5">
+    <div class="glow-orb gold-tr"></div>
+    <div class="glow-orb gold-bl"></div>
+    <div class="slide-content">
+        <div class="slide-num">05 &mdash; ROI &amp; Wirtschaftlichkeit</div>
+        <div class="slide-title">
+            Investition <span class="gold">10.000 &euro;</span>.<br>Ersparnis <span class="gold">1&ndash;2 Stellen.</span>
+        </div>
+        <div class="slide-subtitle">
+            Ihre Investition rechnet sich innerhalb von 4&ndash;6 Monaten &mdash; konservativ gerechnet.
+        </div>
+        <div class="two-col">
+            <div>
+                <table class="roi-table">
+                    <thead>
+                        <tr>
+                            <th>Position</th>
+                            <th>Wert</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Pilotprojekt (einmalig)</td>
+                            <td class="val">10.000 &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Retainer / Monat</td>
+                            <td class="val">1.200 &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Kosten Jahr 1 (gesamt)</td>
+                            <td class="val">24.400 &euro;</td>
+                        </tr>
+                        <tr>
+                            <td>Personalkosten 1 Vollzeitkraft/Jahr</td>
+                            <td class="val">45.000&ndash;55.000 &euro;</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><strong>Netto-Ersparnis Jahr 1</strong></td>
+                            <td class="val">20.600&ndash;30.600 &euro;</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div class="roi-big">
+                    <div class="roi-number">3&ndash;5x</div>
+                    <div class="roi-label">
+                        <strong>Return on Investment</strong>
+                        &uuml;ber 3 Jahre gerechnet &mdash; ohne Ber&uuml;cksichtigung von Qualit&auml;tsverbesserung, weniger Fehlern und h&ouml;herer Mitarbeiterzufriedenheit.
+                    </div>
+                </div>
+                <div class="roi-big">
+                    <div class="roi-number" style="font-size: clamp(36px,5vw,56px);">70 %</div>
+                    <div class="roi-label">
+                        <strong>Zeitersparnis</strong>
+                        bei repetitiven Aufgaben &mdash; Belegerfassung, Angebotserstellung, Mitgliederverwaltung und Standardanfragen.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 7: PILOTPROJEKT-ABLAUF                                 -->
+<!-- ============================================================ -->
+<div class="slide bg-dark" data-slide="6">
+    <div class="glow-orb gold-c"></div>
+    <div class="slide-content">
+        <div class="slide-num">06 &mdash; Pilotprojekt-Ablauf</div>
+        <div class="slide-title">
+            In <span class="gold">8 Wochen</span> zum ersten Ergebnis.
+        </div>
+        <div class="slide-subtitle">
+            Unser bew&auml;hrter Prozess &mdash; transparent, iterativ, mit Ihrem Team abgestimmt.
+        </div>
+        <div class="timeline">
+            <div class="t-step">
+                <div class="t-week">Woche 1&ndash;2</div>
+                <div class="t-dot"></div>
+                <div class="t-title">Analyse &amp; Mapping</div>
+                <div class="t-desc">Prozessaufnahme vor Ort. Interviews mit Mitarbeiterinnen. Identifikation der Top-3-Automatisierungspotenziale.</div>
+            </div>
+            <div class="t-step">
+                <div class="t-week">Woche 3&ndash;4</div>
+                <div class="t-dot"></div>
+                <div class="t-title">Prototyping</div>
+                <div class="t-desc">Erster funktionsf&auml;higer KI-Agent. Live-Demo mit Ihren echten Daten (auf unseren Servern).</div>
+            </div>
+            <div class="t-step">
+                <div class="t-week">Woche 5&ndash;6</div>
+                <div class="t-dot"></div>
+                <div class="t-title">Integration &amp; Test</div>
+                <div class="t-desc">Anbindung an Ihre Systeme. Testphase mit 2&ndash;3 Mitarbeiterinnen. Feedback-Schleifen und Feintuning.</div>
+            </div>
+            <div class="t-step">
+                <div class="t-week">Woche 7&ndash;8</div>
+                <div class="t-dot"></div>
+                <div class="t-title">Go-Live &amp; Schulung</div>
+                <div class="t-desc">Rollout f&uuml;r das gesamte Team. Schulung. &Uuml;bergabe der Dokumentation. Start des Retainer-Supports.</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 8: TECHNOLOGIE-STACK                                   -->
+<!-- ============================================================ -->
+<div class="slide bg-graphite" data-slide="7">
+    <div class="glow-orb gold-tr"></div>
+    <div class="slide-content">
+        <div class="slide-num">07 &mdash; Technologie</div>
+        <div class="slide-title">
+            Bew&auml;hrte Technik.<br><span class="gold">Keine Experimente</span> mit Ihren Daten.
+        </div>
+        <div class="slide-subtitle">
+            Unser Stack basiert auf Open-Source-Technologien und eigener Infrastruktur &mdash; kein Vendor Lock-in.
+        </div>
+        <div class="grid-4">
+            <div class="s-card">
+                <div class="s-card-icon">&#129302;</div>
+                <h3>KI-Agenten</h3>
+                <p>Custom LLM-Agenten mit RAG-Architektur. Trainiert auf Ihre Fachdom&auml;ne, nicht auf das gesamte Internet.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-card-icon">&#128256;</div>
+                <h3>RAG-System</h3>
+                <p>Retrieval-Augmented Generation: Ihre Dokumente werden zur Wissensbasis &mdash; pr&auml;zise Antworten statt Halluzinationen.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-card-icon">&#9881;</div>
+                <h3>n8n-Workflows</h3>
+                <p>Visuelle Prozess-Automatisierung. 400+ Integrationen. Self-hosted auf unseren Servern.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-card-icon">&#128421;</div>
+                <h3>Eigene Server</h3>
+                <p>Deutsche Infrastruktur. Volle Kontrolle &uuml;ber Ihre Daten. Kein Transfer in Drittl&auml;nder. TLS-verschl&uuml;sselt.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 9: WARUM WIR                                           -->
+<!-- ============================================================ -->
+<div class="slide bg-dark" data-slide="8">
+    <div class="glow-orb gold-bl"></div>
+    <div class="glow-orb gold-tr"></div>
+    <div class="slide-content">
+        <div class="slide-num">08 &mdash; Warum wir</div>
+        <div class="slide-title">
+            Kein IT-Konzern.<br><span class="gold">Ihre Partnerin</span> vor Ort.
+        </div>
+        <div class="slide-subtitle">
+            Was uns von gro&szlig;en Beratungsh&auml;usern und SaaS-Anbietern unterscheidet.
+        </div>
+        <div class="grid-3">
+            <div class="s-card">
+                <div class="s-card-icon">&#127891;</div>
+                <h3>PhD-Expertise</h3>
+                <p>Mathematische Pr&auml;zision in jeder Systemarchitektur. Keine Blackbox &mdash; jede Entscheidung ist nachvollziehbar und erkl&auml;rbar.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-card-icon">&#128205;</div>
+                <h3>Lokal in OWL</h3>
+                <p>Pers&ouml;nliche Betreuung vor Ort. Workshops in Ihren R&auml;umen. Kurze Wege, schnelle Reaktion, echtes Verst&auml;ndnis f&uuml;r die Region.</p>
+            </div>
+            <div class="s-card">
+                <div class="s-card-icon">&#128156;</div>
+                <h3>Menschen-zentriert</h3>
+                <p>Unsere Mission: Mitarbeiterinnen entlasten, nicht ersetzen. Wir h&ouml;ren zu, bevor wir automatisieren. Jede L&ouml;sung wird mit Ihrem Team entwickelt.</p>
+            </div>
+        </div>
+        <div class="quote-block" style="margin-top:24px;">
+            &laquo;Gro&szlig;e Berater verkaufen Ihnen ein Produkt. Wir h&ouml;ren Ihren Mitarbeiterinnen zu und bauen genau das, was sie brauchen &mdash; nicht mehr und nicht weniger.&raquo;
+            <span class="q-author">&mdash; Unser Versprechen</span>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================ -->
+<!-- SLIDE 10: CALL TO ACTION                                     -->
+<!-- ============================================================ -->
+<div class="slide bg-gold-dark" data-slide="9">
+    <div class="glow-orb gold-tr"></div>
+    <div class="glow-orb gold-bl"></div>
+    <div class="glow-orb gold-c"></div>
+    <div class="slide-content" style="text-align:center; display:flex; flex-direction:column; align-items:center;">
+        <div class="slide-num">N&auml;chster Schritt</div>
+        <div class="slide-title" style="max-width:800px;">
+            Starten wir <span class="gold">gemeinsam.</span>
+        </div>
+        <div class="slide-subtitle" style="text-align:center; margin-left:auto; margin-right:auto;">
+            Ein unverbindliches Erstgespr&auml;ch &mdash; 30 Minuten, bei Ihnen vor Ort oder digital. Kein Verkaufsdruck, sondern eine ehrliche Analyse Ihres Automatisierungs-Potenzials.
+        </div>
+        <div class="cta-box">
+            <div class="cta-title">Ihr Weg zum Pilotprojekt</div>
+            <div class="cta-sub">Drei einfache Schritte &mdash; vom Erstgespr&auml;ch bis zum ersten KI-Agenten.</div>
+            <div class="cta-steps">
+                <div class="cta-step">
+                    <div class="cs-num">1</div>
+                    <div class="cs-label">Kostenfreies<br>Erstgespr&auml;ch</div>
+                </div>
+                <div class="cta-step">
+                    <div class="cs-num">2</div>
+                    <div class="cs-label">Prozess-Analyse<br>vor Ort</div>
+                </div>
+                <div class="cta-step">
+                    <div class="cs-num">3</div>
+                    <div class="cs-label">Pilotprojekt<br>in 8 Wochen</div>
+                </div>
+            </div>
+        </div>
+        <div class="trust-row" style="margin-top:28px; justify-content:center;">
+            <div class="trust-badge">
+                <span class="tb-icon">&#128272;</span>
+                <div>
+                    <div class="tb-title">100 % DSGVO</div>
+                    <div class="tb-text">Eigene Server in DE</div>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <span class="tb-icon">&#128176;</span>
+                <div>
+                    <div class="tb-title">Ab 5.000 &euro;</div>
+                    <div class="tb-text">Transparente Festpreise</div>
+                </div>
+            </div>
+            <div class="trust-badge">
+                <span class="tb-icon">&#127891;</span>
+                <div>
+                    <div class="tb-title">PhD-Qualit&auml;t</div>
+                    <div class="tb-text">Mathematische Pr&auml;zision</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /deck -->
+
+<!-- ============================== -->
+<!-- NAVIGATION BAR                 -->
+<!-- ============================== -->
+<div class="nav-bar">
+    <div class="nav-brand">AI-CONSULTING OWL</div>
+    <div class="nav-center" id="navDots"></div>
+    <div class="nav-btns">
+        <button class="nav-btn" onclick="prevSlide()" title="Zur&uuml;ck">&#8592;</button>
+        <span class="nav-counter" id="counter">1 / 10</span>
+        <button class="nav-btn" onclick="nextSlide()" title="Weiter">&#8594;</button>
+    </div>
+</div>
+
+<script>
+    var current = 0;
+    var total = 10;
+    var slides = document.querySelectorAll('.slide');
+    var dotsContainer = document.getElementById('navDots');
+    var counter = document.getElementById('counter');
+    var isAnimating = false;
+
+    // Create dots
+    for (var i = 0; i < total; i++) {
+        var dot = document.createElement('div');
+        dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+        dot.setAttribute('data-index', i);
+        dot.addEventListener('click', function() {
+            goToSlide(parseInt(this.getAttribute('data-index')));
+        });
+        dotsContainer.appendChild(dot);
+    }
+
+    function goToSlide(n) {
+        if (n === current || isAnimating || n < 0 || n >= total) return;
+        isAnimating = true;
+
+        var oldSlide = slides[current];
+        var newSlide = slides[n];
+
+        // Reset animations on the new slide's children
+        var animated = newSlide.querySelectorAll('.slide-num, .slide-title, .slide-subtitle, .s-card, .pain-bar, .trust-badge, .stat-item, .pillar-card, .sol-list li, .t-step, .roi-table, .roi-big, .quote-block, .cta-box');
+        animated.forEach(function(el) {
+            el.style.animation = 'none';
+            el.offsetHeight;
+            el.style.animation = '';
+        });
+
+        // Direction
+        if (n > current) {
+            newSlide.style.transform = 'translateX(60px)';
+            oldSlide.classList.remove('active');
+            oldSlide.classList.add('prev');
+        } else {
+            newSlide.style.transform = 'translateX(-60px)';
+            oldSlide.classList.remove('active');
+            oldSlide.style.transform = 'translateX(60px)';
+            oldSlide.style.opacity = '0';
+        }
+
+        setTimeout(function() {
+            newSlide.classList.add('active');
+            newSlide.style.transform = '';
+        }, 30);
+
+        // Cleanup old
+        setTimeout(function() {
+            oldSlide.classList.remove('prev');
+            oldSlide.style.transform = '';
+            oldSlide.style.opacity = '';
+            isAnimating = false;
+        }, 750);
+
+        current = n;
+        updateUI();
+    }
+
+    function nextSlide() {
+        if (current < total - 1) goToSlide(current + 1);
+    }
+
+    function prevSlide() {
+        if (current > 0) goToSlide(current - 1);
+    }
+
+    function updateUI() {
+        counter.textContent = (current + 1) + ' / ' + total;
+        var dots = dotsContainer.querySelectorAll('.nav-dot');
+        dots.forEach(function(d, i) {
+            d.classList.toggle('active', i === current);
+        });
+    }
+
+    // Keyboard
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); nextSlide(); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); prevSlide(); }
+        if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+        if (e.key === 'End') { e.preventDefault(); goToSlide(total - 1); }
+    });
+
+    // Touch swipe
+    var touchStartX = 0;
+    document.addEventListener('touchstart', function(e) {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+
+    document.addEventListener('touchend', function(e) {
+        var diff = touchStartX - e.changedTouches[0].screenX;
+        if (Math.abs(diff) > 60) {
+            if (diff > 0) nextSlide();
+            else prevSlide();
+        }
+    }, { passive: true });
+</script>
+
+</body>
+</html>
