@@ -665,8 +665,8 @@
             width: 20px;
             height: 20px;
             border-radius: 6px;
-            background: rgba(22,163,74,0.1);
-            color: var(--green-dark);
+            background: var(--gold-glow);
+            color: var(--gold);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -804,6 +804,9 @@
         .case-result-icon {
             font-size: 18px;
             flex-shrink: 0;
+            color: var(--gold);
+            display: flex;
+            align-items: center;
         }
 
         /* ============================================= */
@@ -919,6 +922,7 @@
             justify-content: center;
             font-size: 16px;
             flex-shrink: 0;
+            color: var(--gold);
         }
 
         /* ============================================= */
@@ -958,6 +962,7 @@
             justify-content: center;
             font-size: 24px;
             flex-shrink: 0;
+            color: var(--gold);
         }
 
         .adv-content h3 {
@@ -1198,6 +1203,12 @@
             color: var(--gold);
         }
 
+        .footer-social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
         .footer-copy {
             text-align: center;
             font-size: 12px;
@@ -1205,6 +1216,174 @@
             margin-top: 32px;
             padding-top: 24px;
             border-top: 1px solid rgba(255,255,255,0.04);
+        }
+
+        /* ============================================= */
+        /*  PAKETE (PACKAGES)                            */
+        /* ============================================= */
+        .pakete-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            align-items: start;
+        }
+
+        .paket-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 36px 32px;
+            border: 1px solid var(--gray-200);
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+        }
+
+        .paket-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+        }
+
+        .paket-card--featured {
+            border: 2px solid var(--gold);
+            box-shadow: 0 8px 40px rgba(201,168,76,0.12);
+        }
+
+        .paket-card--featured:hover {
+            box-shadow: 0 20px 60px rgba(201,168,76,0.18);
+        }
+
+        .paket-beliebt {
+            position: absolute;
+            top: 18px;
+            right: -35px;
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 6px 44px;
+            transform: rotate(45deg);
+        }
+
+        .paket-badge {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            padding: 5px 14px;
+            border-radius: 6px;
+            border: 1px solid var(--gray-200);
+            color: var(--gray-600);
+            margin-bottom: 24px;
+        }
+
+        .paket-card--featured .paket-badge {
+            border-color: rgba(201,168,76,0.3);
+            color: var(--gold-dark);
+            background: var(--gold-glow);
+        }
+
+        .paket-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: var(--gold-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--gold);
+            margin-bottom: 20px;
+        }
+
+        .paket-title {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--graphite);
+            margin-bottom: 10px;
+        }
+
+        .paket-desc {
+            font-size: 14px;
+            color: var(--gray-600);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .paket-list {
+            list-style: none;
+            margin-bottom: 28px;
+        }
+
+        .paket-list li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 7px 0;
+            font-size: 14px;
+            color: var(--gray-700);
+        }
+
+        .paket-check {
+            width: 18px;
+            height: 18px;
+            border-radius: 5px;
+            background: var(--gold-glow);
+            color: var(--gold);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            flex-shrink: 0;
+        }
+
+        .paket-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 14px 24px;
+            border-radius: 12px;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.35s ease;
+            border: none;
+        }
+
+        .paket-btn--outline {
+            background: transparent;
+            border: 2px solid var(--gray-200);
+            color: var(--graphite);
+        }
+
+        .paket-btn--outline:hover {
+            border-color: var(--gold);
+            color: var(--gold-dark);
+            transform: translateY(-2px);
+        }
+
+        .paket-btn--gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-dark));
+            color: var(--black);
+            box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+        }
+
+        .paket-btn--gold:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+        }
+
+        .paket-btn--dark {
+            background: var(--graphite);
+            color: var(--white);
+        }
+
+        .paket-btn--dark:hover {
+            background: var(--black);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
         }
 
         /* ============================================= */
@@ -1234,6 +1413,7 @@
             .cta-grid { grid-template-columns: 1fr; }
             .skills-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-stats { gap: 28px; }
+            .pakete-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
         }
 
         @media (max-width: 768px) {
@@ -1297,6 +1477,7 @@
             <li><a href="#referenzen">Referenzen</a></li>
             <li><a href="#ueber-mich">&Uuml;ber mich</a></li>
             <li><a href="#vorteile">Vorteile</a></li>
+            <li><a href="#pakete">Pakete</a></li>
             <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
         </ul>
         <button class="nav-toggle" id="navToggle" aria-label="Men&uuml; &ouml;ffnen">
@@ -1451,19 +1632,19 @@
                 <p><strong>L&ouml;sung:</strong> Entwicklung einer integrierten Automatisierungsl&ouml;sung mit n8n-Workflows und RAG-basiertem KI-Agenten. Die Infrastruktur l&auml;uft Self-Hosted auf dediziertem Server ohne externe Datentransfers.</p>
                 <div class="case-results">
                     <div class="case-result-item">
-                        <span class="case-result-icon">&#9201;</span>
+                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
                         Bis zu 60 % Zeitersparnis
                     </div>
                     <div class="case-result-item">
-                        <span class="case-result-icon">&#128218;</span>
+                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
                         Über 100+ Automatisierungen
                     </div>
                     <div class="case-result-item">
-                        <span class="case-result-icon">&#128272;</span>
+                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
                         Self-Hosted, DSGVO-konform
                     </div>
                     <div class="case-result-item">
-                        <span class="case-result-icon">&#128640;</span>
+                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg></span>
                         DMS-Optimierung
                     </div>
                 </div>
@@ -1506,27 +1687,27 @@
                 </p>
                 <div class="skills-grid">
                     <div class="skill-item reveal delay-1">
-                        <div class="skill-icon">&#9881;</div>
+                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
                         Workflow-Automatisierung (n8n)
                     </div>
                     <div class="skill-item reveal delay-2">
-                        <div class="skill-icon">&#129302;</div>
+                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></svg></div>
                         KI-Agenten und RAG-Systeme
                     </div>
                     <div class="skill-item reveal delay-3">
-                        <div class="skill-icon">&#128272;</div>
+                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                         Self-Hosting und DSGVO
                     </div>
                     <div class="skill-item reveal delay-4">
-                        <div class="skill-icon">&#128200;</div>
+                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
                         Prozessanalyse und -optimierung
                     </div>
                     <div class="skill-item reveal delay-5">
-                        <div class="skill-icon">&#128268;</div>
+                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
                         API-Integrationen
                     </div>
                     <div class="skill-item reveal delay-5">
-                        <div class="skill-icon">&#128300;</div>
+                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
                         Qualit&auml;tssicherung f&uuml;r KI
                     </div>
                 </div>
@@ -1551,46 +1732,124 @@
         </div>
         <div class="adv-grid">
             <div class="adv-card reveal delay-1">
-                <div class="adv-icon">&#128272;</div>
+                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
                 <div class="adv-content">
                     <h3>DSGVO by Design</h3>
                     <p>Datenschutz ist Architekturprinzip, kein Nachgedanke. Alle Systeme laufen auf eigenen Servern in Deutschland &mdash; ohne US-Cloud-Abh&auml;ngigkeit.</p>
                 </div>
             </div>
             <div class="adv-card reveal delay-2">
-                <div class="adv-icon">&#127891;</div>
+                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
                 <div class="adv-content">
                     <h3>Wissenschaftliche Pr&auml;zision</h3>
                     <p>Ein PhD in Mathematik bedeutet: analytisches Denken, logisch einwandfreie Systemarchitektur und systematisches Testen statt Trial-and-Error.</p>
                 </div>
             </div>
             <div class="adv-card reveal delay-3">
-                <div class="adv-icon">&#128205;</div>
+                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
                 <div class="adv-content">
                     <h3>Lokal in OWL</h3>
                     <p>Pers&ouml;nliche Betreuung vor Ort. Workshops in Ihren R&auml;umen. Kurze Wege, schnelle Reaktion und echtes Verst&auml;ndnis f&uuml;r die Region.</p>
                 </div>
             </div>
             <div class="adv-card reveal delay-4">
-                <div class="adv-icon">&#128736;</div>
+                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
                 <div class="adv-content">
                     <h3>Kein Vendor Lock-in</h3>
                     <p>Open-Source-Technologien (n8n, Qdrant) und eigene Infrastruktur &mdash; Sie behalten die volle Kontrolle &uuml;ber Ihre Daten und Systeme.</p>
                 </div>
             </div>
             <div class="adv-card reveal delay-3">
-                <div class="adv-icon">&#128640;</div>
+                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
                 <div class="adv-content">
                     <h3>Schnelle Ergebnisse</h3>
                     <p>Vom Erstgespr&auml;ch zum produktiven Piloten in 4&ndash;6 Wochen. Jede Phase liefert eigenst&auml;ndig Mehrwert &mdash; kein monatelanges Warten.</p>
                 </div>
             </div>
             <div class="adv-card reveal delay-4">
-                <div class="adv-icon">&#128156;</div>
+                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
                 <div class="adv-content">
                     <h3>Menschen im Fokus</h3>
                     <p>KI als Unterst&uuml;tzung f&uuml;r Ihr Team, nicht als Ersatz. Praxisnahe Schulungen und L&ouml;sungen, die in den Arbeitsalltag passen.</p>
                 </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ================================== -->
+<!--  PAKETE                            -->
+<!-- ================================== -->
+<section class="section section-pearl" id="pakete">
+    <div class="container">
+        <div class="reveal">
+            <div class="section-label">
+                <span class="section-label-line"></span> Unsere Leistungen
+            </div>
+            <div class="section-title">Drei Pakete f&uuml;r <span class="gold">Ihr Wachstum.</span></div>
+            <p class="section-desc">
+                Von der Markenentwicklung bis zur automatisierten Kundengewinnung &mdash; w&auml;hlen Sie das Paket, das zu Ihnen passt.
+            </p>
+        </div>
+        <div class="pakete-grid">
+            <!-- Starter -->
+            <div class="paket-card reveal delay-1">
+                <div class="paket-badge">Starter</div>
+                <div class="paket-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 10-10 10L2 12z"/></svg>
+                </div>
+                <h3 class="paket-title">Digital Kickstart</h3>
+                <p class="paket-desc">Ihr professioneller Marktauftritt &mdash; Branding, One-Page-Website und Basis-Automatisierung.</p>
+                <ul class="paket-list">
+                    <li><span class="paket-check">&#10003;</span> Markenpositionierung &amp; Logo</li>
+                    <li><span class="paket-check">&#10003;</span> Corporate-Design-Grundlagen</li>
+                    <li><span class="paket-check">&#10003;</span> One-Page-Landingpage (responsive)</li>
+                    <li><span class="paket-check">&#10003;</span> Basis-SEO &amp; Kontaktformular</li>
+                    <li><span class="paket-check">&#10003;</span> E-Mail-Autoresponder</li>
+                    <li><span class="paket-check">&#10003;</span> 1 Workflow-Automatisierung</li>
+                </ul>
+                <a href="#kontakt" class="paket-btn paket-btn--outline">Paket anfragen</a>
+            </div>
+            <!-- Business (Featured) -->
+            <div class="paket-card paket-card--featured reveal delay-2">
+                <div class="paket-beliebt">Beliebt</div>
+                <div class="paket-badge">Business</div>
+                <div class="paket-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                </div>
+                <h3 class="paket-title">Growth Engine</h3>
+                <p class="paket-desc">Kompletter digitaler Vertriebskanal mit KI-Chatbot, CRM und LinkedIn-Lead-Funnel.</p>
+                <ul class="paket-list">
+                    <li><span class="paket-check">&#10003;</span> Markt- &amp; Wettbewerbsanalyse</li>
+                    <li><span class="paket-check">&#10003;</span> Vollst&auml;ndige Markenidentit&auml;t</li>
+                    <li><span class="paket-check">&#10003;</span> Multi-Page-Website (5 Seiten)</li>
+                    <li><span class="paket-check">&#10003;</span> Conversion-optimierte Landingpage</li>
+                    <li><span class="paket-check">&#10003;</span> CRM + 5 Automatisierungen</li>
+                    <li><span class="paket-check">&#10003;</span> KI-Chatbot &amp; LinkedIn-Funnel</li>
+                    <li><span class="paket-check">&#10003;</span> E-Mail-Marketing-Automation</li>
+                    <li><span class="paket-check">&#10003;</span> SEO + Onboarding &amp; Schulung</li>
+                </ul>
+                <a href="#kontakt" class="paket-btn paket-btn--gold">Beratungsgespr&auml;ch buchen</a>
+            </div>
+            <!-- Enterprise -->
+            <div class="paket-card reveal delay-3">
+                <div class="paket-badge">Enterprise</div>
+                <div class="paket-icon">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                </div>
+                <h3 class="paket-title">Scale System</h3>
+                <p class="paket-desc">Vollst&auml;ndige Digitalisierung mit unbegrenzten Seiten, KI-Telefonassistent und 3 Monaten Support.</p>
+                <ul class="paket-list">
+                    <li><span class="paket-check">&#10003;</span> Premium-Markenidentit&auml;t &amp; GTM</li>
+                    <li><span class="paket-check">&#10003;</span> Vollst&auml;ndige Website (unbegrenzt)</li>
+                    <li><span class="paket-check">&#10003;</span> Landingpages mit A/B-Testing</li>
+                    <li><span class="paket-check">&#10003;</span> Blog &amp; Kundenportal</li>
+                    <li><span class="paket-check">&#10003;</span> Unbegrenzte Automatisierungen</li>
+                    <li><span class="paket-check">&#10003;</span> KI-Chatbot + Telefonassistent</li>
+                    <li><span class="paket-check">&#10003;</span> Multi-Channel Lead-Funnel</li>
+                    <li><span class="paket-check">&#10003;</span> KPI-Dashboard &amp; 3 Mo. Support</li>
+                </ul>
+                <a href="#kontakt" class="paket-btn paket-btn--dark">Individuelle Beratung</a>
             </div>
         </div>
     </div>
@@ -1687,6 +1946,7 @@
                 <li><a href="#">Impressum</a></li>
                 <li><a href="#">Datenschutz</a></li>
                 <li><a href="mailto:lesyab@gmx.de">lesyab@gmx.de</a></li>
+                <li><a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg> LinkedIn</a></li>
             </ul>
         </div>
         <div class="footer-copy">
