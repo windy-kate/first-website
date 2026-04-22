@@ -1425,22 +1425,27 @@
             .nav-toggle { display: block;
              }
 
+            .nav.menu-open {
+                height: 100vh;
+                height: 100dvh;
+                background: var(--black);
+                backdrop-filter: none;
+                -webkit-backdrop-filter: none;
+            }
+
             .nav-links.open {
                 display: flex;
                 flex-direction: column;
-                position: fixed;
+                position: absolute;
                 top: 0;
                 left: 0;
                 right: 0;
                 bottom: 0;
-                background: rgba(17,17,17,0.98);
-                backdrop-filter: blur(20px);
-                -webkit-backdrop-filter: blur(20px);
+                background: var(--black);
                 justify-content: center;
                 align-items: center;
                 gap: 28px;
                 z-index: 999;
-                
             }
 
             .nav-links.open a {
@@ -1999,12 +2004,14 @@
     toggle.addEventListener('click', function() {
         toggle.classList.toggle('open');
         links.classList.toggle('open');
+        nav.classList.toggle('menu-open');
     });
 
     links.querySelectorAll('a').forEach(function(a) {
         a.addEventListener('click', function() {
             toggle.classList.remove('open');
             links.classList.remove('open');
+            nav.classList.remove('menu-open');
         });
     });
 
