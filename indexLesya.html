@@ -820,7 +820,6 @@
             grid-template-columns: 340px 1fr;
             gap: 60px;
             align-items: start;
-            margin-top: 30px;
         }
 
         .about-photo-wrap {
@@ -1418,13 +1417,9 @@
             .skills-grid { grid-template-columns: repeat(2, 1fr); }
             .hero-stats { gap: 28px; }
             .pakete-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
-        }
 
-        @media (max-width: 768px) {
-            .nav-links { display: none; 
-            }
-            .nav-toggle { display: block;
-             }
+            .nav-links { display: none; }
+            .nav-toggle { display: block; }
 
             .nav.menu-open {
                 height: 100vh;
@@ -1452,9 +1447,10 @@
             .nav-links.open a {
                 font-size: 20px;
                 color: var(--white);
-                
             }
+        }
 
+        @media (max-width: 768px) {
             .hero h1 { font-size: 32px; }
             .hero-stats { flex-direction: column; gap: 20px; }
             .form-row { grid-template-columns: 1fr; }
@@ -1697,9 +1693,6 @@
                 </p>
                 <p class="about-text">
                     Meine Qualifikation vereint <strong>wissenschaftliche Forschung</strong> und <strong>praktische Softwareentwicklung</strong>. Als Wissenschaftlerin mit Doktortitel bringe ich analytisches Denken ein; als Entwicklerin beherrsche ich die Integration von Technologien in bestehende Systeme.
-
-                    Ich arbeite zudem fließend in mehreren Sprachen: Englisch, Deutsch, Ukrainisch und Russisch, was eine Kommunikation mit internationalen Kunden ermöglicht.
-
                 </p>
                 <div class="skills-grid">
                     <div class="skill-item reveal delay-1">
