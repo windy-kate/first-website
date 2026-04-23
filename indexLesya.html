@@ -1,13 +1,44 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dr. Lesya Burban — KI-Automatisierung f&uuml;r den Mittelstand</title>
-    <meta name="description" content="Praxisnahe KI-Automatisierung f&uuml;r den Mittelstand in OWL. DSGVO-konform, Self-Hosted, ohne Abh&auml;ngigkeit von US-Cloud-Diensten.">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    <meta name="description"
+        content="Praxisnahe KI-Automatisierung f&uuml;r den Mittelstand in OWL. DSGVO-konform, Self-Hosted, ohne Abh&auml;ngigkeit von US-Cloud-Diensten.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://windy-kate.github.io/first-website/indexLesya.html">
 
+    <!-- Open Graph -->
+    <meta property="og:title" content="Dr. Lesya Burban &mdash; KI-Automatisierung f&uuml;r den Mittelstand">
+    <meta property="og:description"
+        content="Praxisnahe KI-Automatisierung f&uuml;r den Mittelstand in OWL. DSGVO-konform, Self-Hosted, ohne Abh&auml;ngigkeit von US-Cloud-Diensten.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://windy-kate.github.io/first-website/indexLesya.html">
+    <meta property="og:locale" content="de_DE">
+    <meta property="og:image" content="https://windy-kate.github.io/first-website/photo_2026-04-22_16-31-59.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dr. Lesya Burban &mdash; KI-Automatisierung f&uuml;r den Mittelstand">
+    <meta name="twitter:description"
+        content="Praxisnahe KI-Automatisierung f&uuml;r den Mittelstand in OWL. DSGVO-konform, Self-Hosted.">
+    <meta name="twitter:image" content="https://windy-kate.github.io/first-website/photo_2026-04-22_16-31-59.jpg">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml"
+        href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%23111'/%3E%3Ctext x='50' y='72' font-size='58' fill='%23c9a84c' text-anchor='middle' font-family='sans-serif' font-weight='bold'%3ELB%3C/text%3E%3C/svg%3E">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap">
+
+
+
+    <style>
         /* ============================================= */
         /*  CSS VARIABLES                                */
         /* ============================================= */
@@ -19,8 +50,8 @@
             --gold: #c9a84c;
             --gold-light: #e8d48b;
             --gold-dark: #a07e2e;
-            --gold-glow: rgba(201,168,76,0.10);
-            --gold-glow2: rgba(201,168,76,0.05);
+            --gold-glow: rgba(201, 168, 76, 0.10);
+            --gold-glow2: rgba(201, 168, 76, 0.05);
             --pearl: #f5f0e8;
             --pearl-light: #faf7f2;
             --white: #ffffff;
@@ -29,8 +60,8 @@
             --gray-200: #e5e5e5;
             --gray-300: #d4d4d4;
             --gray-400: #a3a3a3;
-            --gray-500: #8a8a8a;
-            --gray-600: #737373;
+            --gray-500: #929292;
+            --gray-600: #666666;
             --gray-700: #525252;
             --green: #22c55e;
             --green-dark: #16a34a;
@@ -40,7 +71,13 @@
         /* ============================================= */
         /*  RESET & BASE                                 */
         /* ============================================= */
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
         html {
             scroll-behavior: smooth;
@@ -57,8 +94,15 @@
             overflow-x: hidden;
         }
 
-        img { max-width: 100%; display: block; }
-        a { text-decoration: none; color: inherit; }
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
 
         .container {
             max-width: 1200px;
@@ -72,7 +116,7 @@
         .reveal {
             opacity: 0;
             transform: translateY(36px);
-            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal.visible {
@@ -83,7 +127,7 @@
         .reveal-left {
             opacity: 0;
             transform: translateX(-40px);
-            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal-left.visible {
@@ -94,7 +138,7 @@
         .reveal-right {
             opacity: 0;
             transform: translateX(40px);
-            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal-right.visible {
@@ -105,7 +149,7 @@
         .reveal-scale {
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .reveal-scale.visible {
@@ -113,11 +157,25 @@
             transform: scale(1);
         }
 
-        .delay-1 { transition-delay: 0.1s; }
-        .delay-2 { transition-delay: 0.2s; }
-        .delay-3 { transition-delay: 0.3s; }
-        .delay-4 { transition-delay: 0.4s; }
-        .delay-5 { transition-delay: 0.5s; }
+        .delay-1 {
+            transition-delay: 0.1s;
+        }
+
+        .delay-2 {
+            transition-delay: 0.2s;
+        }
+
+        .delay-3 {
+            transition-delay: 0.3s;
+        }
+
+        .delay-4 {
+            transition-delay: 0.4s;
+        }
+
+        .delay-5 {
+            transition-delay: 0.5s;
+        }
 
         /* ============================================= */
         /*  NAVIGATION                                   */
@@ -132,16 +190,16 @@
             display: flex;
             align-items: center;
             padding: 0 40px;
-            background: rgba(17,17,17,0.85);
+            background: rgba(17, 17, 17, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
             transition: background 0.3s ease, box-shadow 0.3s ease;
         }
 
         .nav.scrolled {
-            background: rgba(17,17,17,0.96);
-            box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+            background: rgba(17, 17, 17, 0.96);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
         }
 
         .nav-inner {
@@ -178,7 +236,7 @@
             align-items: center;
             gap: 32px;
             list-style: none;
-            
+
         }
 
         .nav-links a {
@@ -223,7 +281,7 @@
         .nav-cta:hover {
             background: var(--gold-light);
             transform: translateY(-1px);
-            box-shadow: 0 4px 16px rgba(201,168,76,0.3);
+            box-shadow: 0 4px 16px rgba(201, 168, 76, 0.3);
         }
 
         /* Mobile menu */
@@ -249,13 +307,31 @@
             transition: all 0.3s ease;
         }
 
-        .nav-toggle span:nth-child(1) { top: 0; }
-        .nav-toggle span:nth-child(2) { top: 11px; }
-        .nav-toggle span:nth-child(3) { top: 22px; }
+        .nav-toggle span:nth-child(1) {
+            top: 0;
+        }
 
-        .nav-toggle.open span:nth-child(1) { top: 11px; transform: rotate(45deg); }
-        .nav-toggle.open span:nth-child(2) { opacity: 0; }
-        .nav-toggle.open span:nth-child(3) { top: 11px; transform: rotate(-45deg); }
+        .nav-toggle span:nth-child(2) {
+            top: 11px;
+        }
+
+        .nav-toggle span:nth-child(3) {
+            top: 22px;
+        }
+
+        .nav-toggle.open span:nth-child(1) {
+            top: 11px;
+            transform: rotate(45deg);
+        }
+
+        .nav-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .nav-toggle.open span:nth-child(3) {
+            top: 11px;
+            transform: rotate(-45deg);
+        }
 
         /* ============================================= */
         /*  HERO                                         */
@@ -274,12 +350,12 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(rgba(201,168,76,0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(201,168,76,0.03) 1px, transparent 1px);
+                linear-gradient(rgba(201, 168, 76, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(201, 168, 76, 0.03) 1px, transparent 1px);
             background-size: 80px 80px;
             mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
             -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 70%);
-            
+
         }
 
         .hero-orb {
@@ -294,7 +370,7 @@
             height: 600px;
             top: -15%;
             right: -10%;
-            background: rgba(201,168,76,0.07);
+            background: rgba(201, 168, 76, 0.07);
             animation: orbFloat 8s ease-in-out infinite;
         }
 
@@ -303,7 +379,7 @@
             height: 400px;
             bottom: -10%;
             left: -5%;
-            background: rgba(201,168,76,0.04);
+            background: rgba(201, 168, 76, 0.04);
             animation: orbFloat 10s ease-in-out infinite reverse;
         }
 
@@ -312,14 +388,24 @@
             height: 250px;
             top: 40%;
             left: 30%;
-            background: rgba(201,168,76,0.03);
+            background: rgba(201, 168, 76, 0.03);
             animation: orbFloat 12s ease-in-out infinite;
         }
 
         @keyframes orbFloat {
-            0%, 100% { transform: translate(0, 0); }
-            33% { transform: translate(15px, -20px); }
-            66% { transform: translate(-10px, 15px); }
+
+            0%,
+            100% {
+                transform: translate(0, 0);
+            }
+
+            33% {
+                transform: translate(15px, -20px);
+            }
+
+            66% {
+                transform: translate(-10px, 15px);
+            }
         }
 
         .hero-content {
@@ -327,15 +413,15 @@
             z-index: 2;
             max-width: 780px;
             padding: 80px 0;
-        
+
         }
 
         .hero-badge {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(201,168,76,0.1);
-            border: 1px solid rgba(201,168,76,0.2);
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.2);
             padding: 8px 18px;
             border-radius: 100px;
             font-size: 12px;
@@ -355,8 +441,15 @@
         }
 
         @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.3; }
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
         }
 
         .hero h1 {
@@ -411,18 +504,18 @@
         .btn-gold {
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             color: var(--black);
-            box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
         }
 
         .btn-gold:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+            box-shadow: 0 8px 32px rgba(201, 168, 76, 0.35);
         }
 
         .btn-outline {
             background: transparent;
             color: var(--gray-300);
-            border: 2px solid rgba(255,255,255,0.12);
+            border: 2px solid rgba(255, 255, 255, 0.12);
         }
 
         .btn-outline:hover {
@@ -436,7 +529,7 @@
             gap: 48px;
             margin-top: 64px;
             padding-top: 40px;
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             animation: fadeInUp 0.8s 0.6s ease-out both;
             justify-content: center;
         }
@@ -491,8 +584,17 @@
         }
 
         @keyframes scrollPulse {
-            0%, 100% { opacity: 1; transform: scaleY(1); }
-            50% { opacity: 0.4; transform: scaleY(0.6); }
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scaleY(1);
+            }
+
+            50% {
+                opacity: 0.4;
+                transform: scaleY(0.6);
+            }
         }
 
         /* ============================================= */
@@ -562,8 +664,13 @@
             margin-bottom: 48px;
         }
 
-        .section-dark .section-desc { color: var(--gray-400); }
-        .section-black .section-desc { color: var(--gray-400); }
+        .section-dark .section-desc {
+            color: var(--gray-400);
+        }
+
+        .section-black .section-desc {
+            color: var(--gray-400);
+        }
 
         /* ============================================= */
         /*  LEISTUNGEN (SERVICES)                        */
@@ -581,7 +688,7 @@
             border: 1px solid var(--gray-200);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .phase-card::before {
@@ -599,8 +706,8 @@
 
         .phase-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
-            border-color: rgba(201,168,76,0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
+            border-color: rgba(201, 168, 76, 0.3);
         }
 
         .phase-card:hover::before {
@@ -627,7 +734,7 @@
             font-weight: 700;
             color: var(--gold-dark);
             background: var(--gold-glow);
-            border: 1px solid rgba(201,168,76,0.2);
+            border: 1px solid rgba(201, 168, 76, 0.2);
             padding: 4px 12px;
             border-radius: 6px;
             margin-bottom: 12px;
@@ -662,7 +769,9 @@
             border-bottom: 1px solid var(--gray-100);
         }
 
-        .phase-list li:last-child { border-bottom: none; }
+        .phase-list li:last-child {
+            border-bottom: none;
+        }
 
         .phase-check {
             width: 20px;
@@ -702,7 +811,7 @@
             background: linear-gradient(160deg, var(--graphite-mid), var(--black));
             border-radius: 24px;
             padding: 48px 40px;
-            border: 1px solid rgba(255,255,255,0.06);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             position: relative;
             overflow: hidden;
         }
@@ -714,7 +823,7 @@
             right: -30%;
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, rgba(201,168,76,0.08), transparent 70%);
+            background: radial-gradient(circle, rgba(201, 168, 76, 0.08), transparent 70%);
             border-radius: 50%;
         }
 
@@ -756,8 +865,8 @@
             border-radius: 8px;
             font-size: 12px;
             font-weight: 600;
-            background: rgba(201,168,76,0.1);
-            border: 1px solid rgba(201,168,76,0.2);
+            background: rgba(201, 168, 76, 0.1);
+            border: 1px solid rgba(201, 168, 76, 0.2);
             color: var(--gold-light);
         }
 
@@ -797,8 +906,8 @@
             align-items: center;
             gap: 10px;
             padding: 12px 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 10px;
             font-size: 13px;
             color: var(--gray-300);
@@ -836,7 +945,7 @@
             justify-content: center;
             font-size: 120px;
             overflow: hidden;
-            border: 3px solid rgba(201,168,76,0.2);
+            border: 3px solid rgba(201, 168, 76, 0.2);
             position: relative;
         }
 
@@ -846,7 +955,7 @@
             left: 0;
             right: 0;
             padding: 24px;
-            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
         }
 
         .about-photo-name {
@@ -912,7 +1021,7 @@
         .skill-item:hover {
             border-color: var(--gold);
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.05);
         }
 
         .skill-icon {
@@ -941,17 +1050,17 @@
             display: flex;
             gap: 20px;
             padding: 32px;
-            background: rgba(255,255,255,0.03);
-            border: 1px solid rgba(255,255,255,0.06);
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 18px;
             transition: all 0.35s ease;
         }
 
         .adv-card:hover {
-            background: rgba(201,168,76,0.04);
-            border-color: rgba(201,168,76,0.2);
+            background: rgba(201, 168, 76, 0.04);
+            border-color: rgba(201, 168, 76, 0.2);
             transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
         }
 
         .adv-icon {
@@ -959,7 +1068,7 @@
             height: 52px;
             border-radius: 14px;
             background: var(--gold-glow);
-            border: 1px solid rgba(201,168,76,0.15);
+            border: 1px solid rgba(201, 168, 76, 0.15);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1042,7 +1151,7 @@
             width: 24px;
             height: 24px;
             border-radius: 50%;
-            background: rgba(201,168,76,0.12);
+            background: rgba(201, 168, 76, 0.12);
             color: var(--gold);
             display: flex;
             align-items: center;
@@ -1052,8 +1161,8 @@
         }
 
         .form-card {
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 40px;
             backdrop-filter: blur(10px);
@@ -1090,8 +1199,8 @@
         .form-group select {
             width: 100%;
             padding: 14px 18px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 12px;
             color: var(--white);
             font-family: 'Inter', sans-serif;
@@ -1109,7 +1218,7 @@
         .form-group textarea:focus,
         .form-group select:focus {
             border-color: var(--gold);
-            box-shadow: 0 0 0 3px rgba(201,168,76,0.1);
+            box-shadow: 0 0 0 3px rgba(201, 168, 76, 0.1);
         }
 
         .form-group textarea {
@@ -1145,7 +1254,7 @@
 
         .form-submit:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(201,168,76,0.3);
+            box-shadow: 0 8px 32px rgba(201, 168, 76, 0.3);
         }
 
         .form-note {
@@ -1160,7 +1269,7 @@
         /* ============================================= */
         .footer {
             background: var(--black);
-            border-top: 1px solid rgba(255,255,255,0.06);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
             padding: 48px 0 32px;
             color: var(--gray-500);
         }
@@ -1218,7 +1327,7 @@
             color: var(--gray-600);
             margin-top: 32px;
             padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,0.04);
+            border-top: 1px solid rgba(255, 255, 255, 0.04);
         }
 
         /* ============================================= */
@@ -1238,21 +1347,21 @@
             border: 1px solid var(--gray-200);
             position: relative;
             overflow: hidden;
-            transition: all 0.4s cubic-bezier(0.4,0,0.2,1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .paket-card:hover {
             transform: translateY(-6px);
-            box-shadow: 0 20px 60px rgba(0,0,0,0.08);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.08);
         }
 
         .paket-card--featured {
             border: 2px solid var(--gold);
-            box-shadow: 0 8px 40px rgba(201,168,76,0.12);
+            box-shadow: 0 8px 40px rgba(201, 168, 76, 0.12);
         }
 
         .paket-card--featured:hover {
-            box-shadow: 0 20px 60px rgba(201,168,76,0.18);
+            box-shadow: 0 20px 60px rgba(201, 168, 76, 0.18);
         }
 
         .paket-beliebt {
@@ -1283,7 +1392,7 @@
         }
 
         .paket-card--featured .paket-badge {
-            border-color: rgba(201,168,76,0.3);
+            border-color: rgba(201, 168, 76, 0.3);
             color: var(--gold-dark);
             background: var(--gold-glow);
         }
@@ -1370,12 +1479,12 @@
         .paket-btn--gold {
             background: linear-gradient(135deg, var(--gold), var(--gold-dark));
             color: var(--black);
-            box-shadow: 0 4px 20px rgba(201,168,76,0.25);
+            box-shadow: 0 4px 20px rgba(201, 168, 76, 0.25);
         }
 
         .paket-btn--gold:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(201,168,76,0.35);
+            box-shadow: 0 8px 32px rgba(201, 168, 76, 0.35);
         }
 
         .paket-btn--dark {
@@ -1386,40 +1495,94 @@
         .paket-btn--dark:hover {
             background: var(--black);
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
         }
 
         /* ============================================= */
         /*  KEYFRAMES                                    */
         /* ============================================= */
         @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(28px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(28px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeInDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         /* ============================================= */
         /*  RESPONSIVE                                   */
         /* ============================================= */
         @media (max-width: 1024px) {
-            .container { padding: 0 24px; }
-            .section { padding: 80px 0; }
-            .phases-grid { grid-template-columns: 1fr; }
-            .case-grid { grid-template-columns: 1fr; }
-            .about-grid { grid-template-columns: 1fr; }
-            .about-photo-wrap { max-width: 320px; margin: 0 auto; }
-            .adv-grid { grid-template-columns: 1fr; }
-            .cta-grid { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: repeat(2, 1fr); }
-            .hero-stats { gap: 28px; }
-            .pakete-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; }
+            .container {
+                padding: 0 24px;
+            }
 
-            .nav-links { display: none; }
-            .nav-toggle { display: block; }
+            .section {
+                padding: 80px 0;
+            }
+
+            .phases-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .case-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .about-photo-wrap {
+                max-width: 320px;
+                margin: 0 auto;
+            }
+
+            .adv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .hero-stats {
+                gap: 28px;
+            }
+
+            .pakete-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin: 0 auto;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .nav-toggle {
+                display: block;
+            }
 
             .nav.menu-open {
                 height: 100vh;
@@ -1451,597 +1614,961 @@
         }
 
         @media (max-width: 768px) {
-            .hero h1 { font-size: 32px; }
-            .hero-stats { flex-direction: column; gap: 20px; }
-            .form-row { grid-template-columns: 1fr; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .case-results { grid-template-columns: 1fr; }
-            .footer-inner { flex-direction: column; text-align: center; }
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .case-results {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-inner {
+                flex-direction: column;
+                text-align: center;
+            }
         }
 
         /* ============================================= */
         /*  PRINT                                        */
         /* ============================================= */
         @media print {
-            .nav, .scroll-indicator { display: none; }
-            .hero { min-height: auto; padding: 60px 0; }
-            .section { padding: 40px 0; }
-            .reveal, .reveal-left, .reveal-right, .reveal-scale { opacity: 1 !important; transform: none !important; }
+
+            .nav,
+            .scroll-indicator {
+                display: none;
+            }
+
+            .hero {
+                min-height: auto;
+                padding: 60px 0;
+            }
+
+            .section {
+                padding: 40px 0;
+            }
+
+            .reveal,
+            .reveal-left,
+            .reveal-right,
+            .reveal-scale {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        }
+
+        /* ============================================= */
+        /*  FORM VALIDATION & STATES                     */
+        /* ============================================= */
+        .form-error-msg {
+            display: block;
+            font-size: 12px;
+            color: #ef4444;
+            margin-top: 4px;
+            min-height: 0;
+        }
+
+        .form-group.has-error input,
+        .form-group.has-error textarea,
+        .form-group.has-error select {
+            border-color: #ef4444 !important;
+            box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1) !important;
+        }
+
+        .form-status {
+            text-align: center;
+            padding: 14px 18px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+            margin-top: 14px;
+            display: none;
+        }
+
+        .form-status.success {
+            display: block;
+            background: rgba(34, 197, 94, 0.12);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: #22c55e;
+        }
+
+        .form-status.error {
+            display: block;
+            background: rgba(239, 68, 68, 0.12);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+        }
+
+        .form-submit.loading {
+            opacity: 0.7;
+            pointer-events: none;
         }
     </style>
 </head>
+
 <body>
 
-<!-- ================================== -->
-<!--  NAVIGATION                        -->
-<!-- ================================== -->
-<nav class="nav" id="nav">
-    <div class="nav-inner">
-        <a href="#" class="nav-brand">
-            <span class="nav-brand-name">Dr. Lesya Burban</span>
-            <span class="nav-brand-sub">KI-Automatisierungsberatung</span>
-        </a>
-        <ul class="nav-links" id="navLinks">
-            <li sy><a href="#pakete">Leistungen</a></li>
-            <li><a href="#referenzen">Referenzen</a></li>
-            <li><a href="#ueber-mich">&Uuml;ber mich</a></li>
-            <li><a href="#vorteile">Vorteile</a></li>
-            <li><a href="#leistungen">Phasen</a></li>
-            <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
-        </ul>
-        <button class="nav-toggle" id="navToggle" aria-label="Men&uuml; &ouml;ffnen">
-            <span></span><span></span><span></span>
-        </button>
-    </div>
-</nav>
-
-<!-- ================================== -->
-<!--  HERO                              -->
-<!-- ================================== -->
-<section class="hero" id="hero">
-    <div class="hero-bg-grid"></div>
-    <div class="hero-orb hero-orb-1"></div>
-    <div class="hero-orb hero-orb-2"></div>
-    <div class="hero-orb hero-orb-3"></div>
-    <div class="container">
-        <div class="hero-content">
-            
-            <h1>
-                KI-Automatisierung, die auf <span class="gold">Ihrer Infrastruktur</span> l&auml;uft
-            </h1>
-            <p class="hero-sub">
-                Praxisnahe L&ouml;sungen f&uuml;r den Mittelstand in Ostwestfalen-Lippe &mdash; DSGVO-konform, Self-Hosted und ohne Abh&auml;ngigkeit von US-Cloud-Diensten
-            </p>
-            <div class="hero-buttons">
-                <a href="#kontakt" class="btn btn-gold">Kostenlos beraten lassen</a>
-                <a href="#pakete" class="btn btn-outline">Leistungen ansehen</a>
-            </div>
-            <div class="hero-stats">
-                <div class="hero-stat">
-                    <div class="hero-stat-val">60 %</div>
-                    <div class="hero-stat-label">Zeitersparnis</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-val">1 &ndash; 2</div>
-                    <div class="hero-stat-label">Wochen bis zum Piloten</div>
-                </div>
-                <div class="hero-stat">
-                    <div class="hero-stat-val">100+</div>
-                    <div class="hero-stat-label">Automatisierungen</div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="scroll-indicator">
-      
-        <div class="scroll-line"></div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  LEISTUNGEN                        -->
-<!-- ================================== -->
-<section class="section section-pearl" id="leistungen">
-    <div class="container">
-        <div class="reveal">
-            <div class="section-label">
-                <span class="section-label-line"></span> Phasen
-            </div>
-            <div class="section-title">Drei Phasen <span class="gold">zum Erfolg</span></div>
-            <p class="section-desc">
-                Von der Analyse bis zum laufenden Betrieb &mdash; jede Phase liefert eigenst&auml;ndig Mehrwert
-            </p>
-        </div>
-        <div class="phases-grid">
-            <!-- Phase 1 -->
-            <div class="phase-card reveal delay-1">
-                <div class="phase-num">01</div>
-                <div class="phase-badge">Phase 1</div>
-                <h3 class="phase-title">Assess &mdash; Analyse und Potenziale</h3>
-                <p class="phase-desc">Strukturierte Analyse Ihrer Prozesse und Identifikation der gr&ouml;&szlig;ten KI-Hebel.</p>
-                <ul class="phase-list">
-                    <li><span class="phase-check">&#10003;</span> Strukturiertes Prozess-Mapping</li>
-                    <li><span class="phase-check">&#10003;</span> Bewertung nach Aufwand, Impact und Machbarkeit</li>
-                    <li><span class="phase-check">&#10003;</span> Technologie-Empfehlung passend zu Ihrer IT-Landschaft</li>
-                    <li><span class="phase-check">&#10003;</span> Priorisierter Fahrplan f&uuml;r die Umsetzung</li>
-                </ul>
-                <div class="phase-result">
-                    Ergebnis: Ein dokumentierter Analyse-Bericht mit 3&ndash;5 priorisierten Automatisierungs-Kandidaten.
-                </div>
-            </div>
-            <!-- Phase 2 -->
-            <div class="phase-card reveal delay-2">
-                <div class="phase-num">02</div>
-                <div class="phase-badge">Phase 2</div>
-                <h3 class="phase-title">Pilot &mdash; Umsetzung und Validierung</h3>
-                <p class="phase-desc">Umsetzung des vielversprechendsten Automatisierungs-Kandidaten in 1&ndash;2 Wochen.</p>
-                <ul class="phase-list">
-                    <li><span class="phase-check">&#10003;</span> Workflow-Automatisierung mit n8n (Self-Hosted)</li>
-                    <li><span class="phase-check">&#10003;</span> KI-Agenten mit RAG f&uuml;r Unternehmensdaten</li>
-                    <li><span class="phase-check">&#10003;</span> Integration in bestehende Tools</li>
-                    <li><span class="phase-check">&#10003;</span> Praxisnahe Schulung</li>
-                </ul>
-                <div class="phase-result">
-                    Ergebnis: Ein produktiver Workflow, der nachweislich Zeit spart.
-                </div>
-            </div>
-            <!-- Phase 3 -->
-            <div class="phase-card reveal delay-3">
-                <div class="phase-num">03</div>
-                <div class="phase-badge">Phase 3</div>
-                <h3 class="phase-title">Operate &mdash; Betrieb und Optimierung</h3>
-                <p class="phase-desc">Langfristige Betreuung: Monitoring, Wartung und kontinuierliche Verbesserung.</p>
-                <ul class="phase-list">
-                    <li><span class="phase-check">&#10003;</span> Proaktives Monitoring und Alerting</li>
-                    <li><span class="phase-check">&#10003;</span> Qualit&auml;tschecks</li>
-                    <li><span class="phase-check">&#10003;</span> Erweiterung auf weitere Bereiche</li>
-                    <li><span class="phase-check">&#10003;</span> Self-Hosting-Betrieb</li>
-                </ul>
-                <div class="phase-result">
-                    Ergebnis: Stabile, skalierbare Automatisierung im laufenden Betrieb.
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  REFERENZEN                        -->
-<!-- ================================== -->
-<section class="section section-dark" id="referenzen">
-    <div class="container">
-        <div class="reveal">
-            <div class="section-label">
-                <span class="section-label-line"></span> Referenzen
-            </div>
-            <div class="section-title">Ausgew&auml;hlte <span class="gold">Projekte</span></div>
-            <p class="section-desc">
-                Ausgew&auml;hlte Projekte, die zeigen, wie KI-Automatisierung in der Praxis funktioniert
-            </p>
-        </div>
-        <div class="case-grid">
-            <div class="case-visual reveal-left">
-                <div class="case-metric">
-                    <div class="case-metric-val">60 %</div>
-                    <div class="case-metric-label">Zeitersparnis</div>
-                </div>
-                <div class="case-tags">
-                    <span class="case-tag">n8n</span>
-                    <span class="case-tag">Qdrant</span>
-                    <span class="case-tag">RAG</span>
-                    <span class="case-tag">Claude API</span>
-                    <span class="case-tag">Self-Hosting</span>
-                    <span class="case-tag">Coolify</span>
-                </div>
-            </div>
-            <div class="case-info reveal-right">
-                <h3>QA-Workflow-Automatisierung f&uuml;r B2B-SaaS</h3>
-                <div class="case-branche">Branche: B2B-SaaS-Anbieter im QA-Tooling-Umfeld</div>
-                <p><strong>Ausgangssituation:</strong> Ein wachsendes SaaS-Unternehmen im QA-Bereich konnte manuelle Prozesse bei der Datenverarbeitung und Qualit&auml;tssicherung nicht mehr skalieren. Wiederkehrende Aufgaben banden qualifizierte Mitarbeiter und verlangsamten die Produktentwicklung.</p>
-                <p><strong>L&ouml;sung:</strong> Entwicklung einer integrierten Automatisierungsl&ouml;sung mit n8n-Workflows und RAG-basiertem KI-Agenten. Die Infrastruktur l&auml;uft Self-Hosted auf dediziertem Server ohne externe Datentransfers.</p>
-                <div class="case-results">
-                    <div class="case-result-item">
-                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></span>
-                        Bis zu 60 % Zeitersparnis
-                    </div>
-                    <div class="case-result-item">
-                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></span>
-                        Über 100+ Automatisierungen
-                    </div>
-                    <div class="case-result-item">
-                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></span>
-                        Self-Hosted, DSGVO-konform
-                    </div>
-                    <div class="case-result-item">
-                        <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><polyline points="7 7 17 7 17 17"/></svg></span>
-                        DMS-Optimierung
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  UEBER MICH                        -->
-<!-- ================================== -->
-<section class="section section-pearl" id="ueber-mich">
-    <div class="container">
-        <div class="reveal">
-            <div class="section-label">
-                <span class="section-label-line"></span> &Uuml;ber mich
-            </div>
-            <div class="section-title">Dr. Lesya <span class="gold">Burban</span></div>
-        </div>
-        <div class="about-grid">
-            <div class="about-photo-wrap reveal-left">
-                <div class="about-photo">
-                    
-                    <img src="./photo_2026-04-22_16-31-59.jpg" alt="Dr. Lesya Burban">
-                    <div class="about-photo-overlay">
-                        
-                    </div>
-                </div>
-                
-            </div>
-            <div class="reveal-right">
-                <p class="about-text">
-                    Seit M&auml;rz 2026 berate ich mittelst&auml;ndische Unternehmen in Ostwestfalen-Lippe bei der Einf&uuml;hrung von KI-Automatisierung.
-                </p>
-                <p class="about-text">
-                    Mein Fokus liegt auf L&ouml;sungen, die auf <strong>Ihrer eigenen Infrastruktur</strong> laufen &mdash; DSGVO-konform und ohne Abh&auml;ngigkeit von US-Cloud-Diensten.
-                </p>
-                <p class="about-text">
-                    Meine Qualifikation vereint <strong>wissenschaftliche Forschung</strong> und <strong>praktische Softwareentwicklung</strong>. Als Wissenschaftlerin mit Doktortitel bringe ich analytisches Denken ein; als Entwicklerin beherrsche ich die Integration von Technologien in bestehende Systeme.
-                    Ich arbeite zudem fließend in mehreren Sprachen: Englisch, Deutsch, Ukrainisch und Russisch, was eine Kommunikation mit internationalen Kunden ermöglicht.
-                </p>
-                <div class="skills-grid">
-                    <div class="skill-item reveal delay-1">
-                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 1l4 4-4 4"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><path d="M7 23l-4-4 4-4"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg></div>
-                        Workflow-Automatisierung (n8n)
-                    </div>
-                    <div class="skill-item reveal delay-2">
-                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2"/></svg></div>
-                        KI-Agenten und RAG-Systeme
-                    </div>
-                    <div class="skill-item reveal delay-3">
-                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                        Self-Hosting und DSGVO
-                    </div>
-                    <div class="skill-item reveal delay-4">
-                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
-                        Prozessanalyse und -optimierung
-                    </div>
-                    <div class="skill-item reveal delay-5">
-                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
-                        API-Integrationen
-                    </div>
-                    <div class="skill-item reveal delay-5">
-                        <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg></div>
-                        Qualit&auml;tssicherung f&uuml;r KI
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  VORTEILE                          -->
-<!-- ================================== -->
-<section class="section section-black" id="vorteile">
-    <div class="container">
-        <div class="reveal">
-            <div class="section-label">
-                <span class="section-label-line"></span> Vorteile
-            </div>
-            <div class="section-title">Warum mit mir <span class="gold">arbeiten?</span></div>
-            <p class="section-desc">
-                Was meine Beratung von gro&szlig;en IT-Dienstleistern und Standard-SaaS-L&ouml;sungen unterscheidet
-            </p>
-        </div>
-        <div class="adv-grid">
-            <div class="adv-card reveal delay-1">
-                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-                <div class="adv-content">
-                    <h3>DSGVO by Design</h3>
-                    <p>Datenschutz ist Architekturprinzip, kein Nachgedanke. Alle Systeme laufen auf eigenen Servern in Deutschland &mdash; ohne US-Cloud-Abh&auml;ngigkeit.</p>
-                </div>
-            </div>
-            <div class="adv-card reveal delay-2">
-                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></div>
-                <div class="adv-content">
-                    <h3>Wissenschaftliche Pr&auml;zision</h3>
-                    <p>Ein PhD in Mathematik bedeutet: analytisches Denken, logisch einwandfreie Systemarchitektur und systematisches Testen statt Trial-and-Error.</p>
-                </div>
-            </div>
-            <div class="adv-card reveal delay-3">
-                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
-                <div class="adv-content">
-                    <h3>Lokal in OWL</h3>
-                    <p>Pers&ouml;nliche Betreuung vor Ort. Workshops in Ihren R&auml;umen. Kurze Wege, schnelle Reaktion und echtes Verst&auml;ndnis f&uuml;r die Region.</p>
-                </div>
-            </div>
-            <div class="adv-card reveal delay-4">
-                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg></div>
-                <div class="adv-content">
-                    <h3>Kein Vendor Lock-in</h3>
-                    <p>Open-Source-Technologien (n8n, Qdrant) und eigene Infrastruktur &mdash; Sie behalten die volle Kontrolle &uuml;ber Ihre Daten und Systeme.</p>
-                </div>
-            </div>
-            <div class="adv-card reveal delay-3">
-                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-                <div class="adv-content">
-                    <h3>Schnelle Ergebnisse</h3>
-                    <p>Vom Erstgespr&auml;ch zum produktiven Piloten in 1&ndash;2 Wochen. Jede Phase liefert eigenst&auml;ndig Mehrwert &mdash; kein monatelanges Warten.</p>
-                </div>
-            </div>
-            <div class="adv-card reveal delay-4">
-                <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
-                <div class="adv-content">
-                    <h3>Menschen im Fokus</h3>
-                    <p>KI als Unterst&uuml;tzung f&uuml;r Ihr Team, nicht als Ersatz. Praxisnahe Schulungen und L&ouml;sungen, die in den Arbeitsalltag passen.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  PAKETE                            -->
-<!-- ================================== -->
-<section class="section section-pearl" id="pakete">
-    <div class="container">
-        <div class="reveal">
-            <div class="section-label">
-                <span class="section-label-line"></span> Leistungen
-            </div>
-            <div class="section-title">Drei Pakete f&uuml;r <span class="gold">Ihr Wachstum</span></div>
-            <p class="section-desc">
-                Von der Markenentwicklung bis zur automatisierten Kundengewinnung &mdash; w&auml;hlen Sie das Paket, das zu Ihnen passt
-            </p>
-        </div>
-        <div class="pakete-grid">
-            <!-- Starter -->
-            <div class="paket-card reveal delay-1">
-                <div class="paket-badge">Starter</div>
-                <div class="paket-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l10 10-10 10L2 12z"/></svg>
-                </div>
-                <h3 class="paket-title">Digital Kickstart</h3>
-                <p class="paket-desc">Ihr professioneller Marktauftritt &mdash; Branding, One-Page-Website und Basis-Automatisierung.</p>
-                <ul class="paket-list">
-                    <li><span class="paket-check">&#10003;</span> Markenpositionierung &amp; Logo</li>
-                    <li><span class="paket-check">&#10003;</span> Corporate-Design-Grundlagen</li>
-                    <li><span class="paket-check">&#10003;</span> One-Page-Landingpage (responsive)</li>
-                    <li><span class="paket-check">&#10003;</span> Basis-SEO &amp; Kontaktformular</li>
-                    <li><span class="paket-check">&#10003;</span> E-Mail-Autoresponder</li>
-                    <li><span class="paket-check">&#10003;</span> 1 Workflow-Automatisierung</li>
-                </ul>
-                <a href="#kontakt" class="paket-btn paket-btn--outline">Paket anfragen</a>
-            </div>
-            <!-- Business (Featured) -->
-            <div class="paket-card paket-card--featured reveal delay-2">
-                <div class="paket-beliebt">Beliebt</div>
-                <div class="paket-badge">Business</div>
-                <div class="paket-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <h3 class="paket-title">Growth Engine</h3>
-                <p class="paket-desc">Kompletter digitaler Vertriebskanal mit KI-Chatbot, CRM und LinkedIn-Lead-Funnel.</p>
-                <ul class="paket-list">
-                    <li><span class="paket-check">&#10003;</span> Markt- &amp; Wettbewerbsanalyse</li>
-                    <li><span class="paket-check">&#10003;</span> Vollst&auml;ndige Markenidentit&auml;t</li>
-                    <li><span class="paket-check">&#10003;</span> Multi-Page-Website (5 Seiten)</li>
-                    <li><span class="paket-check">&#10003;</span> Conversion-optimierte Landingpage</li>
-                    <li><span class="paket-check">&#10003;</span> CRM + 5 Automatisierungen</li>
-                    <li><span class="paket-check">&#10003;</span> KI-Chatbot &amp; LinkedIn-Funnel</li>
-                    <li><span class="paket-check">&#10003;</span> E-Mail-Marketing-Automation</li>
-                    <li><span class="paket-check">&#10003;</span> SEO + Onboarding &amp; Schulung</li>
-                </ul>
-                <a href="#kontakt" class="paket-btn paket-btn--gold">Beratungsgespr&auml;ch buchen</a>
-            </div>
-            <!-- Enterprise -->
-            <div class="paket-card reveal delay-3">
-                <div class="paket-badge">Enterprise</div>
-                <div class="paket-icon">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-                </div>
-                <h3 class="paket-title">Scale System</h3>
-                <p class="paket-desc">Vollst&auml;ndige Digitalisierung mit unbegrenzten Seiten, KI-Telefonassistent und 3 Monaten Support.</p>
-                <ul class="paket-list">
-                    <li><span class="paket-check">&#10003;</span> Premium-Markenidentit&auml;t &amp; GTM</li>
-                    <li><span class="paket-check">&#10003;</span> Vollst&auml;ndige Website (unbegrenzt)</li>
-                    <li><span class="paket-check">&#10003;</span> Landingpages mit A/B-Testing</li>
-                    <li><span class="paket-check">&#10003;</span> Blog &amp; Kundenportal</li>
-                    <li><span class="paket-check">&#10003;</span> Unbegrenzte Automatisierungen</li>
-                    <li><span class="paket-check">&#10003;</span> KI-Chatbot + Telefonassistent</li>
-                    <li><span class="paket-check">&#10003;</span> Multi-Channel Lead-Funnel</li>
-                    <li><span class="paket-check">&#10003;</span> KPI-Dashboard &amp; 3 Mo. Support</li>
-                </ul>
-                <a href="#kontakt" class="paket-btn paket-btn--dark">Individuelle Beratung</a>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  KONTAKT / CTA                     -->
-<!-- ================================== -->
-<section class="section section-dark cta-section" id="kontakt">
-    <div class="hero-orb hero-orb-1" style="top:-20%;right:-10%;"></div>
-    <div class="hero-orb hero-orb-2" style="bottom:-15%;left:-8%;"></div>
-    <div class="container" style="position:relative;z-index:2;">
-        <div class="cta-grid">
-            <div class="cta-text reveal-left">
-                <div class="section-label">
-                    <span class="section-label-line"></span> Kontakt
-                </div>
-                <h2>Bereit f&uuml;r den <span class="gold">n&auml;chsten Schritt?</span></h2>
-                <p>Lassen Sie uns in einem kostenlosen Erstgespr&auml;ch herausfinden, wo KI-Automatisierung in Ihrem Unternehmen den gr&ouml;&szlig;ten Hebel hat</p>
-                <ul class="cta-features">
-                    <li>
-                        <span class="cta-features-check">&#10003;</span>
-                        Kostenfreies Erstgespr&auml;ch (30 Min.)
-                    </li>
-                    <li>
-                        <span class="cta-features-check">&#10003;</span>
-                        Analyse Ihres Automatisierungs-Potenzials
-                    </li>
-                    <li>
-                        <span class="cta-features-check">&#10003;</span>
-                        Konkrete n&auml;chste Schritte &mdash; kein Verkaufsdruck
-                    </li>
-                    <li>
-                        <span class="cta-features-check">&#10003;</span>
-                        Vor Ort in OWL oder digital
-                    </li>
-                </ul>
-            </div>
-            <div class="form-card reveal-right">
-                <h3>Erstgespr&auml;ch vereinbaren</h3>
-                <p class="form-sub">Ich melde mich innerhalb von 24 Stunden bei Ihnen.</p>
-                <form id="contactForm" onsubmit="handleSubmit(event)">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label>Vorname *</label>
-                            <input type="text" placeholder="Ihr Vorname" required>
-                        </div>
-                        <div class="form-group">
-                            <label>Nachname *</label>
-                            <input type="text" placeholder="Ihr Nachname" required>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>E-Mail *</label>
-                        <input type="email" placeholder="ihre@email.de" required>
-                    </div>
-                    <div class="form-group">
-                        <label>Unternehmen</label>
-                        <input type="text" placeholder="Ihr Unternehmen">
-                    </div>
-                    <div class="form-group">
-                        <label>Interesse</label>
-                        <select>
-                            <option value="">Bitte w&auml;hlen...</option>
-                            <option value="assess">Starter &mdash; Digital Kickstart</option>
-                            <option value="pilot">Business &mdash; Growth Engine</option>
-                            <option value="operate">Enterprise &mdash; Scale System</option>
-                            <option value="other">Sonstiges</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Ihre Nachricht</label>
-                        <textarea placeholder="Beschreiben Sie kurz Ihr Anliegen..."></textarea>
-                    </div>
-                    <button type="submit" class="form-submit">Erstgespr&auml;ch vereinbaren</button>
-                    <p class="form-note">Ihre Daten werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
-                </form>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ================================== -->
-<!--  FOOTER                            -->
-<!-- ================================== -->
-<footer class="footer">
-    <div class="container">
-        <div class="footer-inner">
-            <div class="footer-brand">
-                <span class="footer-brand-name">Dr. Lesya Burban</span>
-                <span class="footer-brand-sub">KI-Automatisierungsberatung</span>
-            </div>
-            <ul class="footer-links">
-                <li><a href="#">Impressum</a></li>
-                <li><a href="#">Datenschutz</a></li>
-                <li><a href="mailto:lesyab@gmx.de">lesyab@gmx.de</a></li>
-                <li><a href="#" target="_blank" rel="noopener noreferrer" class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a></li>
+    <!-- ================================== -->
+    <!--  NAVIGATION                        -->
+    <!-- ================================== -->
+    <nav class="nav" id="nav">
+        <div class="nav-inner">
+            <a href="#" class="nav-brand">
+                <span class="nav-brand-name">Dr. Lesya Burban</span>
+                <span class="nav-brand-sub">KI-Automatisierungsberatung</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#vorteile">Vorteile</a></li>
+                <li><a href="#phasen">Phasen</a></li>
+                <li><a href="#referenzen">Referenzen</a></li>
+                <li><a href="#ueber-mich">&Uuml;ber mich</a></li>
+                <li><a href="#pakete">Pakete</a></li>
+                <li><a href="#kontakt" class="nav-cta">Kontakt</a></li>
             </ul>
+            <button class="nav-toggle" id="navToggle" aria-label="Men&uuml; &ouml;ffnen">
+                <span></span><span></span><span></span>
+            </button>
         </div>
-        <div class="footer-copy">
-            &copy; 2026 Dr. Lesya Burban. Alle Rechte vorbehalten.
+    </nav>
+
+    <main>
+
+        <!-- ================================== -->
+        <!--  HERO                              -->
+        <!-- ================================== -->
+        <section class="hero" id="hero">
+            <div class="hero-bg-grid"></div>
+            <div class="hero-orb hero-orb-1"></div>
+            <div class="hero-orb hero-orb-2"></div>
+            <div class="hero-orb hero-orb-3"></div>
+            <div class="container">
+                <div class="hero-content">
+
+                    <h1>
+                        KI-Automatisierung, die auf <span class="gold">Ihrer Infrastruktur</span> l&auml;uft
+                    </h1>
+                    <p class="hero-sub">
+                        Praxisnahe L&ouml;sungen f&uuml;r den Mittelstand in Ostwestfalen-Lippe &mdash; DSGVO-konform,
+                        Self-Hosted und ohne Abh&auml;ngigkeit von US-Cloud-Diensten
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#kontakt" class="btn btn-gold">Kostenlos beraten lassen</a>
+                        <a href="#pakete" class="btn btn-outline">Leistungen ansehen</a>
+                    </div>
+                    <div class="hero-stats">
+                        <div class="hero-stat">
+                            <div class="hero-stat-val">60 %</div>
+                            <div class="hero-stat-label">Zeitersparnis</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-val">1 &ndash; 2</div>
+                            <div class="hero-stat-label">Wochen bis zum Piloten</div>
+                        </div>
+                        <div class="hero-stat">
+                            <div class="hero-stat-val">100+</div>
+                            <div class="hero-stat-label">Automatisierungen</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!--  PAKETE                            -->
+        <!-- ================================== -->
+        <section class="section section-pearl" id="pakete">
+            <div class="container">
+                <div class="reveal">
+                    <div class="section-label">
+                        <span class="section-label-line"></span> Leistungen
+                    </div>
+                    <h2 class="section-title">Drei Pakete f&uuml;r <span class="gold">Ihr Wachstum</span></h2>
+                    <p class="section-desc">
+                        Von der Markenentwicklung bis zur automatisierten Kundengewinnung &mdash; w&auml;hlen Sie das
+                        Paket, das zu Ihnen passt
+                    </p>
+                </div>
+                <div class="pakete-grid">
+                    <!-- Starter -->
+                    <div class="paket-card reveal delay-1">
+                        <div class="paket-badge">Starter</div>
+                        <div class="paket-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2l10 10-10 10L2 12z" />
+                            </svg>
+                        </div>
+                        <h3 class="paket-title">Digital Kickstart</h3>
+                        <p class="paket-desc">Ihr professioneller Marktauftritt &mdash; Branding, One-Page-Website und
+                            Basis-Automatisierung.</p>
+                        <ul class="paket-list">
+                            <li><span class="paket-check">&#10003;</span> Markenpositionierung &amp; Logo</li>
+                            <li><span class="paket-check">&#10003;</span> Corporate-Design-Grundlagen</li>
+                            <li><span class="paket-check">&#10003;</span> One-Page-Landingpage (responsive)</li>
+                            <li><span class="paket-check">&#10003;</span> Basis-SEO &amp; Kontaktformular</li>
+                            <li><span class="paket-check">&#10003;</span> E-Mail-Autoresponder</li>
+                            <li><span class="paket-check">&#10003;</span> 1 Workflow-Automatisierung</li>
+                        </ul>
+                        <a href="#kontakt" class="paket-btn paket-btn--outline">Paket anfragen</a>
+                    </div>
+                    <!-- Business (Featured) -->
+                    <div class="paket-card paket-card--featured reveal delay-2">
+                        <div class="paket-beliebt">Beliebt</div>
+                        <div class="paket-badge">Business</div>
+                        <div class="paket-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon
+                                    points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                        </div>
+                        <h3 class="paket-title">Growth Engine</h3>
+                        <p class="paket-desc">Kompletter digitaler Vertriebskanal mit KI-Chatbot, CRM und
+                            LinkedIn-Lead-Funnel.</p>
+                        <ul class="paket-list">
+                            <li><span class="paket-check">&#10003;</span> Markt- &amp; Wettbewerbsanalyse</li>
+                            <li><span class="paket-check">&#10003;</span> Vollst&auml;ndige Markenidentit&auml;t</li>
+                            <li><span class="paket-check">&#10003;</span> Multi-Page-Website (5 Seiten)</li>
+                            <li><span class="paket-check">&#10003;</span> Conversion-optimierte Landingpage</li>
+                            <li><span class="paket-check">&#10003;</span> CRM + 5 Automatisierungen</li>
+                            <li><span class="paket-check">&#10003;</span> KI-Chatbot &amp; LinkedIn-Funnel</li>
+                            <li><span class="paket-check">&#10003;</span> E-Mail-Marketing-Automation</li>
+                            <li><span class="paket-check">&#10003;</span> SEO + Onboarding &amp; Schulung</li>
+                        </ul>
+                        <a href="#kontakt" class="paket-btn paket-btn--gold">Beratungsgespr&auml;ch buchen</a>
+                    </div>
+                    <!-- Enterprise -->
+                    <div class="paket-card reveal delay-3">
+                        <div class="paket-badge">Enterprise</div>
+                        <div class="paket-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z" />
+                                <circle cx="12" cy="12" r="3" />
+                            </svg>
+                        </div>
+                        <h3 class="paket-title">Scale System</h3>
+                        <p class="paket-desc">Vollst&auml;ndige Digitalisierung mit unbegrenzten Seiten,
+                            KI-Telefonassistent und 3 Monaten Support.</p>
+                        <ul class="paket-list">
+                            <li><span class="paket-check">&#10003;</span> Premium-Markenidentit&auml;t &amp; GTM</li>
+                            <li><span class="paket-check">&#10003;</span> Vollst&auml;ndige Website (unbegrenzt)</li>
+                            <li><span class="paket-check">&#10003;</span> Landingpages mit A/B-Testing</li>
+                            <li><span class="paket-check">&#10003;</span> Blog &amp; Kundenportal</li>
+                            <li><span class="paket-check">&#10003;</span> Unbegrenzte Automatisierungen</li>
+                            <li><span class="paket-check">&#10003;</span> KI-Chatbot + Telefonassistent</li>
+                            <li><span class="paket-check">&#10003;</span> Multi-Channel Lead-Funnel</li>
+                            <li><span class="paket-check">&#10003;</span> KPI-Dashboard &amp; 3 Mo. Support</li>
+                        </ul>
+                        <a href="#kontakt" class="paket-btn paket-btn--dark">Individuelle Beratung</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!--  REFERENZEN                        -->
+        <!-- ================================== -->
+        <section class="section section-dark" id="referenzen">
+            <div class="container">
+                <div class="reveal">
+                    <div class="section-label">
+                        <span class="section-label-line"></span> Referenzen
+                    </div>
+                    <h2 class="section-title">Ausgew&auml;hlte <span class="gold">Projekte</span></h2>
+                    <p class="section-desc">
+                        Ausgew&auml;hlte Projekte, die zeigen, wie KI-Automatisierung in der Praxis funktioniert
+                    </p>
+                </div>
+                <div class="case-grid">
+                    <div class="case-visual reveal-left">
+                        <div class="case-metric">
+                            <div class="case-metric-val">60 %</div>
+                            <div class="case-metric-label">Zeitersparnis</div>
+                        </div>
+                        <div class="case-tags">
+                            <span class="case-tag">n8n</span>
+                            <span class="case-tag">Qdrant</span>
+                            <span class="case-tag">RAG</span>
+                            <span class="case-tag">Claude API</span>
+                            <span class="case-tag">Self-Hosting</span>
+                            <span class="case-tag">Coolify</span>
+                        </div>
+                    </div>
+                    <div class="case-info reveal-right">
+                        <h3>QA-Workflow-Automatisierung f&uuml;r B2B-SaaS</h3>
+                        <div class="case-branche">Branche: B2B-SaaS-Anbieter im QA-Tooling-Umfeld</div>
+                        <p><strong>Ausgangssituation:</strong> Ein wachsendes SaaS-Unternehmen im QA-Bereich konnte
+                            manuelle Prozesse bei der Datenverarbeitung und Qualit&auml;tssicherung nicht mehr
+                            skalieren. Wiederkehrende Aufgaben banden qualifizierte Mitarbeiter und verlangsamten die
+                            Produktentwicklung.</p>
+                        <p><strong>L&ouml;sung:</strong> Entwicklung einer integrierten Automatisierungsl&ouml;sung mit
+                            n8n-Workflows und RAG-basiertem KI-Agenten. Die Infrastruktur l&auml;uft Self-Hosted auf
+                            dediziertem Server ohne externe Datentransfers.</p>
+                        <div class="case-results">
+                            <div class="case-result-item">
+                                <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="12" cy="12" r="10" />
+                                        <polyline points="12 6 12 12 16 14" />
+                                    </svg></span>
+                                Bis zu 60 % Zeitersparnis
+                            </div>
+                            <div class="case-result-item">
+                                <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                                        <polyline points="2 17 12 22 22 17" />
+                                        <polyline points="2 12 12 17 22 12" />
+                                    </svg></span>
+                                100+ Automatisierungen
+                            </div>
+                            <div class="case-result-item">
+                                <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                    </svg></span>
+                                Self-Hosted, DSGVO-konform
+                            </div>
+                            <div class="case-result-item">
+                                <span class="case-result-icon"><svg width="18" height="18" viewBox="0 0 24 24"
+                                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M7 17L17 7" />
+                                        <polyline points="7 7 17 7 17 17" />
+                                    </svg></span>
+                                DMS-Optimierung
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!--  VORTEILE                          -->
+        <!-- ================================== -->
+        <section class="section section-black" id="vorteile">
+            <div class="container">
+                <div class="reveal">
+                    <div class="section-label">
+                        <span class="section-label-line"></span> Vorteile
+                    </div>
+                    <h2 class="section-title">Warum mit mir <span class="gold">arbeiten?</span></h2>
+                    <p class="section-desc">
+                        Was meine Beratung von gro&szlig;en IT-Dienstleistern und Standard-SaaS-L&ouml;sungen
+                        unterscheidet
+                    </p>
+                </div>
+                <div class="adv-grid">
+                    <div class="adv-card reveal delay-1">
+                        <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            </svg></div>
+                        <div class="adv-content">
+                            <h3>DSGVO by Design</h3>
+                            <p>Datenschutz ist Architekturprinzip, kein Nachgedanke. Alle Systeme laufen auf eigenen
+                                Servern in Deutschland &mdash; ohne US-Cloud-Abh&auml;ngigkeit.</p>
+                        </div>
+                    </div>
+                    <div class="adv-card reveal delay-2">
+                        <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="8" r="7" />
+                                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88" />
+                            </svg></div>
+                        <div class="adv-content">
+                            <h3>Wissenschaftliche Pr&auml;zision</h3>
+                            <p>Ein PhD in Mathematik bedeutet: analytisches Denken, logisch einwandfreie
+                                Systemarchitektur und systematisches Testen statt Trial-and-Error.</p>
+                        </div>
+                    </div>
+                    <div class="adv-card reveal delay-3">
+                        <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                <circle cx="12" cy="10" r="3" />
+                            </svg></div>
+                        <div class="adv-content">
+                            <h3>Lokal in OWL</h3>
+                            <p>Pers&ouml;nliche Betreuung vor Ort. Workshops in Ihren R&auml;umen. Kurze Wege, schnelle
+                                Reaktion und echtes Verst&auml;ndnis f&uuml;r die Region.</p>
+                        </div>
+                    </div>
+                    <div class="adv-card reveal delay-4">
+                        <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+                            </svg></div>
+                        <div class="adv-content">
+                            <h3>Kein Vendor Lock-in</h3>
+                            <p>Open-Source-Technologien (n8n, Qdrant) und eigene Infrastruktur &mdash; Sie behalten die
+                                volle Kontrolle &uuml;ber Ihre Daten und Systeme.</p>
+                        </div>
+                    </div>
+                    <div class="adv-card reveal delay-3">
+                        <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />
+                            </svg></div>
+                        <div class="adv-content">
+                            <h3>Schnelle Ergebnisse</h3>
+                            <p>Vom Erstgespr&auml;ch zum produktiven Piloten in 1&ndash;2 Wochen. Jede Phase liefert
+                                eigenst&auml;ndig Mehrwert &mdash; kein monatelanges Warten.</p>
+                        </div>
+                    </div>
+                    <div class="adv-card reveal delay-4">
+                        <div class="adv-icon"><svg width="24" height="24" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path
+                                    d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                            </svg></div>
+                        <div class="adv-content">
+                            <h3>Menschen im Fokus</h3>
+                            <p>KI als Unterst&uuml;tzung f&uuml;r Ihr Team, nicht als Ersatz. Praxisnahe Schulungen und
+                                L&ouml;sungen, die in den Arbeitsalltag passen.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!--  UEBER MICH                        -->
+        <!-- ================================== -->
+        <section class="section section-pearl" id="ueber-mich">
+            <div class="container">
+                <div class="reveal">
+                    <div class="section-label">
+                        <span class="section-label-line"></span> &Uuml;ber mich
+                    </div>
+                    <h2 class="section-title">Dr. Lesya <span class="gold">Burban</span></h2>
+                </div>
+                <div class="about-grid">
+                    <div class="about-photo-wrap reveal-left">
+                        <div class="about-photo">
+
+                            <img src="./photo_2026-04-22_16-31-59.jpg"
+                                alt="Dr. Lesya Burban &mdash; KI-Automatisierungsberaterin in OWL" width="340"
+                                height="453" loading="lazy">
+                            <div class="about-photo-overlay">
+
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="reveal-right">
+                        <p class="about-text">
+                            Ich berate mittelst&auml;ndische Unternehmen in Ostwestfalen-Lippe bei der Einf&uuml;hrung
+                            von KI-Automatisierung.
+                        </p>
+                        <p class="about-text">
+                            Mein Fokus liegt auf L&ouml;sungen, die auf <strong>Ihrer eigenen Infrastruktur</strong>
+                            laufen &mdash; DSGVO-konform und ohne Abh&auml;ngigkeit von US-Cloud-Diensten.
+                        </p>
+                        <p class="about-text">
+                            Meine Qualifikation vereint <strong>wissenschaftliche Forschung</strong> und
+                            <strong>praktische Softwareentwicklung</strong>. Als Wissenschaftlerin mit Doktortitel
+                            bringe ich analytisches Denken ein; als Entwicklerin beherrsche ich die Integration von
+                            Technologien in bestehende Systeme.
+                            Ich arbeite zudem flie&szlig;end in mehreren Sprachen: Englisch, Deutsch, Ukrainisch und
+                            Russisch, was eine Kommunikation mit internationalen Kunden erm&ouml;glicht.
+                        </p>
+                        <div class="skills-grid">
+                            <div class="skill-item reveal delay-1">
+                                <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M17 1l4 4-4 4" />
+                                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                                        <path d="M7 23l-4-4 4-4" />
+                                        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                                    </svg></div>
+                                Workflow-Automatisierung (n8n)
+                            </div>
+                            <div class="skill-item reveal delay-2">
+                                <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <rect x="4" y="4" width="16" height="16" rx="2" />
+                                        <rect x="9" y="9" width="6" height="6" />
+                                        <path d="M15 2v2M9 2v2M15 20v2M9 20v2M2 15h2M2 9h2M20 15h2M20 9h2" />
+                                    </svg></div>
+                                KI-Agenten und RAG-Systeme
+                            </div>
+                            <div class="skill-item reveal delay-3">
+                                <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                                    </svg></div>
+                                Self-Hosting und DSGVO
+                            </div>
+                            <div class="skill-item reveal delay-4">
+                                <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18" />
+                                        <polyline points="17 6 23 6 23 12" />
+                                    </svg></div>
+                                Prozessanalyse und -optimierung
+                            </div>
+                            <div class="skill-item reveal delay-5">
+                                <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71" />
+                                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71" />
+                                    </svg></div>
+                                API-Integrationen
+                            </div>
+                            <div class="skill-item reveal delay-5">
+                                <div class="skill-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round">
+                                        <circle cx="11" cy="11" r="8" />
+                                        <path d="M21 21l-4.35-4.35" />
+                                    </svg></div>
+                                Qualit&auml;tssicherung f&uuml;r KI
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!--  LEISTUNGEN                        -->
+        <!-- ================================== -->
+        <section class="section section-pearl" id="leistungen">
+            <div class="container">
+                <div class="reveal">
+                    <div class="section-label">
+                        <span class="section-label-line"></span> Phasen
+                    </div>
+                    <h2 class="section-title">Drei Phasen <span class="gold">zum Erfolg</span></h2>
+                    <p class="section-desc">
+                        Von der Analyse bis zum laufenden Betrieb &mdash; jede Phase liefert eigenst&auml;ndig Mehrwert
+                    </p>
+                </div>
+                <div class="phases-grid">
+                    <!-- Phase 1 -->
+                    <div class="phase-card reveal delay-1">
+                        <div class="phase-num">01</div>
+                        <div class="phase-badge">Phase 1</div>
+                        <h3 class="phase-title">Assess &mdash; Analyse und Potenziale</h3>
+                        <p class="phase-desc">Strukturierte Analyse Ihrer Prozesse und Identifikation der
+                            gr&ouml;&szlig;ten KI-Hebel.</p>
+                        <ul class="phase-list">
+                            <li><span class="phase-check">&#10003;</span> Strukturiertes Prozess-Mapping</li>
+                            <li><span class="phase-check">&#10003;</span> Bewertung nach Aufwand, Impact und Machbarkeit
+                            </li>
+                            <li><span class="phase-check">&#10003;</span> Technologie-Empfehlung passend zu Ihrer
+                                IT-Landschaft</li>
+                            <li><span class="phase-check">&#10003;</span> Priorisierter Fahrplan f&uuml;r die Umsetzung
+                            </li>
+                        </ul>
+                        <div class="phase-result">
+                            Ergebnis: Ein dokumentierter Analyse-Bericht mit 3&ndash;5 priorisierten
+                            Automatisierungs-Kandidaten.
+                        </div>
+                    </div>
+                    <!-- Phase 2 -->
+                    <div class="phase-card reveal delay-2">
+                        <div class="phase-num">02</div>
+                        <div class="phase-badge">Phase 2</div>
+                        <h3 class="phase-title">Pilot &mdash; Umsetzung und Validierung</h3>
+                        <p class="phase-desc">Umsetzung des vielversprechendsten Automatisierungs-Kandidaten in
+                            1&ndash;2 Wochen.</p>
+                        <ul class="phase-list">
+                            <li><span class="phase-check">&#10003;</span> Workflow-Automatisierung mit n8n (Self-Hosted)
+                            </li>
+                            <li><span class="phase-check">&#10003;</span> KI-Agenten mit RAG f&uuml;r Unternehmensdaten
+                            </li>
+                            <li><span class="phase-check">&#10003;</span> Integration in bestehende Tools</li>
+                            <li><span class="phase-check">&#10003;</span> Praxisnahe Schulung</li>
+                        </ul>
+                        <div class="phase-result">
+                            Ergebnis: Ein produktiver Workflow, der nachweislich Zeit spart.
+                        </div>
+                    </div>
+                    <!-- Phase 3 -->
+                    <div class="phase-card reveal delay-3">
+                        <div class="phase-num">03</div>
+                        <div class="phase-badge">Phase 3</div>
+                        <h3 class="phase-title">Operate &mdash; Betrieb und Optimierung</h3>
+                        <p class="phase-desc">Langfristige Betreuung: Monitoring, Wartung und kontinuierliche
+                            Verbesserung.</p>
+                        <ul class="phase-list">
+                            <li><span class="phase-check">&#10003;</span> Proaktives Monitoring und Alerting</li>
+                            <li><span class="phase-check">&#10003;</span> Qualit&auml;tschecks</li>
+                            <li><span class="phase-check">&#10003;</span> Erweiterung auf weitere Bereiche</li>
+                            <li><span class="phase-check">&#10003;</span> Self-Hosting-Betrieb</li>
+                        </ul>
+                        <div class="phase-result">
+                            Ergebnis: Stabile, skalierbare Automatisierung im laufenden Betrieb.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================================== -->
+        <!--  KONTAKT / CTA                     -->
+        <!-- ================================== -->
+        <section class="section section-dark cta-section" id="kontakt">
+            <div class="hero-orb hero-orb-1" style="top:-20%;right:-10%;"></div>
+            <div class="hero-orb hero-orb-2" style="bottom:-15%;left:-8%;"></div>
+            <div class="container" style="position:relative;z-index:2;">
+                <div class="cta-grid">
+                    <div class="cta-text reveal-left">
+                        <div class="section-label">
+                            <span class="section-label-line"></span> Kontakt
+                        </div>
+                        <h2>Bereit f&uuml;r den <span class="gold">n&auml;chsten Schritt?</span></h2>
+                        <p>Lassen Sie uns in einem kostenlosen Erstgespr&auml;ch herausfinden, wo KI-Automatisierung in
+                            Ihrem Unternehmen den gr&ouml;&szlig;ten Hebel hat</p>
+                        <ul class="cta-features">
+                            <li>
+                                <span class="cta-features-check">&#10003;</span>
+                                Kostenfreies Erstgespr&auml;ch (30 Min.)
+                            </li>
+                            <li>
+                                <span class="cta-features-check">&#10003;</span>
+                                Analyse Ihres Automatisierungs-Potenzials
+                            </li>
+                            <li>
+                                <span class="cta-features-check">&#10003;</span>
+                                Konkrete n&auml;chste Schritte &mdash; kein Verkaufsdruck
+                            </li>
+                            <li>
+                                <span class="cta-features-check">&#10003;</span>
+                                Vor Ort in OWL oder digital
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-card reveal-right">
+                        <h3>Erstgespr&auml;ch vereinbaren</h3>
+                        <p class="form-sub">Ich melde mich innerhalb von 24 Stunden bei Ihnen.</p>
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="vorname">Vorname *</label>
+                                    <input type="text" id="vorname" name="vorname" placeholder="Ihr Vorname" required
+                                        autocomplete="given-name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nachname">Nachname *</label>
+                                    <input type="text" id="nachname" name="nachname" placeholder="Ihr Nachname" required
+                                        autocomplete="family-name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">E-Mail *</label>
+                                <input type="email" id="email" name="email" placeholder="ihre@email.de" required
+                                    autocomplete="email">
+                            </div>
+                            <div class="form-group">
+                                <label for="unternehmen">Unternehmen *</label>
+                                <input type="text" id="unternehmen" name="unternehmen" placeholder="Ihr Unternehmen"
+                                    required autocomplete="organization">
+                            </div>
+                            <div class="form-group">
+                                <label for="interesse">Interesse *</label>
+                                <select id="interesse" name="interesse" required>
+                                    <option value="">Bitte w&auml;hlen...</option>
+                                    <option value="starter">Starter &mdash; Digital Kickstart</option>
+                                    <option value="business">Business &mdash; Growth Engine</option>
+                                    <option value="enterprise">Enterprise &mdash; Scale System</option>
+                                    <option value="sonstiges">Sonstiges</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="nachricht">Ihre Nachricht *</label>
+                                <textarea id="nachricht" name="nachricht"
+                                    placeholder="Beschreiben Sie kurz Ihr Anliegen..." required></textarea>
+                            </div>
+                            <button type="submit" class="form-submit">Erstgespr&auml;ch vereinbaren</button>
+                            <div class="form-status" id="formStatus"></div>
+                            <p class="form-note">Ihre Daten werden vertraulich behandelt und nicht an Dritte
+                                weitergegeben.</p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ================================== -->
+    <!--  FOOTER                            -->
+    <!-- ================================== -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="footer-brand">
+                    <span class="footer-brand-name">Dr. Lesya Burban</span>
+                    <span class="footer-bran
+                d-sub">KI-Automatisierungsberatung</span>
+                </div>
+                <ul class="footer-links">
+                    <!-- TODO: Impressum- und Datenschutz-Seiten erstellen (in DE rechtlich Pflicht) -->
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="datenschutz.html">Datenschutz</a></li>
+                    <li><a href="mailto:lesyab@gmx.de">lesyab@gmx.de</a></li>
+                    <li><!-- TODO: Echte LinkedIn-URL einsetzen -->
+                        <a href="https://linkedin.com/in/" target="_blank" rel="noopener noreferrer"
+                            class="footer-social-link"><svg width="16" height="16" viewBox="0 0 24 24"
+                                fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="footer-copy">
+                &copy; 2026 Dr. Lesya Burban. Alle Rechte vorbehalten.
+            </div>
         </div>
-    </div>
-</footer>
+    </footer>
 
-<!-- ================================== -->
-<!--  SCRIPTS                           -->
-<!-- ================================== -->
-<script>
-    /* ---- Scroll Reveal ---- */
-    var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
+    <!-- ================================== -->
+    <!--  SCRIPTS                           -->
+    <!-- ================================== -->
+    <script>
+        /* ---- Scroll Reveal ---- */
+        var revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right, .reveal-scale');
 
-    function checkReveal() {
-        var wH = window.innerHeight;
-        revealEls.forEach(function(el) {
-            var top = el.getBoundingClientRect().top;
-            if (top < wH - 80) {
-                el.classList.add('visible');
-            }
-        });
-    }
-
-    window.addEventListener('scroll', checkReveal, { passive: true });
-    window.addEventListener('load', checkReveal);
-
-    /* ---- Nav scroll state ---- */
-    var nav = document.getElementById('nav');
-    window.addEventListener('scroll', function() {
-        if (window.scrollY > 40) {
-            nav.classList.add('scrolled');
-        } else {
-            nav.classList.remove('scrolled');
+        function checkReveal() {
+            var wH = window.innerHeight;
+            revealEls.forEach(function (el) {
+                var top = el.getBoundingClientRect().top;
+                if (top < wH - 80) {
+                    el.classList.add('visible');
+                }
+            });
         }
-    }, { passive: true });
 
-    /* ---- Mobile menu ---- */
-    var toggle = document.getElementById('navToggle');
-    var links = document.getElementById('navLinks');
+        window.addEventListener('scroll', checkReveal, { passive: true });
+        window.addEventListener('load', checkReveal);
 
-    toggle.addEventListener('click', function() {
-        toggle.classList.toggle('open');
-        links.classList.toggle('open');
-        nav.classList.toggle('menu-open');
-    });
-
-    links.querySelectorAll('a').forEach(function(a) {
-        a.addEventListener('click', function() {
-            toggle.classList.remove('open');
-            links.classList.remove('open');
-            nav.classList.remove('menu-open');
-        });
-    });
-
-    /* ---- Form submit ---- */
-    function handleSubmit(e) {
-        e.preventDefault();
-        var btn = e.target.querySelector('.form-submit');
-        btn.textContent = 'Gesendet! Vielen Dank.';
-        btn.style.background = '#16a34a';
-        btn.style.pointerEvents = 'none';
-        setTimeout(function() {
-            btn.textContent = 'Erstgespr\u00e4ch vereinbaren';
-            btn.style.background = '';
-            btn.style.pointerEvents = '';
-            e.target.reset();
-        }, 3000);
-    }
-
-    /* ---- Smooth anchor offset fix for Safari ---- */
-    document.querySelectorAll('a[href^="#"]').forEach(function(a) {
-        a.addEventListener('click', function(e) {
-            var id = this.getAttribute('href').substring(1);
-            var target = document.getElementById(id);
-            if (target) {
-                e.preventDefault();
-                var offset = 72;
-                var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
-                window.scrollTo({ top: top, behavior: 'smooth' });
+        /* ---- Nav scroll state ---- */
+        var nav = document.getElementById('nav');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 40) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
             }
+        }, { passive: true });
+
+        /* ---- Mobile menu ---- */
+        var toggle = document.getElementById('navToggle');
+        var links = document.getElementById('navLinks');
+
+        toggle.addEventListener('click', function () {
+            toggle.classList.toggle('open');
+            links.classList.toggle('open');
+            nav.classList.toggle('menu-open');
         });
-    });
+
+        links.querySelectorAll('a').forEach(function (a) {
+            a.addEventListener('click', function () {
+                toggle.classList.remove('open');
+                links.classList.remove('open');
+                nav.classList.remove('menu-open');
+            });
+        });
+
+        /* ---- Configuration ---- */
+        var GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyillEyIwJJzuWZDoCCtj1EkhWi7FiXUGcHrmNZNHwVQA1O-aMzF1OSN4mSqEiaH75dlg/exec';
+
+        /* ---- Form Validation & Submit ---- */
+        (function () {
+            var form = document.getElementById('contactForm');
+            var btn = form.querySelector('.form-submit');
+            var statusEl = document.getElementById('formStatus');
+            var btnText = btn.textContent;
+
+            var fieldNames = ['vorname', 'nachname', 'email', 'unternehmen', 'interesse', 'nachricht'];
+
+            /* Create error spans dynamically */
+            fieldNames.forEach(function (name) {
+                var field = form.querySelector('[name="' + name + '"]');
+                if (field) {
+                    var span = document.createElement('span');
+                    span.className = 'form-error-msg';
+                    span.id = 'error-' + name;
+                    field.parentNode.appendChild(span);
+                    field.addEventListener('input', function () { clearFieldError(name); });
+                    field.addEventListener('change', function () { clearFieldError(name); });
+                }
+            });
+
+            function showFieldError(name, msg) {
+                var span = document.getElementById('error-' + name);
+                var field = form.querySelector('[name="' + name + '"]');
+                if (span) span.textContent = msg;
+                if (field && field.closest('.form-group')) field.closest('.form-group').classList.add('has-error');
+            }
+
+            function clearFieldError(name) {
+                var span = document.getElementById('error-' + name);
+                var field = form.querySelector('[name="' + name + '"]');
+                if (span) span.textContent = '';
+                if (field && field.closest('.form-group')) field.closest('.form-group').classList.remove('has-error');
+            }
+
+            function clearAllErrors() {
+                fieldNames.forEach(function (name) { clearFieldError(name); });
+            }
+
+            function showStatus(type, msg) {
+                statusEl.className = 'form-status ' + type;
+                statusEl.textContent = msg;
+                statusEl.style.display = 'block';
+            }
+
+            function hideStatus() {
+                statusEl.style.display = 'none';
+                statusEl.className = 'form-status';
+            }
+
+            function validateForm() {
+                var valid = true;
+                clearAllErrors();
+
+                var v = form.querySelector('[name="vorname"]').value.trim();
+                var n = form.querySelector('[name="nachname"]').value.trim();
+                var e = form.querySelector('[name="email"]').value.trim();
+                var u = form.querySelector('[name="unternehmen"]').value.trim();
+                var i = form.querySelector('[name="interesse"]').value;
+                var m = form.querySelector('[name="nachricht"]').value.trim();
+
+                if (!v) { showFieldError('vorname', 'Bitte Vorname eingeben'); valid = false; }
+                if (!n) { showFieldError('nachname', 'Bitte Nachname eingeben'); valid = false; }
+                if (!e) {
+                    showFieldError('email', 'Bitte E-Mail eingeben');
+                    valid = false;
+                } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)) {
+                    showFieldError('email', 'Bitte eine g\u00fcltige E-Mail-Adresse eingeben');
+                    valid = false;
+                }
+                if (!u) { showFieldError('unternehmen', 'Bitte Unternehmen eingeben'); valid = false; }
+                if (!i) { showFieldError('interesse', 'Bitte Interesse w\u00e4hlen'); valid = false; }
+                if (!m) {
+                    showFieldError('nachricht', 'Bitte Nachricht eingeben');
+                    valid = false;
+                } else if (m.length < 10) {
+                    showFieldError('nachricht', 'Mindestens 10 Zeichen erforderlich');
+                    valid = false;
+                }
+
+                return valid;
+            }
+
+            form.addEventListener('submit', function (ev) {
+                ev.preventDefault();
+                hideStatus();
+
+                if (!validateForm()) return;
+
+                /* Loading state */
+                btn.classList.add('loading');
+                btn.textContent = 'Wird gesendet\u2026';
+
+                var interesse = form.querySelector('[name="interesse"]');
+                var data = {
+                    vorname: form.querySelector('[name="vorname"]').value.trim(),
+                    nachname: form.querySelector('[name="nachname"]').value.trim(),
+                    email: form.querySelector('[name="email"]').value.trim(),
+                    unternehmen: form.querySelector('[name="unternehmen"]').value.trim(),
+                    interesse: interesse.options[interesse.selectedIndex].text,
+                    nachricht: form.querySelector('[name="nachricht"]').value.trim(),
+                    timestamp: new Date().toISOString()
+                };
+
+                /* Send as form-urlencoded (reliable with Google Apps Script) */
+                var body = Object.keys(data).map(function (key) {
+                    return encodeURIComponent(key) + '=' + encodeURIComponent(data[key]);
+                }).join('&');
+
+                fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                    body: body
+                })
+                    .then(function () {
+                        showStatus('success', 'Vielen Dank! Ihre Anfrage wurde erfolgreich gesendet. Ich melde mich innerhalb von 24 Stunden.');
+                        form.reset();
+                    })
+                    .catch(function () {
+                        showStatus('error', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder schreiben Sie an lesyab@gmx.de');
+                    })
+                    .finally(function () {
+                        btn.classList.remove('loading');
+                        btn.textContent = btnText;
+                    });
+            });
+        })();
+
+        /* ---- Smooth anchor offset fix for Safari ---- */
+        document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                var id = this.getAttribute('href').substring(1);
+                var target = document.getElementById(id);
+                if (target) {
+                    e.preventDefault();
+                    var offset = 72;
+                    var top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                    window.scrollTo({ top: top, behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Dr. Lesya Burban — KI-Automatisierungsberatung",
+    "description": "Praxisnahe KI-Automatisierung für den Mittelstand in OWL. DSGVO-konform, Self-Hosted.",
+    "url": "https://windy-kate.github.io/first-website/indexLesya.html",
+    "email": "lesyab@gmx.de",
+    "areaServed": "Ostwestfalen-Lippe",
+    "knowsAbout": ["KI-Automatisierung", "DSGVO", "n8n", "RAG", "Self-Hosting"],
+    "makesOffer": [
+        {"@type": "Offer", "name": "Digital Kickstart", "description": "Professioneller Marktauftritt mit Branding, Website und Basis-Automatisierung"},
+        {"@type": "Offer", "name": "Growth Engine", "description": "Kompletter digitaler Vertriebskanal mit KI-Chatbot, CRM und LinkedIn-Lead-Funnel"},
+        {"@type": "Offer", "name": "Scale System", "description": "Vollständige Digitalisierung mit unbegrenzten Seiten und KI-Telefonassistent"}
+    ]
+}
 </script>
 
 </body>
+
 </html>
